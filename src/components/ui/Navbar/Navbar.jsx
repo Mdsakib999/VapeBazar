@@ -26,7 +26,7 @@ const Navbar = () => {
             {/* Logo */}
             <div className='flex items-end  gap-4'>
                 <div className='hidden md:block'>
-                    <h1 className='  md:text-3xl text-xl  font-bold px-3 flex justify-center items-center text-[#00df9a] h-[60px] md:h-[80px] bg-black  bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-purple-600 via-pink-600 to-blue-600'>VapeBazar</h1>
+                    <h1 className=' font-Dancing  md:text-3xl text-xl  font-bold px-3 flex justify-center items-center text-[#00df9a] h-[60px] md:h-[80px] bg-black  bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-purple-600 via-pink-600 to-blue-600'>VapeBazar</h1>
                 </div>
 
                 {/* Desktop Navigation */}
@@ -67,7 +67,7 @@ const Navbar = () => {
                 }
             >
                 {/* Mobile Logo */}
-                <h1 className='w-full text-3xl font-bold text-[#00df9a] m-4'>VapeBazar</h1>
+                <h1 className='w-full text-3xl font-bold font-Dancing text-[#00df9a] m-4'>VapeBazar</h1>
 
                 {/* Mobile Navigation Items */}
                 {navItems.map(item => (
