@@ -2,3 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.section-container {
+  @apply w-[95%] md:w-[90%] xl:w-[1200px] 2xl:w-[1320px] mx-auto;
+}

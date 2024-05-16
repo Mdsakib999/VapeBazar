@@ -8,8 +8,6 @@ import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
     const [nav, setNav] = useState(false);
-
-    // Toggle function to handle the navbar's display
     const handleNav = () => {
         setNav(!nav);
     };
@@ -22,11 +20,12 @@ const Navbar = () => {
         { id: 5, text: 'Contact' },
     ];
     return (
-        <div className=' flex  justify-between  max-w-[1240px] mx-auto  px-5 md:px-0 py-11 md:py-0 text-black'>
+        <div className=' flex  justify-between items-center  max-w-[1240px] mx-auto  px-5 md:px-0 py-11 md:py-0 text-black'>
             {/* Logo */}
-            <div className='flex items-end  gap-4'>
+            <div className='flex  justify-between items-center md:h-[90px] w-[60%]'>
                 <div className='hidden md:block'>
-                    <h1 className=' font-Dancing  md:text-3xl text-xl  font-bold px-3 flex justify-center items-center text-[#00df9a] h-[60px] md:h-[80px] bg-black  bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-purple-600 via-pink-600 to-blue-600'>VapeBazar</h1>
+                    {/* <h1 className=' font-Dancing  md:text-3xl text-xl  font-bold px-3 flex justify-center items-center text-[#00df9a] h-[60px] md:h-[80px] bg-black  bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-purple-600 via-pink-600 to-blue-600'>VapeBazar</h1> */}
+                    <p className='-mt-5 text-3xl font-bold font-Dancing'>Vape<span className='font-bold bg-gradient-to-r from-blue-400 via-green-400 to-pink-400 bg-clip-text text-transparent text-gradient'>Bazara</span></p>
                 </div>
 
                 {/* Desktop Navigation */}
@@ -38,8 +37,6 @@ const Navbar = () => {
                         >
                             {item.text}
                         </li>
-
-
 
                     ))}
                 </ul>
@@ -67,7 +64,7 @@ const Navbar = () => {
                 }
             >
                 {/* Mobile Logo */}
-                <h1 className='w-full text-3xl font-bold font-Dancing text-[#00df9a] m-4'>VapeBazar</h1>
+                <p className=' ps-5 pt-2 text-3xl font-bold font-Dancing text-white'>Vape<span className='font-bold bg-gradient-to-r from-blue-400 via-green-400 to-pink-400 bg-clip-text text-transparent text-gradient'>Bazara</span></p>
 
                 {/* Mobile Navigation Items */}
                 {navItems.map(item => (
