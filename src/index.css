@@ -6,3 +6,26 @@
 .section-container {
   @apply w-[95%] md:w-[90%] xl:w-[1200px] 2xl:w-[1320px] mx-auto;
 }
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+  height: 16px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #edf2f7;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #618fc0;
+  border-radius: 100vh;
+  border: 3px solid #edf2f7;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #246dce;
+}

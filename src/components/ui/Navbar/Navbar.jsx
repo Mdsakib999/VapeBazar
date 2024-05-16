@@ -20,7 +20,7 @@ const Navbar = () => {
         { id: 5, text: 'Contact' },
     ];
     return (
-        <div className='fixed top-0 w-full'>
+        <div className='fixed top-0 w-full bg-gray-400 text-white'>
             <div className=' flex  justify-between items-center  max-w-[1240px] mx-auto  px-5 md:px-0 py-11 md:py-0 text-black'>
                 {/* Logo */}
                 <div className='flex  justify-between items-center md:h-[90px] w-[60%]'>
