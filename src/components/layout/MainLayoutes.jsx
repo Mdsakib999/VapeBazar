@@ -6,7 +6,7 @@ const MainLayoutes = () => {
     return (
         <div>
             <Navbar />
-            <div className='min-h-[calc(100vh-80px)]'>
+            <div className='min-h-[calc(100vh-80px)] mt-[80px]'>
                 <Outlet />
             </div>
             footer
