@@ -1,12 +1,12 @@
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-800 text-white py-10">
+        <footer className="bg-backgroundColor text-textColor py-10">
             <div className="container mx-auto px-4">
                 <div className="flex flex-wrap justify-between items-center">
                     <div className="w-full lg:w-1/3 text-center lg:text-left mb-6 lg:mb-0">
                         {/* <h1 className="text-2xl font-bold">VapeBazara</h1> */}
-                        <p className='-mt-5 text-3xl font-bold font-Dancing'>Vape<span className='font-bold bg-gradient-to-r from-blue-400 via-green-400 to-pink-400 bg-clip-text text-transparent text-gradient'>Bazara</span></p>
+                        <p className='-mt-5 text-3xl font-bold font-Dancing text-textColor'>Vape<span className='font-bold bg-gradient-to-r from-blue-400 via-green-400 to-pink-400 bg-clip-text text-transparent text-gradient'>Bazara</span></p>
                         <p className="mt-2">
                             Your one-stop shop for all vaping needs.
                         </p>
