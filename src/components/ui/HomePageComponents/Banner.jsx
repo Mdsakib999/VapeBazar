@@ -3,21 +3,21 @@ import bannerImg from '../../../../public/homePage/banner.jpg';
 const Banner = () => {
     const [animate, setAnimate] = useState(false);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const scrollY = window.scrollY;
-            if (scrollY < 100) {
-                setAnimate(true);
-            } else {
-                setAnimate(false);
-            }
-        };
+    // useEffect(() => {
+    //     const handleScroll = () => {
+    //         const scrollY = window.scrollY;
+    //         if (scrollY < 100) {
+    //             setAnimate(true);
+    //         } else {
+    //             setAnimate(false);
+    //         }
+    //     };
 
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
+    //     window.addEventListener('scroll', handleScroll);
+    //     return () => {
+    //         window.removeEventListener('scroll', handleScroll);
+    //     };
+    // }, []);
 
     return (
         <div
@@ -30,7 +30,7 @@ const Banner = () => {
             {/* Banner content */}
             <div
 
-                className={`scale-x-[-1] ${animate ? 'animate-fadeRight' : ''} relative z-10 flex flex-col items-start h-full justify-center space-y-4 w-full max-w-xl md:max-w-2xl lg:max-w-3xl`}>
+                className={`scale-x-[-1] ${animate ? 'animate-fadeRight' : ''} animate-fadeRight relative z-10 flex flex-col items-start h-full justify-center space-y-4 w-full max-w-xl md:max-w-2xl lg:max-w-3xl`}>
                 <p className="font-barrio text-5xl md:text-7xl text-textColor">
                     BOOST YOUR <br /> FLAVOUR
                 </p>
