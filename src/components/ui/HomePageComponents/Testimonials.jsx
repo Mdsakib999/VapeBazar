@@ -20,15 +20,15 @@ const Testimonials = () => {
     });
 
     return (
-        <section className="container mx-auto max-w-[1340px] px-4 py-12 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24">
+        <section className="container mx-auto max-w-[1340px] px-4 py-12 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24 ">
             <div className="keen-slider">
                 <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16">
                     <div className="max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
-                        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
                             Don't just take our word for it...
                         </h2>
 
-                        <p className="mt-4 text-gray-700">
+                        <p className="mt-4 text-white">
                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas veritatis illo placeat
                             harum porro optio fugit a culpa sunt id!
                         </p>

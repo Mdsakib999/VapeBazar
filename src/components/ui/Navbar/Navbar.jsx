@@ -1,24 +1,40 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import './Navbar.css'
 import { IoCart } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../Provider/AuthProvider';
 
 
 
 const Navbar = () => {
     const [nav, setNav] = useState(false);
+    const { logout, user, setToken } = useContext(AuthContext)
+    const navigate = useNavigate()
     const handleNav = () => {
         setNav(!nav);
     };
 
     const navItems = [
         { id: 1, text: 'Home' },
-        { id: 2, text: 'Company' },
-        { id: 3, text: 'Product' },
+        { id: 2, text: 'Dashboard', link: '/dashboard/admin/add_product' },
+        { id: 3, text: 'Product', link: '/product' },
         { id: 4, text: 'About' },
         { id: 5, text: 'Contact' },
     ];
+
+    const handelNavigate = () => {
+        if (user) {
+            logout()
+            localStorage.removeItem('auth')
+            setToken(null)
+        }
+        else {
+            navigate('/login')
+        }
+
+    }
     return (
         <div className='fixed top-0 w-full bg-[#2C2C2C] text-white z-50 font-Poppins'>
             <div className=' flex  justify-between items-center  max-w-[1240px] mx-auto  px-5 lg:px-0 py-11 md:py-0 text-black'>
@@ -32,12 +48,14 @@ const Navbar = () => {
                     {/* Desktop Navigation */}
                     <ul className='hidden lg:flex gap-5  '>
                         {navItems.map(item => (
-                            <li
-                                key={item.id}
-                                className=' nav_a rounded-xl  cursor-pointer '
-                            >
-                                {item.text}
-                            </li>
+                            <Link to={item.link} key={item.id}>
+                                <li
+
+                                    className=' nav_a rounded-xl  cursor-pointer '
+                                >
+                                    {item.text}
+                                </li>
+                            </Link>
 
                         ))}
                     </ul>
@@ -52,7 +70,7 @@ const Navbar = () => {
                         <p className='font-bold flex  items-center text-white hover:text-black -mt-1'> <IoCart size={26} />Cart</p>
                     </div>
                     <div >
-                        <p className='font-bold cursor-pointer flex justify-center transition-all duration-300 items-center   hover:text-black -mt-1 text-textColor'> <FaUser size={24} />Account</p>
+                        <span onClick={handelNavigate} className='font-bold cursor-pointer flex justify-center transition-all duration-300 items-center   hover:text-black -mt-1 text-textColor'> <FaUser size={24} />Account</span>
                     </div>
                 </div>
 
@@ -69,12 +87,12 @@ const Navbar = () => {
 
                     {/* Mobile Navigation Items */}
                     {navItems.map(item => (
-                        <li
+                        <Link to={item.link}
                             key={item.id}
                             className='p-4 border-b rounded-xl text-white  duration-300  cursor-pointer border-gray-600'
                         >
                             {item.text}
-                        </li>
+                        </Link>
                     ))}
                 </ul>
             </div>

@@ -12,6 +12,10 @@
   width: 15px;
   height: 16px;
 }
+body {
+  background: black;
+  color: white;
+}
 
 /* Track */
 ::-webkit-scrollbar-track {
