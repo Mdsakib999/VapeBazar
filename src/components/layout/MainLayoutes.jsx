@@ -11,7 +11,7 @@ const MainLayoutes = () => {
     return (
         <div className="flex flex-col min-h-screen">
             <Navbar />
-            <div className="flex-grow mt-[85px]">
+            <div className="flex-grow mt-[85px] min-h-[calc(100vh-80px)]">
                 <Outlet />
             </div>
             <Footer />
