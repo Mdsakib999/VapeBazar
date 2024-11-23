@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../ui/Navbar/Navbar';
 import Footer from '../ui/Footer/Footer';
+import { AuthContext } from '../../Provider/AuthProvider';
+import ShoppingSidebar from '../ShoppingSidebar/ShoppingSidebar';
 
 const MainLayoutes = () => {
     const handleScrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
+    const { isOpen } = useContext(AuthContext)
+    console.log(isOpen);
     return (
         <div className="flex flex-col min-h-screen">
             <Navbar />
-            <div className="flex-grow mt-[85px] min-h-[calc(100vh-80px)]">
+            <div>
+                <ShoppingSidebar />
+            </div>
+            <div className="flex-grow mt-[85px] min-h-[calc(100vh-80px)] relative">
                 <Outlet />
             </div>
             <Footer />

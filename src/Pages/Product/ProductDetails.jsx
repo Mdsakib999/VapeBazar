@@ -10,6 +10,8 @@ import {
     MOUSE_ACTIVATION,
     TOUCH_ACTIVATION,
 } from "react-image-magnifiers";
+import { Toaster, toast } from "sonner";
+import { addToDb } from "../../utils/setLocalStorage";
 
 const ProductDetails = () => {
     const { axiosNotSecure } = useAxiosNotSecure();
@@ -48,12 +50,23 @@ const ProductDetails = () => {
         setQuantity((prev) => (type === "increase" ? prev + 1 : prev > 1 ? prev - 1 : 1));
     };
 
+    const handleAddToCart = (data) => {
+        if (!selectedNicotineStrength) {
+            return toast.error('Select NicotineStrength ')
+        }
+        const cartData = { productId: data._id, image: data.image, price: data.price, quantity, nicotineStrength: selectedNicotineStrength, name }
+        console.log(cartData);
+        addToDb(cartData)
+
+    }
+
     if (isLoading) {
         return <div>Loading...</div>;
     }
 
     return (
         <div className="bg-black text-white rounded-lg shadow-lg">
+            <Toaster />
             <div className="max-w-4xl mx-auto p-6">
                 <h1 className="text-3xl font-bold mb-4">{name}</h1>
                 <p className="text-gray-400 mb-2">
@@ -140,7 +153,7 @@ const ProductDetails = () => {
                         </div>
 
                         {/* Add to Cart Button */}
-                        <button className="mt-4 bg-yellow-500 text-black py-3 px-6 rounded-md font-semibold hover:bg-yellow-600 transition duration-200 shadow-lg hover:shadow-xl">
+                        <button onClick={() => handleAddToCart(productData)} className="mt-4 bg-yellow-500 text-black py-3 px-6 rounded-md font-semibold hover:bg-yellow-600 transition duration-200 shadow-lg hover:shadow-xl">
                             Add to Cart
                         </button>
                     </div>

@@ -14,6 +14,7 @@ const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
     console.log(token);
@@ -89,7 +90,9 @@ const AuthProvider = ({ children }) => {
         googleLogin,
         register,
         token,
-        setToken
+        setToken,
+        isOpen,
+        setIsOpen
     };
 
     return (

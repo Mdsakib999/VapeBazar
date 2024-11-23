@@ -10,7 +10,7 @@ import { AuthContext } from '../../../Provider/AuthProvider';
 
 const Navbar = () => {
     const [nav, setNav] = useState(false);
-    const { logout, user, setToken } = useContext(AuthContext)
+    const { logout, user, setToken, setIsOpen } = useContext(AuthContext)
     const navigate = useNavigate()
     const handleNav = () => {
         setNav(!nav);
@@ -65,7 +65,7 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div className='flex items-end gap-3'>
-                    <div className='relative cursor-pointer '>
+                    <div onClick={() => setIsOpen(pre => !pre)} className='relative cursor-pointer '>
                         <span className='bg-orange-300 absolute px-1 rounded-full text-sm font-bold -top-5 left-1 '>0</span>
                         <p className='font-bold flex  items-center text-white hover:text-black -mt-1'> <IoCart size={26} />Cart</p>
                     </div>
