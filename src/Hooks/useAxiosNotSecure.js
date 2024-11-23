@@ -10,7 +10,6 @@ const useAxiosNotSecure = () => {
     (config) => {
       const auth = localStorage.getItem("auth"); // Replace with your token storage logic
       const { token } = JSON.parse(auth);
-      console.log(token);
       if (token) {
         config.headers.Authorization = token;
       }
