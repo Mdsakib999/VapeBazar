@@ -15,6 +15,7 @@
 body {
   background: black;
   color: white;
+  scrollbar-width: thin;
 }
 
 /* Track */

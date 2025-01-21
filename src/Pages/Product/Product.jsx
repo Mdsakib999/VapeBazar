@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosNotSecure from "../../Hooks/useAxiosNotSecure";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 const Product = () => {
-    const { axiosNotSecure } = useAxiosNotSecure();
     const [selectedCategory, setSelectedCategory] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -12,19 +12,20 @@ const Product = () => {
     const { data: categoriesData = [] } = useQuery({
         queryKey: ['category'],
         queryFn: async () => {
-            const res = await axiosNotSecure.get("/category");
+            const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/category`);
             return res.data;
         },
-    });
 
+    });
+    console.log(categoriesData);
     // Extract category options
-    const categoryOptions = categoriesData.map(item => ({ option: item.category }));
+    const categoryOptions = categoriesData ? categoriesData?.map(item => ({ option: item.category })) : []
 
     // Fetch product data with category and search term as query parameters
     const { data: productData = [], isLoading, error } = useQuery({
         queryKey: ['products', selectedCategory, searchTerm],
         queryFn: async () => {
-            const res = await axiosNotSecure.get("/products", {
+            const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/products`, {
                 params: { category: selectedCategory, searchItem: searchTerm },
             });
             return res.data;
@@ -39,9 +40,9 @@ const Product = () => {
     //     return <div>Loading products...</div>;
     // }
 
-    if (error) {
-        return <div>Error fetching products. Please try again later.</div>;
-    }
+    // if (error) {
+    //     return <div>Error fetching products. Please try again later.</div>;
+    // }
 
     return (
         <div className="mt-8 section-container">
@@ -78,8 +79,8 @@ const Product = () => {
                         <div>Loading</div>
                     )
                 }
-                {productData.length > 0 ? (
-                    productData.map(({ _id, image, name, price }) => (
+                {productData?.length > 0 ? (
+                    productData?.map(({ _id, image, name, price }) => (
                         <div
                             key={_id}
                             className="max-w-xs bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"

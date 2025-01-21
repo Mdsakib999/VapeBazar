@@ -8,6 +8,9 @@ const Sidebar = ({ setOpen, open }) => {
         { title: "Menage product", src: "Transactions", link: '/dashboard/admin/manage_product' },
         { title: "Add Categories", src: "Card", gap: true, link: '/dashboard/admin/add_categories' },
         { title: "Manage Categories", src: "Calendar", link: '/dashboard/admin/manage_categories' },
+        { title: "Add Coupon", src: "Debt", link: '/dashboard/admin/add_coupon' },
+        { title: "Manage Coupon", src: "Debt", link: '/dashboard/admin/manage_coupon' },
+        { title: "Manage Order", src: "Debt", link: '/dashboard/admin/manage_orders' },
         { title: "Home", src: "Debt", link: '/' },
         { title: "Legal information", src: "Legal" },
         { title: "Notifications ", src: "Notifications", gap: true },
@@ -18,7 +21,7 @@ const Sidebar = ({ setOpen, open }) => {
         <div className="flex overflow-y-auto border-l-2">
             <div
                 className={` ${open ? "w-72" : "w-20 "
-                    } bg-backgroundColor h-screen fixed top-0 left-0  p-5  pt-8  duration-300`}
+                    } bg-backgroundColor h-screen fixed overflow-y-auto overflow-x-hidden top-0 left-0  p-5  pt-8  duration-300`}
             >
                 <img
                     src="/assets/control.png"

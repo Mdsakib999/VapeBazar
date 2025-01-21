@@ -147,7 +147,7 @@ const ManageCategories = () => {
                                     >
                                         {editingCategory ? 'Edit Category' : 'Add Category'}
                                     </Dialog.Title>
-                                    <form onSubmit={handleSubmit} className="mt-4">
+                                    <form onSubmit={handleSubmit} className="mt-4 text-black">
                                         <div className="grid grid-cols-1 gap-4">
                                             <div>
                                                 <label className="block text-sm font-semibold text-gray-700 mb-1">Category Name</label>
@@ -177,7 +177,7 @@ const ManageCategories = () => {
                                                             <span onClick={() => {
                                                                 setImageUrl("")
                                                             }
-                                                            } className="absolute top-3 left-9 rounded-full  "><HiMiniXCircle size={20} /></span>
+                                                            } className="absolute top-3 left-9 rounded-full cursor-pointer  "><HiMiniXCircle size={20} /></span>
                                                         </div>
                                                     )
                                                         :
