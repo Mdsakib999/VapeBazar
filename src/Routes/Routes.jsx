@@ -14,6 +14,11 @@ import EditProduct from "../Pages/Dashbord/AdminDashbord/EditProduct";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegistrationPage from "../Pages/RegistrationPage/RegistrationPage";
 import PrivetRoutes from "./PrivetRoutes";
+import Checkout from "../Pages/Checkout/Checkout";
+import AddCoupon from "../Pages/Dashbord/AdminDashbord/AddCoupon";
+import ManageCoupon from "../Pages/Dashbord/AdminDashbord/ManageCoupon";
+import ConfirmCheckout from "../Pages/ConfirmCheckout/ConfirmCheckout";
+import ManageOrders from "../Pages/Dashbord/AdminDashbord/ManageOrders";
 
 
 const router = createBrowserRouter([
@@ -36,6 +41,14 @@ const router = createBrowserRouter([
             {
                 path: '/product/:id',
                 element: <ProductDetails />
+            },
+            {
+                path: '/checkout',
+                element: <Checkout />
+            },
+            {
+                path: '/confirm-checkout',
+                element: <ConfirmCheckout />
             }
         ]
     },
@@ -62,6 +75,18 @@ const router = createBrowserRouter([
             {
                 path: 'admin/manage_categories',
                 element: <ManageCategories />
+            },
+            {
+                path: 'admin/add_coupon',
+                element: <AddCoupon />
+            },
+            {
+                path: 'admin/manage_coupon',
+                element: <ManageCoupon />
+            },
+            {
+                path: 'admin/manage_orders',
+                element: <ManageOrders />
             }
 
         ]

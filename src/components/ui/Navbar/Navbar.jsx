@@ -1,15 +1,17 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import './Navbar.css'
 import { IoCart } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Provider/AuthProvider';
+import { getShoppingCart } from '../../../utils/setLocalStorage';
 
 
 
 const Navbar = () => {
     const [nav, setNav] = useState(false);
+    const [data, setData] = useState([])
     const { logout, user, setToken, setIsOpen } = useContext(AuthContext)
     const navigate = useNavigate()
     const handleNav = () => {
@@ -23,8 +25,25 @@ const Navbar = () => {
         { id: 4, text: 'About' },
         { id: 5, text: 'Contact' },
     ];
+    useEffect(() => {
+        const fetchData = () => {
+            const localData = getShoppingCart();
+            setData(localData);
+        };
+        // Add event listener for "shopping-cart-updated"
+        window.addEventListener("shopping-cart-updated", fetchData);
+
+        // Call fetchData initially
+        fetchData();
+
+        // Cleanup listener on component unmount
+        return () => {
+            window.removeEventListener("shopping-cart-updated", fetchData);
+        };
+    }, []);
 
     const handelNavigate = () => {
+        console.log('object');
         if (user) {
             logout()
             localStorage.removeItem('auth')
@@ -66,7 +85,7 @@ const Navbar = () => {
                 </div>
                 <div className='flex items-end gap-3'>
                     <div onClick={() => setIsOpen(pre => !pre)} className='relative cursor-pointer '>
-                        <span className='bg-orange-300 absolute px-1 rounded-full text-sm font-bold -top-5 left-1 '>0</span>
+                        <span className='bg-orange-300 absolute px-2  rounded-full text-sm font-bold -top-5 left-1 '>{data.length || 0}</span>
                         <p className='font-bold flex  items-center text-white hover:text-black -mt-1'> <IoCart size={26} />Cart</p>
                     </div>
                     <div >
@@ -86,14 +105,16 @@ const Navbar = () => {
                     <p className=' ps-5 pt-2 text-3xl font-bold font-Dancing text-white'>Vape<span className='font-bold bg-gradient-to-r from-blue-400 via-green-400 to-pink-400 bg-clip-text text-transparent text-gradient'>Bazara</span></p>
 
                     {/* Mobile Navigation Items */}
-                    {navItems.map(item => (
-                        <Link to={item.link}
-                            key={item.id}
-                            className='p-4 border-b rounded-xl text-white  duration-300  cursor-pointer border-gray-600'
-                        >
-                            {item.text}
-                        </Link>
-                    ))}
+                    <div className='flex flex-col'>
+                        {navItems.map(item => (
+                            <Link to={item.link}
+                                key={item.id}
+                                className='p-4 border-b rounded-xl text-white  duration-300  cursor-pointer border-gray-600'
+                            >
+                                {item.text}
+                            </Link>
+                        ))}
+                    </div>
                 </ul>
             </div>
         </div>

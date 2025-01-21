@@ -85,6 +85,8 @@ const EditProduct = () => {
                 description: productData.description,
             });
             setContent(productData.description);
+            setValue('category', productData.category); // Set the default category
+            setValue('status', productData.status); // Set the default status
         }
     }, [productData, reset]);
 
@@ -258,18 +260,20 @@ const EditProduct = () => {
             </div>
 
             {/* Category */}
+            {/* Category */}
             <div className="mb-4">
                 <label htmlFor="category" className="block text-gray-700 font-semibold mb-2">Category</label>
                 <select
                     id="category"
-                    defaultValue={productData?.category}
                     {...register('category', { required: 'Category is required' })}
                     className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                     <option value="">Select a category</option>
-                    {
-                        categoryOptions.map((item, index) => <option key={index} value={item.value}>{item.option}</option>)
-                    }
+                    {categoryOptions.map((item, index) => (
+                        <option key={index} value={item.value}>
+                            {item.option}
+                        </option>
+                    ))}
                 </select>
                 {errors.category && <p className="text-red-500 text-sm">{errors.category.message}</p>}
             </div>
