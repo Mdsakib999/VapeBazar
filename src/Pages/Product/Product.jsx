@@ -16,6 +16,9 @@ const Product = () => {
             return res.data;
         },
 
+
+
+
     });
     console.log(categoriesData);
     // Extract category options
