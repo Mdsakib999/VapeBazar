@@ -12,6 +12,7 @@ import {
 } from "react-image-magnifiers";
 import { Toaster, toast } from "sonner";
 import { addToDb } from "../../utils/setLocalStorage";
+import axios from "axios";
 
 const ProductDetails = () => {
     const { axiosNotSecure } = useAxiosNotSecure();
@@ -20,7 +21,7 @@ const ProductDetails = () => {
     const { data: productData = {}, isLoading } = useQuery({
         queryKey: ['products', id],
         queryFn: async () => {
-            const res = await axiosNotSecure.get(`/product/${id}`);
+            const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/product/${id}`);
             return res.data;
         },
     });
