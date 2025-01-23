@@ -1,5 +1,5 @@
 // Retrieve the shopping cart from localStorage
-const getShoppingCart = () => {
+export const getShoppingCart = () => {
   let shoppingCart = [];
   const isStored = localStorage.getItem("shopping-cart");
   if (isStored) {
@@ -7,6 +7,8 @@ const getShoppingCart = () => {
   }
   return shoppingCart;
 };
+
+
 
 // Add or update an item in the shopping cart
 export const addToDb = (data) => {

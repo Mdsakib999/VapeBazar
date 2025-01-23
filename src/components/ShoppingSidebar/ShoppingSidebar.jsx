@@ -2,8 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { addToDb, getLocalData, removeFromDb, removeOneFromDb } from "../../utils/setLocalStorage";
 import { FiDelete } from "react-icons/fi";
+import { addToDb, getLocalData, getShoppingCart, removeFromDb, removeOneFromDb } from "../../utils/setLocalStorage";
 
 
 const ShoppingSidebar = () => {
@@ -44,12 +44,12 @@ const ShoppingSidebar = () => {
     }
     useEffect(() => {
         const fetchData = async () => {
-            const localData = await getLocalData();
+            const localData = await getShoppingCart();
             setData(localData);
         };
         fetchData();
     }, []);
-    const totalPrice = data?.reduce((acc, cur) => acc + (cur.quantity * cur.price), 0)
+    // const totalPrice = data?.reduce((acc, cur) => acc + (cur.quantity * cur.price), 0)
     // console.log(data)
     return (
         <div className={`${isOpen ? 'fixed right-0 top-[55%] transform -translate-y-1/2 z-40' : 'fixed right-[-1000px] top-1/2 transform -translate-y-1/2 z-40'} overflow-hidden h-[90vh] md:h-[85%]  w-full md:w-[30%] transition-right duration-500 bg-white text-black  rounded-md`}>
@@ -89,7 +89,7 @@ const ShoppingSidebar = () => {
                 <div className="bg-gray-200 border-t p-4">
                     <div className="flex justify-between py-2">
                         <span className="text-xl font-semibold">Subtotal</span>
-                        <span className="text-xl font-semibold">Tk {totalPrice}</span>
+                        {/* <span className="text-xl font-semibold">Tk {totalPrice}</span> */}
                     </div>
                     <button onClick={() => {
                         setIsOpen(false);
