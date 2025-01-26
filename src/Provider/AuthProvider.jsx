@@ -72,6 +72,11 @@ const AuthProvider = ({ children }) => {
                 setToken(data.token)
 
             }
+            else {
+                localStorage.removeItem("auth")
+                setUser(null)
+                setToken("")
+            }
         })
 
         return () => {

@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import './Navbar.css'
 import { IoCart } from "react-icons/io5";
-import { FaUser } from "react-icons/fa";
+import { FaSignInAlt, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import { getShoppingCart } from '../../../utils/setLocalStorage';
+import useGetMe from '../../../Hooks/useGetMe';
 
 
 
@@ -14,16 +15,38 @@ const Navbar = () => {
     const [data, setData] = useState([])
     const { logout, user, setToken, setIsOpen } = useContext(AuthContext)
     const navigate = useNavigate()
+    const { meData } = useGetMe()
+    console.log(meData);
     const handleNav = () => {
         setNav(!nav);
     };
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    const handleToggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const handleCloseDropdown = () => {
+        setIsDropdownOpen(false);
+    };
+    const handelNavigateDashboard = () => {
+        if (meData && meData.role === 'admin') {
+            navigate('/dashboard/admin/add_product')
+        }
+        else if (meData && meData.role === 'user') {
+            navigate('/dashboard/user/settings')
+        }
+        else {
+            navigate('/')
+        }
+    }
 
     const navItems = [
         { id: 1, text: 'Home' },
-        { id: 2, text: 'Dashboard', link: '/dashboard/admin/add_product' },
+        // { id: 2, text: 'Dashboard', link: '/dashboard/admin/add_product' },
         { id: 3, text: 'Product', link: '/product' },
         { id: 4, text: 'About' },
-        { id: 5, text: 'Contact' },
+        { id: 5, text: 'Contact', link: '/contact' },
     ];
     useEffect(() => {
         const fetchData = () => {
@@ -88,9 +111,56 @@ const Navbar = () => {
                         <span className='bg-orange-300 absolute px-2  rounded-full text-sm font-bold -top-5 left-1 '>{data.length || 0}</span>
                         <p className='font-bold flex  items-center text-white hover:text-black -mt-1'> <IoCart size={26} />Cart</p>
                     </div>
-                    <div >
-                        <span onClick={handelNavigate} className='font-bold cursor-pointer flex justify-center transition-all duration-300 items-center   hover:text-black -mt-1 text-textColor'> <FaUser size={24} />Account</span>
-                    </div>
+                    {
+                        user ? <div className="relative">
+                            {/* Account Button */}
+                            <div>
+                                <span
+                                    onClick={handleToggleDropdown}
+                                    className="font-bold cursor-pointer flex justify-center transition-all duration-300 items-center hover:text-black text-textColor"
+                                >
+                                    <FaUser size={24} /> Account
+                                </span>
+                            </div>
+
+                            {/* Dropdown */}
+                            {isDropdownOpen && (
+                                <div className="absolute top-10 right-0 w-48 bg-white border border-gray-300 rounded-lg shadow-md z-50">
+                                    <ul className="flex flex-col">
+                                        <li
+                                            onClick={() => {
+                                                handleCloseDropdown();
+                                                handelNavigateDashboard();
+                                            }}
+                                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                        >
+                                            Dashboard
+                                        </li>
+                                        {/* <li
+                                            onClick={handleCloseDropdown}
+                                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                        >
+                                            Settings
+                                        </li> */}
+                                        <li
+                                            onClick={() => {
+                                                handelNavigate();
+                                                handleCloseDropdown();
+                                            }}
+                                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                        >
+                                            Logout
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
+                        </div>
+                            :
+                            <div className="font-bold cursor-pointer  transition-all duration-300 hover:text-black text-textColor">
+
+                                <Link className='flex justify-center items-center' to="/login"><FaSignInAlt size={20} className="mr-2" /> {/* Add the icon with some spacing */} Login</Link>
+                            </div>
+                    }
                 </div>
 
                 {/* Mobile Navigation Menu */}
