@@ -9,8 +9,10 @@ import TestimonialSliders from '../../components/ui/HomePageComponents/AnotherTe
 import AnotherTest from '../../components/ui/HomePageComponents/AnotherTest';
 import BlogSection from '../../components/ui/HomePageComponents/BlogSection';
 import NewsletterSignup from '../../components/ui/HomePageComponents/NewsletterSignup';
+import { setTitle } from '../../components/SetTitle';
 
 const Home = () => {
+    setTitle('Home | vape smoke 24')
     return (
         <div className='max-w-[1400px] mx-auto'>
             {/* <Carousel /> */}

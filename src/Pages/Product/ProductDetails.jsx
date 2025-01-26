@@ -13,9 +13,13 @@ import {
 import { Toaster, toast } from "sonner";
 import { addToDb } from "../../utils/setLocalStorage";
 import axios from "axios";
+import { setTitle } from "../../components/SetTitle";
 
 const ProductDetails = () => {
     const { axiosNotSecure } = useAxiosNotSecure();
+    const [title, setTitles] = useState('')
+    const [intervalId, setIntervalId] = useState(null);
+    // setTitle(`${title} | vape smoke 24`)
     const { id } = useParams();
 
     const { data: productData = {}, isLoading } = useQuery({
@@ -25,6 +29,31 @@ const ProductDetails = () => {
             return res.data;
         },
     });
+    // Update the title when product data is fetched
+    useEffect(() => {
+        if (productData?.name) {
+            setTitles(`${productData.name} | Vape Smoke 24`);
+        }
+    }, [productData]);
+
+    // Pulse the title
+    useEffect(() => {
+        if (title) {
+            let count = 0;
+            const pulseInterval = setInterval(() => {
+                // Alternate between the title and a "blank" title for the effect
+                document.title = count % 2 === 0 ? title : 'Product Details';
+                count++;
+            }, 1000); // Set interval to alternate every second
+
+            // Save intervalId and clean it up when necessary
+            setIntervalId(pulseInterval);
+
+            return () => clearInterval(pulseInterval); // Clean up interval on unmount or when title changes
+        }
+    }, [title]);
+
+
 
     const {
         category,
@@ -66,7 +95,7 @@ const ProductDetails = () => {
     }
 
     return (
-        <div className="bg-black text-white rounded-lg shadow-lg">
+        <div className="bg-black  text-white rounded-lg shadow-lg">
             <Toaster />
             <div className="max-w-4xl mx-auto p-6">
                 <h1 className="text-3xl font-bold mb-4">{name}</h1>
@@ -110,7 +139,7 @@ const ProductDetails = () => {
                     </div>
 
                     <div className="flex flex-col">
-                        <p className="text-xl text-yellow-400 font-semibold mb-2">${price}</p>
+                        <p className="text-xl text-yellow-400 font-semibold mb-2">Dhs {price}</p>
                         <p className="text-gray-400 mb-2">
                             Status:
                             <span

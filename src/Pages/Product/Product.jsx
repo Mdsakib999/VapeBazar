@@ -1,24 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosNotSecure from "../../Hooks/useAxiosNotSecure";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { setTitle } from "../../components/SetTitle";
 
 const Product = () => {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
+    setTitle('Products | vape smoke 24')
 
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
     // Fetch categories data for the category dropdown
     const { data: categoriesData = [] } = useQuery({
         queryKey: ['category'],
         queryFn: async () => {
-            const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/category`);
+            const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/category/user`);
             return res.data;
         },
-
-
-
-
     });
     console.log(categoriesData);
     // Extract category options
@@ -96,7 +96,7 @@ const Product = () => {
 
                             <div className="p-4">
                                 <h3 className="text-lg font-semibold text-gray-800">{name}</h3>
-                                <p className="text-indigo-600 font-bold text-xl mt-2">${price}</p>
+                                <p className="text-indigo-600 font-bold text-xl mt-2">Dhs {price}</p>
 
                                 <Link
                                     to={`/product/${_id}`}

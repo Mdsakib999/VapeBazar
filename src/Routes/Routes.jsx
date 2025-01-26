@@ -19,6 +19,17 @@ import AddCoupon from "../Pages/Dashbord/AdminDashbord/AddCoupon";
 import ManageCoupon from "../Pages/Dashbord/AdminDashbord/ManageCoupon";
 import ConfirmCheckout from "../Pages/ConfirmCheckout/ConfirmCheckout";
 import ManageOrders from "../Pages/Dashbord/AdminDashbord/ManageOrders";
+import ManageUsers from "../Pages/Dashbord/AdminDashbord/ManageUsers";
+import Settings from "../Pages/Dashbord/UserDashbord/Settings";
+import Orders from "../Pages/Dashbord/UserDashbord/Orders";
+import CategoryProducts from "../Pages/Product/CategoryProducts";
+import Categories from "../Pages/Categories/Categories";
+import AdminRoutes from "./AdminRoutes";
+import Contact from "../Pages/Contact/Contact";
+import CreateBlog from "../Pages/Dashbord/AdminDashbord/CreateBlog";
+import ManageBlog from "../Pages/Dashbord/AdminDashbord/ManageBlog";
+import Blog from "../Pages/Blog/Blog";
+import BlogDetails from "../Pages/Blog/BlogDetails";
 
 
 const router = createBrowserRouter([
@@ -35,8 +46,28 @@ const router = createBrowserRouter([
                 element: <About />
             },
             {
+                path: '/contact',
+                element: <Contact />
+            },
+            {
+                path: '/blog',
+                element: <Blog />
+            },
+            {
+                path: '/blogDetails/:link',
+                element: <BlogDetails />
+            },
+            {
                 path: '/product',
                 element: <Product />
+            },
+            {
+                path: '/products/:category',
+                element: <CategoryProducts />
+            },
+            {
+                path: '/categories',
+                element: <Categories />
             },
             {
                 path: '/product/:id',
@@ -56,38 +87,62 @@ const router = createBrowserRouter([
         path: '/dashboard',
         element: <PrivetRoutes> <DashbordLayout /></PrivetRoutes>,
         children: [
+            // user routes
+            {
+                path: 'user/settings',
+                element: <Settings />
+            },
+            {
+                path: 'user/orders',
+                element: <Orders />
+            },
+            // admin routes
             {
                 path: 'admin/add_product',
-                element: <AddProducts />
+                element: <AdminRoutes><AddProducts /></AdminRoutes>,
+                index: true,
+
             },
             {
                 path: 'admin/manage_product',
-                element: <MenageProduct />
+                element: <AdminRoutes><MenageProduct /></AdminRoutes>
             },
             {
                 path: 'admin/edit_product/:id',
-                element: <EditProduct />
+                element: <AdminRoutes><EditProduct /></AdminRoutes>
             },
             {
                 path: 'admin/add_categories',
-                element: <AddCategories />
+                element: <AdminRoutes><AddCategories /></AdminRoutes>
             },
             {
                 path: 'admin/manage_categories',
-                element: <ManageCategories />
+                element: <AdminRoutes><ManageCategories /></AdminRoutes>
             },
             {
                 path: 'admin/add_coupon',
-                element: <AddCoupon />
+                element: <AdminRoutes><AddCoupon /></AdminRoutes>
             },
             {
                 path: 'admin/manage_coupon',
-                element: <ManageCoupon />
+                element: <AdminRoutes><ManageCoupon /></AdminRoutes>
             },
             {
                 path: 'admin/manage_orders',
-                element: <ManageOrders />
-            }
+                element: <AdminRoutes><ManageOrders /></AdminRoutes>
+            },
+            {
+                path: 'admin/manage_users',
+                element: <AdminRoutes> <ManageUsers /></AdminRoutes>
+            },
+            {
+                path: 'admin/add_blog',
+                element: <AdminRoutes> <CreateBlog /></AdminRoutes>
+            },
+            {
+                path: 'admin/manage_blog',
+                element: <AdminRoutes> <ManageBlog /></AdminRoutes>
+            },
 
         ]
     },
