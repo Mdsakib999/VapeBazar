@@ -14,7 +14,7 @@ import { setTitle } from '../../components/SetTitle';
 const Home = () => {
     setTitle('Home | vape smoke 24')
     return (
-        <div className='max-w-[1400px] mx-auto'>
+        <div className='section-container mx-auto'>
             {/* <Carousel /> */}
             <Banner />
             {/* <TopCategories /> */}
