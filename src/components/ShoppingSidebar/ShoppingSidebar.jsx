@@ -97,7 +97,7 @@ const ShoppingSidebar = () => {
                     <button onClick={() => {
                         navigate('/checkout')
                         setIsOpen(false);
-                    }} className="w-full bg-orange-400 font-semibold mt-3 text-white py-3 text-xl rounded">Checkout</button>
+                    }} className="w-full bg-[#6366F1] font-semibold mt-3 text-white py-3 text-xl rounded">Checkout</button>
                 </div>
             </div>
         </div >

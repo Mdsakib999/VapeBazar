@@ -16,7 +16,8 @@ const FeaturedProducts = () => {
         // enabled: !!selectedCategory || !!searchTerm, 
         // Fetch only when there's search or category selected
     });
-    const featuredProducts = productData.slice(0, 4)
+    console.log(productData);
+    const featuredProducts = productData?.products?.slice(0, 4)
     return (
         <section className="py-12 bg-backgroundColor">
             <div className="container mx-auto px-4">
@@ -26,7 +27,7 @@ const FeaturedProducts = () => {
                 </h2>
                 {/* Product Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {featuredProducts.map((product) => (
+                    {featuredProducts?.map((product) => (
                         <div
                             key={product._id}
                             className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
@@ -57,7 +58,7 @@ const FeaturedProducts = () => {
                                 <p className="text-xl font-bold text-primaryColor mb-4">
                                     Dhs {product.price}
                                 </p>
-                                <Link to={`/product/${product._id}`} className="px-6 py-2 bg-primaryColor text-white rounded-full text-sm font-medium hover:bg-secondaryColor transition duration-300">
+                                <Link to={`/product/${product._id}`} className="px-6 py-2 w-full text-center bg-primaryColor text-white rounded-full text-sm font-medium hover:bg-secondaryColor transition duration-300">
                                     View Details
                                 </Link>
                             </div>

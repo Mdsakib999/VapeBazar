@@ -100,7 +100,7 @@ const BlogDetails = () => {
                     />
 
                     <div
-                        class="mt-4 prose lg:prose-xl w-full max-w-none"
+                        className="mt-4 prose lg:prose-xl w-full max-w-none"
                         dangerouslySetInnerHTML={{ __html: blogData?.description }}
                     >
                     </div>
@@ -116,7 +116,7 @@ const BlogDetails = () => {
                         <p className="text-xl font-bold mb-5">Best Selling Product</p>
                         <div>
                             {
-                                productData?.slice(0, 4).map((product, index, slicedArray) => (
+                                productData?.products?.slice(0, 4).map((product, index, slicedArray) => (
                                     <Link to={`/product/${product._id}`} key={product._id}>
                                         <div className="flex lg:flex-col xl:flex-row items-center gap-x-4 mb-3">
                                             <img

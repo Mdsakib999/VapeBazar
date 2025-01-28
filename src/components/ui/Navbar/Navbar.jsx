@@ -34,7 +34,7 @@ const Navbar = () => {
             navigate('/dashboard/admin/add_product')
         }
         else if (meData && meData.role === 'user') {
-            navigate('/dashboard/user/settings')
+            navigate('/dashboard/user/orders')
         }
         else {
             navigate('/')
@@ -45,7 +45,7 @@ const Navbar = () => {
         { id: 1, text: 'Home' },
         // { id: 2, text: 'Dashboard', link: '/dashboard/admin/add_product' },
         { id: 3, text: 'Product', link: '/product' },
-        { id: 4, text: 'About' },
+        // { id: 4, text: 'About' },
         { id: 5, text: 'Contact', link: '/contact' },
     ];
     useEffect(() => {
@@ -82,10 +82,12 @@ const Navbar = () => {
             <div className=' flex  justify-between items-center  max-w-[1240px] mx-auto  px-5 lg:px-0 py-11 md:py-0 text-black'>
                 {/* Logo */}
                 <div className='flex  justify-between items-center md:h-[90px] w-[60%]'>
-                    <div className='hidden lg:block'>
+                    {/* <Link to={'/'}>  */}
+                    <Link to={'/'} className='hidden lg:block'>
 
                         <p className='-mt-5 text-3xl font-bold font-Dancing text-textColor'>Vape<span className='font-bold bg-gradient-to-r from-blue-400 via-green-400 to-pink-400 bg-clip-text text-transparent text-gradient'>Bazara</span></p>
-                    </div>
+                    </Link>
+                    {/* </Link> */}
 
                     {/* Desktop Navigation */}
                     <ul className='hidden lg:flex gap-5  '>
@@ -187,7 +189,7 @@ const Navbar = () => {
                     </div>
                 </ul>
             </div>
-        </div>
+        </div >
     );
 };
 
