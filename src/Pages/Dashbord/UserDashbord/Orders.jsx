@@ -72,7 +72,7 @@ const Orders = () => {
                                                     {item.productId.name} (x {item.quantity}) <span className="text-red-500">{item.nicotineStrength}</span>
                                                 </span>
                                             </div>
-                                            <span>Tk {item.productId.price}</span>
+                                            <span>Dhs {item.productId.price}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -81,21 +81,21 @@ const Orders = () => {
                             {/* Total */}
                             <div className="border-t border-gray-200 pt-4 flex justify-between">
                                 <span className="font-semibold text-gray-800">Products Price:</span>
-                                <span className="font-semibold text-gray-800">Tk {order.totalAmount}</span>
+                                <span className="font-semibold text-gray-800">Dhs {order.totalAmount}</span>
                             </div>
                             <div className=" border-gray-200 pt-1 flex justify-between">
                                 <span className="font-semibold text-gray-800">Shipping Fee:</span>
-                                <span className="font-semibold text-gray-800">Tk {order.shippingFee}</span>
+                                <span className="font-semibold text-gray-800">Dhs {order.shippingFee}</span>
                             </div>
                             {
                                 order.discount && <div className=" border-gray-200 pt-1 flex justify-between">
                                     <span className="font-semibold text-gray-800">Discount</span>
-                                    <span className="font-semibold text-gray-800">-Tk {order.discount}</span>
+                                    <span className="font-semibold text-gray-800">-Dhs {order.discount}</span>
                                 </div>
                             }
                             <div className="border-t border-gray-200 pt-2  flex justify-between">
                                 <span className="font-semibold text-gray-800 ">Total:</span>
-                                <span className="font-semibold text-gray-800">Tk {order?.discount ? (Number(order?.totalAmount) + Number(order?.shippingFee)) - Number(order?.discount) : (Number(order?.totalAmount) + Number(order?.shippingFee))}</span>
+                                <span className="font-semibold text-gray-800">Dhs {order?.discount ? (Number(order?.totalAmount) + Number(order?.shippingFee)) - Number(order?.discount) : (Number(order?.totalAmount) + Number(order?.shippingFee))}</span>
                             </div>
                         </div>
                     ))}

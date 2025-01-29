@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import bannerImg from '../../../../public/homePage/banner.jpg';
+import { Link } from 'react-router-dom';
 const Banner = () => {
     const [animate, setAnimate] = useState(false);
 
@@ -37,9 +38,9 @@ const Banner = () => {
                 <p className="mt-4 text-lg md:text-xl text-gray-200">
                     Discover the best vape products and accessories.
                 </p>
-                <button className="mt-6 px-6 py-3 bg-primaryColor text-white text-lg rounded-full hover:bg-secondaryColor transition duration-300">
+                <Link to={'/product'} className="mt-6 px-6 py-3 bg-primaryColor text-white text-lg rounded-full hover:bg-secondaryColor transition duration-300">
                     Shop Now
-                </button>
+                </Link>
             </div>
         </div>
     );

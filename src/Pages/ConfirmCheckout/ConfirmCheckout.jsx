@@ -17,7 +17,7 @@ const ConfirmCheckout = () => {
         alert("Order ID copied to clipboard!");
     };
     return (
-        <div className=" inset-0  flex items-center justify-center my-8">
+        <div className=" inset-0 h-screen flex items-center justify-center my-8">
             <div className="bg-gradient-to-br from-white to-gray-50 shadow-xl rounded-lg w-11/12 md:w-2/3 lg:w-1/3 p-8 space-y-6">
                 <h2 className="text-2xl md:text-3xl font-extrabold text-green-600 text-center">
                     🎉 Congratulations ✅

@@ -21,7 +21,7 @@ const BlogSection = () => {
     if (isLoading || blogData.length === undefined) return <div>Loading...</div>;
 
     return (
-        <section className="bg-gray-200 container mx-auto max-w-[1340px] px-4 py-12 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24">
+        <section className="bg-gray-300 container mx-auto max-w-[1340px] px-4 py-12 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24">
             {/* Section Title */}
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-8">
                 Highlights of Recent Blog Posts
