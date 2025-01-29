@@ -4,7 +4,7 @@ import { setTitle } from '../../components/SetTitle';
 const Contact = () => {
     setTitle('Contact | vape smoke 24')
     return (
-        <section className="py-16 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white">
+        <section className="py-16 mt-4 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white">
             <div className="container mx-auto px-6 lg:px-12">
                 {/* Heading */}
                 <div className="text-center mb-12">

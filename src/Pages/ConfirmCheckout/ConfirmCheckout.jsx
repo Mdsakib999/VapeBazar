@@ -24,7 +24,7 @@ const ConfirmCheckout = () => {
                 </h2>
 
                 <p className="text-center text-red-600 leading-7">
-                    আপনার অর্ডারটি সফলভাবে সম্পন্ন হয়েছে। <br /> শীঘ্রই একজন প্রতিনিধি আপনার সাথে যোগাযোগ করবে।
+                    Your order has been successfully completed. <br /> A representative will contact you shortly.
                 </p>
 
                 <div className="bg-orange-50 border border-orange-200 rounded-md p-4 text-center">
@@ -41,13 +41,13 @@ const ConfirmCheckout = () => {
 
                 {!user && (
                     <p className="text-center text-sm text-red-500">
-                        ভবিষ্যতে অনুসন্ধানের জন্য অর্ডার আইডি সংরক্ষণ করুন.
+                        Save the order ID for future reference
                     </p>
                 )}
 
                 <Link
                     to={'/product'}
-                    className="w-full px-6 py-3 block text-center bg-orange-400 text-white rounded-md font-bold text-lg hover:bg-orange-500 focus:outline-none   transition"
+                    className="w-full px-6 py-3 block text-center bg-primaryColor text-white rounded-md font-bold text-lg  focus:outline-none   transition"
 
                 >
                     Return To Shop
@@ -57,10 +57,10 @@ const ConfirmCheckout = () => {
                     <p className="text-gray-700 text-sm">
                         Need help? Contact us{" "}
                         <a
-                            href="tel:+88 01727103079"
-                            className=" font-semibold text-orange-500 hover:underline"
+                            href="tel:+971524869090"
+                            className=" font-semibold text-primaryColor hover:underline"
                         >
-                            +88 01727103079
+                            +971524869090
                         </a>
                         .
                     </p>
