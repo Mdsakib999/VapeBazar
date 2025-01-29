@@ -9,9 +9,9 @@ const Product = () => {
     const location = useLocation()
     const [selectedCategory, setSelectedCategory] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
-    // const [currentPage, setCurrentPage] = useState(); // Track current page
     const itemsPerPage = 10; // Number of products per page
-    const currentPage = Number(location.search.split("?")[1])
+    const currentPage = Number(location.search.split("?")[1]) || 1
+    // const [currentPage, setCurrentPage] = useState(); // Track current page
 
     setTitle("Products | Vape Smoke 24");
 

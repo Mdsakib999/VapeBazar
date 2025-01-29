@@ -18,7 +18,7 @@ const MainLayoutes = () => {
             <div>
                 <ShoppingSidebar />
             </div>
-            <div className="flex-grow mt-[85px] min-h-[calc(100vh-80px)] mb-4 relative overflow-hidden">
+            <div className="flex-grow  min-h-[calc(100vh-80px)]   relative overflow-hidden">
                 <Outlet />
             </div>
             <Footer />

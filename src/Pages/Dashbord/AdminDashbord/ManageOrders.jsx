@@ -2,14 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import useAxiosNotSecure from "../../../Hooks/useAxiosNotSecure";
-
+import { TfiReload } from "react-icons/tfi";
+import LoadingComponent from "../../../components/LoadingComponent";
 
 const ManageOrders = () => {
     const { axiosNotSecure } = useAxiosNotSecure()
     const [status, setStatus] = useState('')
     const [search, setSearch] = useState('')
     console.log(status);
-    const { data: orders = [], refetch, isLoading } = useQuery({
+    const { data: orders = [], refetch, isLoading: orderLoading } = useQuery({
         queryKey: ['orders', status, search], // Unique query key
         queryFn: async () => {
             // Set optional query parameters dynamically
@@ -61,11 +62,19 @@ const ManageOrders = () => {
         }
 
     };
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleClick = async () => {
+        setIsLoading(true);
+        await refetch();  // Wait for refetch to complete
+        setIsLoading(false);
+    };
 
 
     return (
         <div className="p-6 bg-gray-50 min-h-screen">
-            <h1 className="text-3xl font-bold text-center mb-6">Manage Orders</h1>
+
+            <h1 className="text-3xl font-bold text-center text-black mb-6">Manage Orders</h1>
             <div className="flex items-center justify-between px-4 ">
                 <div className="w-full max-w-xs">
                     <label
@@ -91,6 +100,12 @@ const ManageOrders = () => {
                     </select>
 
                 </div>
+                <div onClick={handleClick} className="cursor-pointer">
+                    <TfiReload
+                        className={`text-black size-4 transition-transform ${isLoading ? "animate-spin" : ""
+                            }`}
+                    />
+                </div>
                 <div className="relative md:flex text-black  items-center group  pt-1">
                     <input
                         type="text"
@@ -107,71 +122,81 @@ const ManageOrders = () => {
 
             {/* Table data */}
             <div className="p-4">
-                <table className="w-full border-collapse text-black">
-                    <thead>
-                        <tr className="bg-gray-200">
-                            <th className="p-2 border">Order ID</th>
-                            <th className="p-2 border">Email</th>
-                            <th className="p-2 border">Contact No</th>
-                            <th className="p-2 border">Total Amount</th>
-                            <th className="p-2 border">Status</th>
-                            <th className="p-2 border">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {orders?.map((order) => (
-                            <tr key={order._id} className="text-center border-b">
-                                <td className="p-2 border">{order.orderId}</td>
-                                <td className="p-2 border">
-                                    {order?.userData?.email ? order?.userData?.email : "Guest"}
-                                </td>
-                                <td className="p-2 border">
-                                    {order?.userId?.contactNo
-                                        ? order?.userId?.contactNo
-                                        : order?.contactNo}
-                                </td>
-                                <td className="p-2 border">Tk {order?.discount ? (Number(order?.totalAmount) + Number(order?.shippingFee)) - Number(order?.discount) : (Number(order?.totalAmount) + Number(order?.shippingFee))}</td>
-                                <td>
-                                    <span
-                                        className={`px-1 rounded-lg font-semibold ${order?.orderStatus === "Pending"
-                                            ? "text-red-500"
-                                            : order?.orderStatus === "Shipped"
-                                                ? "text-blue-500"
-                                                : order?.orderStatus === "Cancel"
-                                                    ? "text-gray-600"
-                                                    : "text-green-500"
-                                            }`}
-                                    >
-                                        {order?.orderStatus}
-                                    </span>
-                                </td>
+                <div className="overflow-x-auto">
+                    {orderLoading ? (
+                        <div className="w-full flex justify-center py-5">
+                            <LoadingComponent />
+                        </div>
+                    ) : (
+                        <table className="w-full border-collapse text-black">
+                            <thead>
+                                <tr className="bg-gray-200">
+                                    <th className="p-2 border min-w-[100px]">Order ID</th>
+                                    <th className="p-2 border min-w-[150px]">Email</th>
+                                    <th className="p-2 border min-w-[130px]">Contact No</th>
+                                    <th className="p-2 border min-w-[120px]">Total Amount</th>
+                                    <th className="p-2 border min-w-[100px]">Status</th>
+                                    <th className="p-2 border min-w-[150px]">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {orders?.map((order) => (
+                                    <tr key={order._id} className="text-center border-b">
+                                        <td className="p-2 border">{order.orderId}</td>
+                                        <td className="p-2 border">
+                                            {order?.userData?.email ? order.userData.email : "Guest"}
+                                        </td>
+                                        <td className="p-2 border">
+                                            {order?.userId?.contactNo ? order.userId.contactNo : order?.contactNo}
+                                        </td>
+                                        <td className="p-2 border">
+                                            {order?.discount
+                                                ? Number(order.totalAmount) + Number(order.shippingFee) - Number(order.discount)
+                                                : Number(order.totalAmount) + Number(order.shippingFee)}
+                                        </td>
+                                        <td className="p-2 border">
+                                            <span
+                                                className={`px-2 py-1 rounded-lg font-semibold 
+                                        ${order?.orderStatus === "Pending"
+                                                        ? "text-red-500"
+                                                        : order?.orderStatus === "Shipped"
+                                                            ? "text-blue-500"
+                                                            : order?.orderStatus === "Cancel"
+                                                                ? "text-gray-600"
+                                                                : "text-green-500"
+                                                    }`}
+                                            >
+                                                {order?.orderStatus}
+                                            </span>
+                                        </td>
+                                        <td className="p-2 border">
+                                            <div className="flex justify-center gap-3">
+                                                {/* View Details Button */}
+                                                <button
+                                                    onClick={() => {
+                                                        setSelectedOrder(order);
+                                                        setUpdatedStatus(order?.orderStatus);
+                                                    }}
+                                                    className="bg-orange-500 text-white px-4 py-2 rounded-md shadow hover:bg-orange-600 transition focus:outline-none"
+                                                >
+                                                    Details
+                                                </button>
 
-                                <td className="p-2 border">
-                                    <div className="flex justify-center gap-3">
-                                        {/* View Details Button */}
-                                        <button
-                                            onClick={() => {
-                                                setSelectedOrder(order);
-                                                setUpdatedStatus(order?.orderStatus);
-                                            }}
-                                            className="bg-orange-500 text-white px-4 py-2 rounded-md shadow hover:bg-orange-600 transition focus:outline-none "
-                                        >
-                                            Details
-                                        </button>
-
-                                        {/* Delete Button */}
-                                        <button
-                                            onClick={() => handleDeleteOrder(order._id)}
-                                            className="bg-red-500 text-white px-4 py-2 rounded-md shadow hover:bg-red-600 transition"
-                                        >
-                                            Delete
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                                                {/* Delete Button */}
+                                                <button
+                                                    onClick={() => handleDeleteOrder(order._id)}
+                                                    className="bg-red-500 text-white px-4 py-2 rounded-md shadow hover:bg-red-600 transition"
+                                                >
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    )}
+                </div>
                 {/* <div className="flex justify-center items-center mt-6 space-x-2">
                     {Array.from({ length: Math.ceil(totalItems / limit) }, (_, i) => (
                         <button
@@ -259,26 +284,26 @@ const ManageOrders = () => {
                                     <div>
                                         <p className="flex justify-center">{item?.productId?.name} <p className="text-red-500"> {`${item.nicotineStrength}`}</p> </p>
                                         <p>
-                                            {Number(item.quantity)} x Tk{" "}
+                                            {Number(item.quantity)} x Dhs{" "}
                                             {Number(item?.productId?.price)} ={" "}
                                             {(
                                                 Number(item.quantity) *
                                                 Number(item?.productId?.price)
                                             ).toFixed(2)}{" "}
-                                            Tk
+                                            Dhs
                                         </p>
                                     </div>
                                 </li>
                             ))}
                             <p className="flex flex-col" >
-                                <p className="flex justify-between"><strong>Subtotal:</strong> Tk {selectedOrder?.totalAmount}</p>
-                                <p className="flex justify-between"><strong>Shipping Fee:</strong> Tk {selectedOrder?.shippingFee}</p>
+                                <p className="flex justify-between"><strong>Subtotal:</strong> Dhs {selectedOrder?.totalAmount}</p>
+                                <p className="flex justify-between"><strong>Shipping Fee:</strong> Dhs {selectedOrder?.shippingFee}</p>
                                 {
-                                    selectedOrder?.discount && <p className="flex justify-between"><strong>Discount:</strong> -Tk {selectedOrder?.discount}</p>
+                                    selectedOrder?.discount && <p className="flex justify-between"><strong>Discount:</strong> -Dhs {selectedOrder?.discount}</p>
                                 }
 
 
-                                <p className="flex justify-between border-t mt-1"><strong>Total Amount:</strong> Tk {selectedOrder?.discount ? (Number(selectedOrder?.totalAmount) + Number(selectedOrder?.shippingFee)) - Number(selectedOrder?.discount) : (Number(selectedOrder?.totalAmount) + Number(selectedOrder?.shippingFee))}</p>
+                                <p className="flex justify-between border-t mt-1"><strong>Total Amount:</strong> Dhs {selectedOrder?.discount ? (Number(selectedOrder?.totalAmount) + Number(selectedOrder?.shippingFee)) - Number(selectedOrder?.discount) : (Number(selectedOrder?.totalAmount) + Number(selectedOrder?.shippingFee))}</p>
                             </p>
                         </ul>
 

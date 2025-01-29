@@ -39,8 +39,8 @@ const CategoryProducts = () => {
 
             {/* Product Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {productData?.length > 0 ? (
-                    productData?.map(({ _id, image, name, price }) => (
+                {productData?.products?.length > 0 ? (
+                    productData?.products.map(({ _id, image, name, price }) => (
                         <div
                             key={_id}
                             className="max-w-xs bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"

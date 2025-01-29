@@ -30,7 +30,7 @@ export default {
         primaryColor: "#6366F1",
         secondaryColor: "#9C27B0",
         accentColor: "#00FFFF",
-        backgroundColor: "#2C2C2C",
+        backgroundColor: "#171F2E",
         textColor: "#FFFFFF",
       },
     },
