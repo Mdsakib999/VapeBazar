@@ -3,21 +3,21 @@ import bannerImg from '../../../../public/homePage/banner.jpg';
 const Banner = () => {
     const [animate, setAnimate] = useState(false);
 
-    // useEffect(() => {
-    //     const handleScroll = () => {
-    //         const scrollY = window.scrollY;
-    //         if (scrollY < 100) {
-    //             setAnimate(true);
-    //         } else {
-    //             setAnimate(false);
-    //         }
-    //     };
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollY = window.scrollY;
+            if (scrollY < 100) {
+                setAnimate(true);
+            } else {
+                setAnimate(false);
+            }
+        };
 
-    //     window.addEventListener('scroll', handleScroll);
-    //     return () => {
-    //         window.removeEventListener('scroll', handleScroll);
-    //     };
-    // }, []);
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     return (
         <div

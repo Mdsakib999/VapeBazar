@@ -1,49 +1,61 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import useAxiosNotSecure from '../../../Hooks/useAxiosNotSecure';
-import { capitalizeFirstWords } from '../../../utils/capitalizeFirstWords';
 import { Link } from 'react-router-dom';
-
-// const categories = [
-//     { id: 1, name: 'E-Liquids', image: 'https://images.unsplash.com/photo-1587324438678-77a1f6b44730', link: '/category/e-liquids' },
-//     { id: 2, name: 'Vape Kits', image: 'https://images.unsplash.com/photo-1587881862870-36c812428a6c', link: '/category/vape-kits' },
-//     { id: 3, name: 'Mods', image: 'https://images.unsplash.com/photo-1586348943529-beaae6c28db9', link: '/category/mods' },
-//     { id: 4, name: 'Tanks', image: 'https://images.unsplash.com/photo-1512499617640-c2f9991e2f16', link: '/category/tanks' },
-// ];
+import axios from 'axios';
+import { capitalizeFirstWords } from '../../../utils/capitalizeFirstWords';
 
 const ProductCategories = () => {
-    const { axiosNotSecure } = useAxiosNotSecure()
     const { data: categoriesData = [] } = useQuery({
-        queryKey: ['category',],
+        queryKey: ['category'],
         queryFn: async () => {
-            const res = await axiosNotSecure.get(`/category`);
+            const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/category/user`);
             return res.data;
         },
     });
+
     const categories = categoriesData.slice(0, 4).map(item => {
-        const name = capitalizeFirstWords(item.category)
+        const name = capitalizeFirstWords(item.category);
         return {
             id: item._id,
             name,
-            link: `/category/${item.category}`,
+            link: `/products/${item.category}`,
             image: item.image
-        }
-    })
-    console.log(categories);
+        };
+    });
 
     return (
-        <section className="py-8 bg-backgroundColor border-b-2">
-            <div className="container mx-auto px-4">
-                <h2 className="text-center text-textColor text-3xl font-bold mb-8">Product Categories</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <section className="py-12 bg-gray-50">
+            <div className="container mx-auto px-6">
+                <h2 className="text-center  font-bold text-gray-800 mb-10">
+                    <p className='text-3xl'>Our Product Categories</p>
+                    <Link to={'/categories'} className='mt-3 block'>See More</Link>
+                </h2>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {categories.map(category => (
-                        <div key={category.id} className="relative group border-2 rounded-lg overflow-hidden shadow-lg transform transition duration-500 hover:scale-105">
-                            <img src={category.image} alt={category.name} className="w-full h-64 object-cover group-hover:opacity-75 transition duration-300 ease-in-out" />
-                            <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg transition duration-300 ease-in-out opacity-0 group-hover:opacity-100">
-                                <Link to={category.link} className="text-white text-xl font-semibold bg-primaryColor px-4 py-2 rounded-full hover:bg-secondaryColor transition duration-300">
-                                    {category.name}
-                                </Link>
+                        <div
+                            key={category._id}
+                            className="relative group flex flex-col items-center justify-center text-center rounded-full bg-white shadow-lg border-2 border-gray-200 hover:shadow-2xl transition duration-300 p-4"
+                        >
+                            {/* Image Section */}
+                            <div className="w-32 h-32 rounded-full overflow-hidden shadow-md transition-transform transform group-hover:scale-110 duration-300">
+                                <img
+                                    src={category.image}
+                                    alt={category.name}
+                                    className="w-full h-full object-cover"
+                                />
                             </div>
+                            {/* Category Name */}
+                            <h3 className="mt-4 text-lg font-semibold text-gray-800">
+                                {category.name}
+                            </h3>
+                            {/* Button */}
+                            <Link
+                                to={category.link}
+                                className="mt-2 inline-block px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-full shadow-md hover:bg-blue-500 transition duration-300"
+                            >
+                                Explore Now
+                            </Link>
                         </div>
                     ))}
                 </div>
