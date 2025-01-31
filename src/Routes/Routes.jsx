@@ -157,3 +157,20 @@ const router = createBrowserRouter([
 ])
 
 export default router
+
+
+{/* <GlassMagnifier
+                                imageSrc={mainImage}
+                                imageAlt={name}
+                            // magnifierSize="200px"
+                            // magnifierBorderSize={2}
+                            // magnifierBorderColor="rgba(255, 255, 255, 0.8)"
+                            // square
+                            />
+                            <Magnifier
+                                imageSrc={mainImage}
+                                imageAlt="Example"
+                            // largeImageSrc="./large-image.jpg" // Optional
+                            // mouseActivation={MOUSE_ACTIVATION.DOUBLE_CLICK} // Optional
+                            // touchActivation={TOUCH_ACTIVATION.DOUBLE_TAP} // Optional
+                            /> */}

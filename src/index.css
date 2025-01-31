@@ -18,6 +18,10 @@ body {
   scrollbar-width: thin;
 }
 
+.b{
+  border: 2px solid red;
+}
+
 /* Track */
 ::-webkit-scrollbar-track {
   border-radius: 100vh;
@@ -26,7 +30,7 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #6a0dad;
+  background: #6366f1;
   border-radius: 100vh;
   border: 3px solid #edf2f7;
 }

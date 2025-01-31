@@ -160,7 +160,7 @@ const Checkout = () => {
                 {/* Left Side - User Interface */}
                 <div>
                     <div className="bg-white p-6 rounded-lg shadow-md">
-                        <p className="text-xl text-center text-orange-600 font-semibold mb-4">
+                        <p className="text-xl text-center text-primaryColor font-semibold mb-4">
                             User Information
                         </p>
 
@@ -341,7 +341,7 @@ const Checkout = () => {
 
                 {/* Right Side - Product & Payment Summary */}
                 <div className="bg-white p-6 rounded-lg shadow-md">
-                    <h2 className="text-xl text-center text-orange-600 font-semibold mb-4">
+                    <h2 className="text-xl text-center text-primaryColor font-semibold mb-4">
                         Order Summary
                     </h2>
                     <div className="space-y-4">
@@ -390,8 +390,8 @@ const Checkout = () => {
                                 <button
                                     disabled={!couponText}
                                     className={` ${!couponText
-                                        ? "bg-orange-500 opacity-70"
-                                        : "bg-orange-600 hover:bg-orange-700"
+                                        ? "bg-backgroundColor opacity-70"
+                                        : "bg-primaryColor"
                                         } text-white py-2 px-4 rounded-md  transition`}
                                     onClick={applyCoupon}
                                 >
@@ -432,7 +432,7 @@ const Checkout = () => {
                             <button
                                 disabled={products.length === 0}
                                 onClick={handlePayment}
-                                className="w-full py-3 bg-orange-500 text-white rounded-md hover:bg-orange-600 font-semibold transition"
+                                className="w-full py-3 bg-primaryColor text-white rounded-md  font-semibold transition"
                             >
                                 Confirm Order
                             </button>

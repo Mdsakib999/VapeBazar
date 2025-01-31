@@ -55,7 +55,7 @@ const AddCoupon = () => {
 
     };
     return (
-        <div className="flex items-center justify-center min-h-screen">
+        <div className="flex items-center justify-center min-h-screen bg-white">
             <Toaster />
             <div className="bg-black border-2  p-8 rounded-2xl shadow-xl w-full max-w-md">
                 <h2 className="text-2xl font-semibold text-orange-600 text-center mb-6">
@@ -66,7 +66,7 @@ const AddCoupon = () => {
                     <div>
                         <label
                             htmlFor="couponText"
-                            className="block text-sm font-medium text-gray-700 mb-1"
+                            className="block text-sm font-medium text-gray-100 mb-1"
                         >
                             Coupon Text
                         </label>
@@ -86,7 +86,7 @@ const AddCoupon = () => {
                     <div>
                         <label
                             htmlFor="expireDate"
-                            className="block text-sm font-medium text-gray-700 mb-1"
+                            className="block text-sm font-medium text-gray-100 mb-1"
                         >
                             Expire Date
                         </label>
@@ -104,7 +104,7 @@ const AddCoupon = () => {
                     <div>
                         <label
                             htmlFor="discountTk"
-                            className="block text-sm font-medium text-gray-700 mb-1"
+                            className="block text-sm font-medium text-gray-100 mb-1"
                         >
                             Discount Amount (Tk)
                         </label>
@@ -124,7 +124,7 @@ const AddCoupon = () => {
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full bg-orange-500 text-black text-center font-semibold text-white py-3 rounded-lg shadow-md hover:bg-orange-600 hover:shadow-lg transition duration-300"
+                        className="w-full bg-orange-500 text-center font-semibold text-white py-3 rounded-lg shadow-md hover:bg-orange-600 hover:shadow-lg transition duration-300"
                     >
                         {isLoading ? (
                             <div className="flex items-center justify-center space-x-2">

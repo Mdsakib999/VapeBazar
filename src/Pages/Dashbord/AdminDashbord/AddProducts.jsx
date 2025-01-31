@@ -75,8 +75,8 @@ const AddProducts = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg mx-auto p-6 text-black bg-white shadow-lg rounded-md">
-            <h2 className="text-2xl font-bold mb-6 text-center">Add Vape Product</h2>
+        <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg mx-auto p-6 text-black bg-white shadow-lg rounded-md my-10">
+            <h2 className="text-2xl font-bold mb-6 text-center">Add New Product</h2>
 
             {/* Product Name */}
             <div className="mb-4">
@@ -84,7 +84,7 @@ const AddProducts = () => {
                 <input
                     id="name"
                     {...register('name', { required: 'Product Name is required' })}
-                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
                 {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
             </div>
@@ -114,7 +114,7 @@ const AddProducts = () => {
                     id="image"
                     type="file"
                     {...register('image', { required: 'Image is required' })}
-                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
                 {errors.image && <p className="text-red-500 text-sm">{errors.image.message}</p>}
             </div>
@@ -127,7 +127,7 @@ const AddProducts = () => {
                     multiple
                     type="file"
                     {...register('images', { required: 'Gallery Images are required' })}
-                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
                 {errors.images && <p className="text-red-500 text-sm">{errors.images.message}</p>}
             </div>
@@ -139,7 +139,7 @@ const AddProducts = () => {
                     type="number"
                     id="price"
                     {...register('price', { required: 'Price is required', min: { value: 1, message: 'Price must be greater then 1 ' } })}
-                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
                 {errors.price && <p className="text-red-500 text-sm">{errors.price.message}</p>}
             </div>
@@ -150,7 +150,7 @@ const AddProducts = () => {
                 <select
                     id="category"
                     {...register('category', { required: 'Category is required' })}
-                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
                 >
                     <option value="">Select a category</option>
                     {
@@ -173,7 +173,7 @@ const AddProducts = () => {
                             options={nicotineStrengthOptions}
                             isMulti
                             classNamePrefix="react-select"
-                            className="w-full border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
                         />
                     )}
                 />
@@ -227,7 +227,7 @@ const AddProducts = () => {
                 <select
                     id="status"
                     {...register('status', { required: 'Status is required' })}
-                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
                 >
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>

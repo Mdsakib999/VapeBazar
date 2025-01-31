@@ -1,152 +1,163 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import './Navbar.css'
+import React, { useContext, useEffect, useState } from "react";
+import { AiOutlineClose, AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
 import { IoCart } from "react-icons/io5";
 import { FaSignInAlt, FaUser } from "react-icons/fa";
-import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../../Provider/AuthProvider';
-import { getShoppingCart } from '../../../utils/setLocalStorage';
-import useGetMe from '../../../Hooks/useGetMe';
-
-
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import { getShoppingCart } from "../../../utils/setLocalStorage";
+import useGetMe from "../../../Hooks/useGetMe";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const Navbar = () => {
     const [nav, setNav] = useState(false);
-    const [data, setData] = useState([])
-    const { logout, user, setToken, setIsOpen } = useContext(AuthContext)
-    const navigate = useNavigate()
-    const { meData } = useGetMe()
-    console.log(meData);
-    const handleNav = () => {
-        setNav(!nav);
-    };
+    const [searchTerm, setSearchTerm] = useState("");
+    const [data, setData] = useState([]);
+    const { logout, user, setToken, setIsOpen } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const { meData } = useGetMe();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    const handleToggleDropdown = () => {
-        setIsDropdownOpen(!isDropdownOpen);
-    };
+    const { data: productData = {} } = useQuery({
+        queryKey: ["products", searchTerm],
+        queryFn: async () => {
+            const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/products`, {
+                params: { searchItem: searchTerm },
+            });
+            return res.data;
+        },
+    });
 
-    const handleCloseDropdown = () => {
-        setIsDropdownOpen(false);
-    };
-    const handelNavigateDashboard = () => {
-        if (meData && meData.role === 'admin') {
-            navigate('/dashboard/admin/add_product')
-        }
-        else if (meData && meData.role === 'user') {
-            navigate('/dashboard/user/settings')
-        }
-        else {
-            navigate('/')
-        }
-    }
+    const { products = [] } = productData;
 
-    const navItems = [
-        { id: 1, text: 'Home' },
-        // { id: 2, text: 'Dashboard', link: '/dashboard/admin/add_product' },
-        { id: 3, text: 'Product', link: '/product' },
-        { id: 4, text: 'About' },
-        { id: 5, text: 'Contact', link: '/contact' },
-    ];
     useEffect(() => {
         const fetchData = () => {
             const localData = getShoppingCart();
             setData(localData);
         };
-        // Add event listener for "shopping-cart-updated"
         window.addEventListener("shopping-cart-updated", fetchData);
-
-        // Call fetchData initially
         fetchData();
-
-        // Cleanup listener on component unmount
         return () => {
             window.removeEventListener("shopping-cart-updated", fetchData);
         };
     }, []);
 
+    const handleNav = () => setNav(!nav);
+    const handleSearchCancel = () => setSearchTerm("");
+
+    const handelNavigateDashboard = () => {
+        if (meData?.role === "admin") {
+            navigate("/dashboard/admin/add_product");
+        } else if (meData?.role === "user") {
+            navigate("/dashboard/user/orders");
+        } else {
+            navigate("/");
+        }
+    };
+
     const handelNavigate = () => {
-        console.log('object');
         if (user) {
-            logout()
-            localStorage.removeItem('auth')
-            setToken(null)
+            logout();
+            localStorage.removeItem("auth");
+            setToken(null);
+        } else {
+            navigate("/login");
         }
-        else {
-            navigate('/login')
-        }
+    };
 
-    }
+    const navItems = [
+        { id: 1, text: "Home", link: "/" },
+        { id: 2, text: "Product", link: "/product" },
+        { id: 3, text: "Contact", link: "/contact" },
+    ];
+
     return (
-        <div className='fixed top-0 w-full bg-[#2C2C2C] text-white z-50 font-Poppins'>
-            <div className=' flex  justify-between items-center  max-w-[1240px] mx-auto  px-5 lg:px-0 py-11 md:py-0 text-black'>
+        <div className="fixed top-0 w-full bg-gradient-to-r from-gray-900 to-gray-800 text-white z-50 shadow-lg">
+            <div className="flex justify-between items-center max-w-[1240px] mx-auto px-5 py-4">
                 {/* Logo */}
-                <div className='flex  justify-between items-center md:h-[90px] w-[60%]'>
-                    <div className='hidden lg:block'>
+                <Link to="/" className="text-3xl font-bold text-white">
+                    V<span className="hidden md:inline">ape</span>
+                    <span className="text-blue-400">Bazar</span>
+                </Link>
 
-                        <p className='-mt-5 text-3xl font-bold font-Dancing text-textColor'>Vape<span className='font-bold bg-gradient-to-r from-blue-400 via-green-400 to-pink-400 bg-clip-text text-transparent text-gradient'>Bazara</span></p>
+                {/* Desktop Navigation */}
+                <ul className="hidden lg:flex items-center gap-8">
+                    {navItems.map((item) => (
+                        <Link to={item.link} key={item.id} className="hover:text-blue-400 transition">
+                            {item.text}
+                        </Link>
+                    ))}
+                </ul>
+
+                {/* Search Bar */}
+                <div className="hidden lg:flex items-center relative w-80">
+                    <div className="relative w-full">
+                        <input
+                            type="text"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            placeholder="Search products..."
+                            className="px-4 py-2 w-full rounded-full bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        />
+                        <AiOutlineSearch className="absolute top-3 right-10 text-gray-400" size={20} />
+                        {searchTerm && (
+                            <AiOutlineClose
+                                className="absolute top-3 right-3 text-gray-400 cursor-pointer"
+                                size={20}
+                                onClick={handleSearchCancel}
+                            />
+                        )}
                     </div>
 
-                    {/* Desktop Navigation */}
-                    <ul className='hidden lg:flex gap-5  '>
-                        {navItems.map(item => (
-                            <Link to={item.link} key={item.id}>
-                                <li
-
-                                    className=' nav_a rounded-xl  cursor-pointer '
-                                >
-                                    {item.text}
-                                </li>
-                            </Link>
-
-                        ))}
-                    </ul>
-                    {/* Mobile Navigation Icon */}
-                    <div onClick={handleNav} className='block lg:hidden'>
-                        {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
-                    </div>
+                    {/* Search Results Dropdown */}
+                    {searchTerm && products?.length > 0 && (
+                        <div className="absolute top-12 left-0 w-96 bg-white shadow-lg rounded-lg overflow-hidden">
+                            <ul className="max-h-60 overflow-y-auto">
+                                {products?.map((item) => (
+                                    <Link
+                                        to={`/product/${item._id}`}
+                                        key={item._id}
+                                        className="flex items-center gap-3 px-3 py-2 hover:bg-gray-100 transition cursor-pointer"
+                                    >
+                                        <img src={item.image} alt={item.name} className="w-12 h-12 object-cover rounded-md" />
+                                        <div>
+                                            <p className="text-sm font-semibold text-gray-800">{item.name}</p>
+                                            <p className="text-xs text-gray-500">${item.price}</p>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </div>
-                <div className='flex items-end gap-3'>
-                    <div onClick={() => setIsOpen(pre => !pre)} className='relative cursor-pointer '>
-                        <span className='bg-orange-100 absolute px-1  rounded-full text-sm font-bold -top-3 -left-2 '>{data.length || 0}</span>
-                        <p className='font-bold flex  items-center text-white  -mt-1'> <IoCart size={26} />Cart</p>
-                    </div>
-                    {
-                        user ? <div className="relative">
-                            {/* Account Button */}
-                            <div>
-                                <span
-                                    onClick={handleToggleDropdown}
-                                    className="font-bold cursor-pointer flex justify-center transition-all duration-300 items-center hover:text-black text-textColor"
-                                >
-                                    <FaUser size={24} /> Account
-                                </span>
-                            </div>
 
-                            {/* Dropdown */}
+                {/* User Account and Cart */}
+                <div className="flex items-center gap-5">
+                    <div className="relative cursor-pointer" onClick={() => setIsOpen((prev) => !prev)}>
+                        <IoCart size={26} />
+                        <span className="absolute -top-3 -right-2 bg-blue-500 text-sm font-bold text-white px-2 rounded-full">
+                            {data.length || 0}
+                        </span>
+                    </div>
+                    {user ? (
+                        <div className="relative">
+                            <span
+                                onClick={() => setIsDropdownOpen((prev) => !prev)}
+                                className="flex items-center cursor-pointer gap-1 hover:text-blue-400 transition"
+                            >
+                                <FaUser size={20} /> Account
+                            </span>
                             {isDropdownOpen && (
-                                <div className="absolute top-10 right-0 w-48 bg-white border border-gray-300 rounded-lg shadow-md z-50">
-                                    <ul className="flex flex-col">
+                                <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg">
+                                    <ul ul className="flex flex-col">
                                         <li
-                                            onClick={() => {
-                                                handleCloseDropdown();
-                                                handelNavigateDashboard();
-                                            }}
+                                            onClick={handelNavigateDashboard}
                                             className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                                         >
                                             Dashboard
                                         </li>
-                                        {/* <li
-                                            onClick={handleCloseDropdown}
-                                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                                        >
-                                            Settings
-                                        </li> */}
                                         <li
-                                            onClick={() => {
-                                                handelNavigate();
-                                                handleCloseDropdown();
-                                            }}
+                                            onClick={handelNavigate}
                                             className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                                         >
                                             Logout
@@ -155,39 +166,37 @@ const Navbar = () => {
                                 </div>
                             )}
                         </div>
-                            :
-                            <div className="font-bold cursor-pointer  transition-all duration-300 hover:text text-textColor">
-
-                                <Link className='flex justify-center items-center' to="/login"><FaSignInAlt size={20} className="mr-2" /> {/* Add the icon with some spacing */} Login</Link>
-                            </div>
-                    }
+                    ) : (
+                        <Link to="/login" className="flex items-center gap-1 hover:text-blue-400 transition">
+                            <FaSignInAlt size={20} /> Login
+                        </Link>
+                    )}
                 </div>
 
-                {/* Mobile Navigation Menu */}
-                <ul
-                    className={
-                        nav
-                            ? 'fixed lg:hidden right-0 top-0 w-[60%] h-full border-r border-r-gray-900 bg-backgroundColor ease-in-out duration-500'
-                            : 'ease-in-out w-[60%] duration-500 fixed top-0 bottom-0 right-[-100%]'
-                    }
-                >
-                    {/* Mobile Logo */}
-                    <p className=' ps-5 pt-2 text-3xl font-bold font-Dancing text-white'>Vape<span className='font-bold bg-gradient-to-r from-blue-400 via-green-400 to-pink-400 bg-clip-text text-transparent text-gradient'>Bazara</span></p>
+                {/* Mobile Navigation */}
+                <div className="lg:hidden flex items-center">
+                    <div onClick={handleNav}>{nav ? <AiOutlineClose size={26} /> : <AiOutlineMenu size={26} />}</div>
+                </div>
+            </div >
 
-                    {/* Mobile Navigation Items */}
-                    <div className='flex flex-col'>
-                        {navItems.map(item => (
-                            <Link to={item.link}
-                                key={item.id}
-                                className='p-4 border-b rounded-xl text-white  duration-300  cursor-pointer border-gray-600'
-                            >
-                                {item.text}
-                            </Link>
-                        ))}
+            {/* Mobile Menu */}
+            {
+                nav && (
+                    <div className="absolute top-0 left-0 w-full h-screen bg-gray-900 text-white lg:hidden">
+                        <div className="flex justify-end p-4">
+                            <AiOutlineClose size={26} onClick={handleNav} className="cursor-pointer" />
+                        </div>
+                        <ul className="flex flex-col items-center gap-6 mt-10 text-lg">
+                            {navItems.map((item) => (
+                                <Link to={item.link} key={item.id} onClick={handleNav}>
+                                    {item.text}
+                                </Link>
+                            ))}
+                        </ul>
                     </div>
-                </ul>
-            </div>
-        </div>
+                )
+            }
+        </div >
     );
 };
 

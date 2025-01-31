@@ -24,13 +24,13 @@ const AddCategories = () => {
         }
     };
     return (
-        <div className="max-w-md mx-auto mt-10 h-screen ">
-            <h2 className="text-2xl font-bold mb-4 text-center">Add Category</h2>
-            <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div className="flex items-center justify-center min-h-screen bg-white">
+            <form onSubmit={handleSubmit(onSubmit)} className="bg-black text-white shadow-md rounded-md px-8 pt-6 pb-8 mb-4 max-w-lg mx-auto">
+            <h2 className="text-2xl font-bold mb-4  text-center ">Add Category</h2>
 
                 {/* Category Name */}
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="category">
+                <div className="mb-4 ">
+                    <label className="block text-gray-100 text-sm font-bold mb-2" htmlFor="category">
                         Category Name
                     </label>
                     <input
@@ -38,7 +38,7 @@ const AddCategories = () => {
                         id="category"
                         type="text"
                         placeholder="Enter category name"
-                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.category ? 'border-red-500' : ''}`}
+                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline ${errors.category ? 'border-red-500' : ''}`}
                     />
                     {errors.category && (
                         <p className="text-red-500 text-xs italic">{errors.category.message}</p>
@@ -47,7 +47,7 @@ const AddCategories = () => {
 
                 {/* Image URL */}
                 <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="image">
+                    <label className="block text-gray-100 text-sm font-bold mb-2" htmlFor="image">
                         Image URL
                     </label>
                     <input
@@ -55,7 +55,7 @@ const AddCategories = () => {
                         id="image"
                         type="file"
                         placeholder="Enter image URL"
-                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.image ? 'border-red-500' : ''}`}
+                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline ${errors.image ? 'border-red-500' : ''}`}
                     />
                     {errors.image && (
                         <p className="text-red-500 text-xs italic">{errors.image.message}</p>
@@ -64,14 +64,14 @@ const AddCategories = () => {
 
                 {/* Description */}
                 <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
+                    <label className="block text-gray-100 text-sm font-bold mb-2" htmlFor="description">
                         Description
                     </label>
                     <textarea
                         {...register("description", { required: "Description is required", maxLength: { value: 500, message: "Description cannot exceed 500 characters" } })}
                         id="description"
                         placeholder="Enter description"
-                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.description ? 'border-red-500' : ''}`}
+                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline ${errors.description ? 'border-red-500' : ''}`}
                     ></textarea>
                     {errors.description && (
                         <p className="text-red-500 text-xs italic">{errors.description.message}</p>

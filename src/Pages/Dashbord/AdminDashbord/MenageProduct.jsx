@@ -86,7 +86,7 @@ const ManageProducts = () => {
     // }
 
     return (
-        <div className="container mx-auto p-6 bg-white text-black shadow-lg rounded-md">
+        <div className="container mx-auto p-6 bg-white text-black shadow-lg min-h-screen rounded-md">
             <Toaster />
             <h2 className="text-2xl font-bold mb-6 text-center">Manage Products</h2>
             <div className="mb-4 flex justify-between items-center">
@@ -133,8 +133,9 @@ const ManageProducts = () => {
                     ))}
                 </select>
             </div>
-            <div className="overflow-x-auto">
-                <table className="min-w-full bg-white">
+
+            <div className="overflow-x-auto mt-10 ">
+                <table className="min-w-full  bg-white">
                     <thead>
                         <tr>
                             <th className="py-2 px-4 border-b-2 border-gray-200 text-left text-sm font-semibold text-gray-700">Image</th>
@@ -146,7 +147,8 @@ const ManageProducts = () => {
                             <th className="py-2 px-4 border-b-2 border-gray-200 text-left text-sm font-semibold text-gray-700">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="">
+                        {/* <div> */}
                         {
                             isLoading ? <div>Loading</div>
                                 :
@@ -181,24 +183,38 @@ const ManageProducts = () => {
                                         </td>
                                     </tr>
                                 ))}
+                        {/* </div> */}
                     </tbody>
                 </table>
-                <div className="mt-4 flex justify-between items-center">
-                    <button onClick={() => setPage((prev) => Math.max(prev - 1, 1))} className="bg-gray-300 text-gray-700 py-1 px-2 rounded mr-2">
-                        Previous
-                    </button>
-                    <span>Page {page}</span>
-                    <button onClick={() => setPage((prev) => prev + 1)} className="bg-gray-300 text-gray-700 py-1 px-2 rounded ml-2">
-                        Next
-                    </button>
-                    <select value={limit} onChange={(e) => setLimit(parseInt(e.target.value))} className="border px-4 py-2 rounded ml-4">
+                <div className="flex justify-between items-end  mt-4 gap-4">
+                    <div className="flex items-center gap-2">
+                        <button
+                            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                            className="bg-gray-300 text-gray-700 py-1 px-2 rounded"
+                        >
+                            Previous
+                        </button>
+                        <span className="text-gray-700">Page {page}</span>
+                        <button
+                            onClick={() => setPage((prev) => prev + 1)}
+                            className="bg-gray-300 text-gray-700 py-1 px-2 rounded"
+                        >
+                            Next
+                        </button>
+                    </div>
+                    <select
+                        value={limit}
+                        onChange={(e) => setLimit(parseInt(e.target.value))}
+                        className="border px-4 py-2 rounded"
+                    >
                         <option value={10}>10</option>
                         <option value={20}>20</option>
                         <option value={50}>50</option>
                     </select>
                 </div>
+
             </div>
-        </div>
+        </div >
     );
 };
 

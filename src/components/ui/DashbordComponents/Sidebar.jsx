@@ -21,17 +21,17 @@ import useGetMe from "../../../Hooks/useGetMe";
 const Sidebar = ({ setOpen, open }) => {
     const { meData } = useGetMe()
     const adminSidebar = [
-        { id: 0, title: "Add Product", src: <FaPlus />, link: "/dashboard/admin/add_product" },
-        { id: 1, title: "Manage Product", src: <FaList />, link: "/dashboard/admin/manage_product" },
-        { id: 2, title: "Add Categories", src: <MdCategory />, link: "/dashboard/admin/add_categories" },
-        { id: 3, title: "Manage Categories", src: <BiSolidCategory />, link: "/dashboard/admin/manage_categories" },
-        { id: 4, title: "Add Coupon", src: <FaTags />, link: "/dashboard/admin/add_coupon" },
-        { id: 5, title: "Manage Coupon", src: <FaTags />, link: "/dashboard/admin/manage_coupon" },
-        { id: 5, title: "Add Blog", src: <FaBloggerB />, link: "/dashboard/admin/add_blog" },
-        { id: 5, title: "Manage Blog", src: <SiBackstage />, link: "/dashboard/admin/manage_blog" },
-        { id: 6, title: "Manage Order", src: <FaShoppingCart />, link: "/dashboard/admin/manage_orders" },
-        { id: 7, title: "Manage Users", src: <FaUsers />, link: "/dashboard/admin/manage_users" },
-        { id: 8, title: "Home", src: <FaHome />, link: "/" },
+        { id: 0, title: "Manage Order", src: <FaShoppingCart />, link: "/dashboard/admin/manage_orders" },
+        { id: 1, title: "Add Product", src: <FaPlus />, link: "/dashboard/admin/add_product" },
+        { id: 2, title: "Manage Product", src: <FaList />, link: "/dashboard/admin/manage_product" },
+        { id: 3, title: "Manage Users", src: <FaUsers />, link: "/dashboard/admin/manage_users" },
+        { id: 4, title: "Add Categories", src: <MdCategory />, link: "/dashboard/admin/add_categories" },
+        { id: 5, title: "Manage Categories", src: <BiSolidCategory />, link: "/dashboard/admin/manage_categories" },
+        { id: 6, title: "Add Coupon", src: <FaTags />, link: "/dashboard/admin/add_coupon" },
+        { id: 7, title: "Manage Coupon", src: <FaTags />, link: "/dashboard/admin/manage_coupon" },
+        { id: 8, title: "Add New Blog", src: <FaBloggerB />, link: "/dashboard/admin/add_blog" },
+        { id: 9, title: "Manage Blog", src: <SiBackstage />, link: "/dashboard/admin/manage_blog" },
+        { id: 10, title: "Home", src: <FaHome />, link: "/" },
     ];
 
     const userSidebar = [

@@ -55,9 +55,9 @@ const ManageBlog = () => {
     }
 
     return (
-        <div className="p-6">
+        <div className="p-6  bg-white h-[100vh]">
             <Toaster />
-            <h2 className="text-3xl font-bold  mb-6 text-center">
+            <h2 className="text-3xl font-bold  mb-8 text-center text-black">
                 Manage Blogs
             </h2>
             <div className="grid justify-center md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 ">
@@ -70,10 +70,10 @@ const ManageBlog = () => {
                             <img
                                 src={blog.blogImage}
                                 alt="blogs tailwind section"
-                                className="max-h-[200px] rounded-t-xl w-full"
+                                className="h-[200px] rounded-t-xl w-full"
                             />
                         </div>
-                        <div className="p-4 transition-all duration-300 rounded-b-2xl group-hover:bg-gray-50">
+                        <div className="p-4 transition-all duration-300 rounded-b-2xl text-black group-hover:bg-gray-50">
                             <div className="flex gap-x-3 mb-3">
                                 <div className="w-12 h-12 rounded-full border-2 border-orange-500">
                                     <img
