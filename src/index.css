@@ -18,6 +18,10 @@ body {
   scrollbar-width: thin;
 }
 
+.b{
+  border: 2px solid red;
+}
+
 /* Track */
 ::-webkit-scrollbar-track {
   border-radius: 100vh;

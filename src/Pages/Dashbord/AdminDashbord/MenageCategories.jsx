@@ -81,7 +81,7 @@ const ManageCategories = () => {
     };
 
     return (
-        <div className="container overflow-x-auto mx-auto p-6 bg-white text-black shadow-lg rounded-md">
+        <div className="container overflow-x-auto mx-auto p-6 bg-white text-black shadow-lg rounded-md h-[100vh]">
             <h2 className="text-2xl font-bold mb-6 text-center">Manage Categories</h2>
 
             <div className="overflow-x-auto">

@@ -83,7 +83,7 @@ const CreateBlog = () => {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen">
+        <div className="flex justify-center items-center min-h-screen my-10">
             <Toaster />
             <form
                 onSubmit={handleSubmit}
