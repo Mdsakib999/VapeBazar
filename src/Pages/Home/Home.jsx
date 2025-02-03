@@ -13,20 +13,20 @@ const Home = () => {
     return (
         <div className="relative w-full">
             {/* Parallax Background */}
-            <div
+            {/* <div
                 className="absolute inset-0 bg-cover bg-center bg-fixed"
                 style={{
                     backgroundImage: "url('https://img.freepik.com/free-photo/man-vaping-electronic-cigarette_158595-3038.jpg?t=st=1738128784~exp=1738132384~hmac=9d38b5702f37203b3a8024a5e3169e616e095ac00b297140c0cd2437702309b7&w=1380')",
                 }}
             >
-                {/* Overlay */}
+
                 <div className="absolute inset-0 bg-black bg-opacity-60"></div>
-            </div>
+            </div> */}
 
             {/* Content */}
             <div className="relative z-10">
                 <Banner />
-                <div className='section-container bg-gray-900 bg-opacity-80 '>
+                <div className='section-containe bg-gray-900 bg-opacity-80 '>
                     <ProductCategories />
                     <FeaturedProducts />
                     <Testimonials />
