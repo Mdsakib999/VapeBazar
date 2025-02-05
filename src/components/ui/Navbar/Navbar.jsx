@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AiOutlineClose, AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
+import React, { useContext, useEffect, useState, useRef } from "react";
+import { AiOutlineClose, AiOutlineMenu, AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
 import { IoCart } from "react-icons/io5";
 import { FaSignInAlt, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,6 +17,9 @@ const Navbar = () => {
     const navigate = useNavigate();
     const { meData } = useGetMe();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    // Reference for the search dropdown to detect clicks outside
+    const searchRef = useRef(null);
 
     const { data: productData = {} } = useQuery({
         queryKey: ["products", searchTerm],
@@ -39,6 +42,19 @@ const Navbar = () => {
         fetchData();
         return () => {
             window.removeEventListener("shopping-cart-updated", fetchData);
+        };
+    }, []);
+
+    useEffect(() => {
+        // Close the search results when clicked outside of the search area
+        const handleClickOutside = (event) => {
+            if (searchRef.current && !searchRef.current.contains(event.target)) {
+                setSearchTerm(""); // Close search results when clicked outside
+            }
+        };
+        document.addEventListener("click", handleClickOutside);
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
         };
     }, []);
 
@@ -75,9 +91,8 @@ const Navbar = () => {
         <div className="fixed top-0 w-full bg-gradient-to-r from-gray-900 to-gray-800 text-white z-50 shadow-lg">
             <div className="flex justify-between items-center max-w-[1240px] mx-auto px-5 py-4">
                 {/* Logo */}
-                <Link to="/" className="text-3xl font-bold text-white">
-                    V<span className="hidden md:inline">ape</span>
-                    <span className="text-blue-400">Bazar</span>
+                <Link to="/">
+                    <p className='-mt-5 text-3xl font-bold font-Dancing text-textColor'>V<span className="hidden md:inline-block">ape</span><span className='font-bold bg-gradient-to-r from-blue-400 via-green-400 to-pink-400 bg-clip-text text-transparent text-gradient'>Bazara</span></p>
                 </Link>
 
                 {/* Desktop Navigation */}
@@ -90,7 +105,7 @@ const Navbar = () => {
                 </ul>
 
                 {/* Search Bar */}
-                <div className="hidden lg:flex items-center relative w-80">
+                <div ref={searchRef} className="hidden lg:flex items-center relative w-80">
                     <div className="relative w-full">
                         <input
                             type="text"
@@ -110,22 +125,29 @@ const Navbar = () => {
                     </div>
 
                     {/* Search Results Dropdown */}
-                    {searchTerm && products?.length > 0 && (
+                    {searchTerm && (
                         <div className="absolute top-12 left-0 w-96 bg-white shadow-lg rounded-lg overflow-hidden">
                             <ul className="max-h-60 overflow-y-auto">
-                                {products?.map((item) => (
-                                    <Link
-                                        to={`/product/${item._id}`}
-                                        key={item._id}
-                                        className="flex items-center gap-3 px-3 py-2 hover:bg-gray-100 transition cursor-pointer"
-                                    >
-                                        <img src={item.image} alt={item.name} className="w-12 h-12 object-cover rounded-md" />
-                                        <div>
-                                            <p className="text-sm font-semibold text-gray-800">{item.name}</p>
-                                            <p className="text-xs text-gray-500">${item.price}</p>
-                                        </div>
-                                    </Link>
-                                ))}
+                                {products.length > 0 ? (
+                                    products.map((item) => (
+                                        <Link
+                                            to={`/product/${item._id}`}
+                                            key={item._id}
+                                            className="flex items-center gap-3 px-3 py-2 hover:bg-gray-100 transition cursor-pointer"
+                                        >
+                                            <img src={item.image} alt={item.name} className="w-12 h-12 object-cover rounded-md" />
+                                            <div>
+                                                <p className="text-sm font-semibold text-gray-800">{item.name}</p>
+                                                <p className="text-xs text-gray-500">${item.price}</p>
+                                            </div>
+                                        </Link>
+                                    ))
+                                ) : (
+                                    <div className="flex items-center justify-center py-4">
+                                        <AiOutlineShoppingCart className="text-gray-400" size={30} />
+                                        <p className="text-gray-500 ml-2">No products found</p>
+                                    </div>
+                                )}
                             </ul>
                         </div>
                     )}
@@ -149,7 +171,7 @@ const Navbar = () => {
                             </span>
                             {isDropdownOpen && (
                                 <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg">
-                                    <ul ul className="flex flex-col">
+                                    <ul className="flex flex-col">
                                         <li
                                             onClick={handelNavigateDashboard}
                                             className="px-4 py-2 hover:bg-gray-100 cursor-pointer"

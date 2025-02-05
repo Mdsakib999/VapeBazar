@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 
 const FeaturedProducts = () => {
     const { data: productData = [], isLoading, error } = useQuery({
@@ -16,7 +16,6 @@ const FeaturedProducts = () => {
         // enabled: !!selectedCategory || !!searchTerm, 
         // Fetch only when there's search or category selected
     });
-    console.log(productData);
     const featuredProducts = productData?.products?.slice(0, 4)
     return (
         <section className="py-12 bg-backgroundColor">
@@ -28,46 +27,85 @@ const FeaturedProducts = () => {
                 {/* Product Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {featuredProducts?.map((product) => (
-                        <div
+                        <Link
+                            to={`/product/${product._id}`}
                             key={product._id}
-                            className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+                            className="bg-white rounded-lg shadow-md overflow-hidden group transition-transform transform hover:scale-105 duration-300"
                         >
+                            {/* Heart Icon */}
+                            <div className="absolute top-4 right-4 text-gray-400 hover:text-red-500 cursor-pointer z-10">
+                                <AiOutlineHeart size={24} />
+                            </div>
+
                             {/* Product Image */}
-                            <div className="relative overflow-hidden rounded-t-lg group">
-                                {/* Default Image */}
+                            <div className="relative w-full bg-gray-100 flex justify-center items-center overflow-hidden group">
+                                {/* Primary Image */}
                                 <img
                                     src={product.images[0]}
                                     alt={product.name}
-                                    className="w-full h-64 object-cover transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                                    className="h-full w-full object-contain transition-transform duration-300 transform group-hover:translate-x-full"
                                 />
                                 {/* Hover Image */}
                                 <img
                                     src={product.images[1]}
-                                    alt={`${product.name} alternate`}
-                                    className="w-full h-64 object-cover absolute top-0 left-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                                    alt={product.name}
+                                    className="h-full w-full object-contain absolute top-0 left-0 transition-transform duration-300 transform translate-x-[-100%] group-hover:translate-x-0"
                                 />
-                                <div className="absolute top-2 left-2 bg-primaryColor text-white text-xs font-bold px-2 py-1 rounded-md">
-                                    Featured
+                            </div>
+
+                            {/* Product Details */}
+                            <div className="p-4 flex justify-between items-center">
+                                {/* Left Section (Text Details) */}
+                                <div className="flex flex-col">
+                                    {/* Product Rating */}
+                                    <div className="flex mb-2">
+                                        {[...Array(5)].map((_, index) => (
+                                            <span
+                                                key={index}
+                                                className={`${index < product.rating ? "text-yellow-400" : "text-gray-300"
+                                                    }`}
+                                            >
+                                                ★
+                                            </span>
+                                        ))}
+                                    </div>
+
+                                    {/* Product Category */}
+                                    <p className="text-lg text-gray-500 mb-1">
+                                        By{" "}
+                                        <span className="text-red-500 font-semibold">
+                                            {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
+                                        </span>
+                                    </p>
+
+
+                                    {/* Product Name */}
+                                    <h3 className="text-base text-gray-800 font-semibold mb-2 truncate max-w-[200px] sm:max-w-[180px]">
+                                        {product.name}
+                                    </h3>
+
+                                    {/* Product Price */}
+                                    <p className="text-lg text-red-500 font-bold">Dhs {product.price}</p>
+                                </div>
+
+                                {/* Right Section (Icons) */}
+                                <div className="flex flex-col space-y-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                    {/* Add to Cart */}
+                                    <Link to={`/product/${product._id}`} className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full text-black hover:bg-gray-300 transition duration-200">
+                                        <AiOutlineShoppingCart size={20} />
+                                    </Link>
+                                    {/* Add to Wishlist */}
+                                    <button className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full text-black hover:bg-gray-300 transition duration-200">
+                                        <AiOutlineHeart size={20} />
+                                    </button>
                                 </div>
                             </div>
-                            {/* Product Details */}
-                            <div className="p-4 flex flex-col items-center">
-                                <h3 className="text-lg font-semibold text-gray-700 mb-2 text-center">
-                                    {product.name}
-                                </h3>
-                                <p className="text-xl font-bold text-primaryColor mb-4">
-                                    Dhs {product.price}
-                                </p>
-                                <Link to={`/product/${product._id}`} className="px-6 py-2 w-full text-center bg-primaryColor text-white rounded-full text-sm font-medium hover:bg-secondaryColor transition duration-300">
-                                    View Details
-                                </Link>
-                            </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
-
             </div>
         </section>
+
     );
 };
 
