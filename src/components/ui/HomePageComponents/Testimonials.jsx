@@ -19,8 +19,40 @@ const Testimonials = () => {
         },
     });
 
+    const testimonials = [
+        {
+            id: 1,
+            name: "Ahmed Al-Mansoori",
+            rating: 5,
+            title: "Best Vape in Dubai",
+            content: "I’ve tried multiple brands, but nothing compares to the quality and flavor of these vapes. The smoothness and consistency make it the best choice for any vape enthusiast in Dubai.",
+        },
+        {
+            id: 2,
+            name: "Fatima Al-Farsi",
+            rating: 5,
+            title: "Amazing Vape Collection",
+            content: "The variety of flavors and sleek designs make this the best vape shop in Dubai. I’ve been a loyal customer for months and always look forward to new product releases.",
+        },
+        {
+            id: 3,
+            name: "Khalid Al-Sabah",
+            rating: 5,
+            title: "Top-Notch Quality",
+            content: "The customer service is fantastic and the products are top-notch. Every vape I’ve purchased has exceeded my expectations. Highly recommend this to everyone in Dubai!",
+        },
+        {
+            id: 4,
+            name: "Laila Al-Najjar",
+            rating: 5,
+            title: "Unmatched Experience",
+            content: "From the moment I walked in, I was greeted with professionalism. The experience and quality of products are unmatched in Dubai. I’ll definitely continue shopping here.",
+        },
+    ];
+
+
     return (
-        <section className="container mx-auto max-w-[1340px] px-4 py-12 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24 ">
+        <section className="container mx-auto max-w-[1340px] px-4 py-12 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24">
             <div className="keen-slider">
                 <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16">
                     <div className="max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
@@ -29,9 +61,9 @@ const Testimonials = () => {
                         </h2>
 
                         <p className="mt-4 text-white">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas veritatis illo placeat
-                            harum porro optio fugit a culpa sunt id!
+                            Discover why vapers in Dubai trust us for their premium vape products. From smooth flavors to sleek designs, our customers rave about the quality and experience that sets us apart!
                         </p>
+
 
                         <div className="hidden lg:mt-8 lg:flex lg:gap-4 navigation-wrapper">
                             <button
@@ -72,12 +104,12 @@ const Testimonials = () => {
 
                     <div className="-mx-6 lg:col-span-2 lg:mx-0 navigation-wrapper">
                         <div ref={sliderRef} className="keen-slider">
-                            {Array(3).fill(0).map((_, index) => (
-                                <div key={index} className="keen-slider__slide">
+                            {testimonials.map((testimonial) => (
+                                <div key={testimonial.id} className="keen-slider__slide">
                                     <blockquote className="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12">
                                         <div>
                                             <div className="flex gap-0.5 text-green-500">
-                                                {Array(5).fill(0).map((_, i) => (
+                                                {Array(testimonial.rating).fill(0).map((_, i) => (
                                                     <svg
                                                         key={i}
                                                         xmlns="http://www.w3.org/2000/svg"
@@ -93,18 +125,16 @@ const Testimonials = () => {
                                             </div>
 
                                             <div className="mt-4">
-                                                <p className="text-2xl font-bold text-rose-600 sm:text-3xl">Stayin' Alive</p>
+                                                <p className="text-2xl font-bold text-rose-600 sm:text-3xl">{testimonial.title}</p>
 
                                                 <p className="mt-4 leading-relaxed text-gray-700">
-                                                    No, Rose, they are not breathing. And they have no arms or legs … Where are they? You
-                                                    know what? If we come across somebody with no arms or legs, do we bother resuscitating
-                                                    them? I mean, what quality of life do we have there?
+                                                    {testimonial.content}
                                                 </p>
                                             </div>
                                         </div>
 
                                         <footer className="mt-4 text-sm font-medium text-gray-700 sm:mt-6">
-                                            &mdash; Michael Scott
+                                            &mdash; {testimonial.name}
                                         </footer>
                                     </blockquote>
                                 </div>

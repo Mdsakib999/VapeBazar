@@ -6,6 +6,8 @@ import Testimonials from '../../components/ui/HomePageComponents/Testimonials';
 import BlogSection from '../../components/ui/HomePageComponents/BlogSection';
 import NewsletterSignup from '../../components/ui/HomePageComponents/NewsletterSignup';
 import { setTitle } from '../../components/SetTitle';
+import Carousel from '../../components/ui/HomePageComponents/Carousel';
+import GradientCards from '../../components/ui/HomePageComponents/GradientCards';
 
 const Home = () => {
     setTitle('Home | Vape Smoke 24');
@@ -24,9 +26,20 @@ const Home = () => {
             </div> */}
 
             {/* Content */}
-            <div className="relative z-10">
-                <Banner />
-                <div className='section-containe bg-gray-900 bg-opacity-80 '>
+            <div className=" ">
+                <div className="relative">
+                    {/* Carousel Section */}
+                    <div className="relative z-10">
+                        <Carousel />
+                    </div>
+
+                    {/* GradientCards Section */}
+                    <div className="relative md:-mt-36 z-20">
+                        <GradientCards />
+                    </div>
+                </div>
+                {/* <Banner /> */}
+                <div className='section-container  bg-gray-900 bg-opacity-80 '>
                     <ProductCategories />
                     <FeaturedProducts />
                     <Testimonials />

@@ -127,7 +127,7 @@ const ProductDetails = () => {
     }
 
     return (
-        <div className="bg-black text-white rounded-lg shadow-lg">
+        <div className="bg-black text-white rounded-lg shadow-lg mt-20">
             <Toaster />
             <div className="max-w-6xl mx-auto p-6">
                 {/* Product Title */}

@@ -30,7 +30,7 @@ const BlogDetails = () => {
     }, []);
 
     return (
-        <div className="bg-gray-100">
+        <div className="bg-gray-100 mt-[75px]">
 
             <div className="w-[90%] mx-auto  flex gap-x-6 text-black ">
                 {/* main contain  */}

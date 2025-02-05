@@ -14,11 +14,12 @@
     "@tanstack/react-query": "^5.49.2",
     "axios": "^1.7.2",
     "firebase": "^11.0.2",
-    "framer-motion": "^12.0.5",
+    "framer-motion": "^12.0.11",
     "jodit-pro-react": "^4.1.20",
     "jwt-decode": "^4.0.0",
     "keen-slider": "^6.8.6",
     "localforage": "^1.10.0",
+    "lucide-react": "^0.474.0",
     "match-sorter": "^6.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -29,7 +30,8 @@
     "react-router-dom": "^6.23.0",
     "react-select": "^5.8.0",
     "sonner": "^1.7.0",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "swiper": "^11.2.2"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",

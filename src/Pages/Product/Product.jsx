@@ -53,7 +53,7 @@ const Product = () => {
     if (error) return <div>Error fetching products. Please try again later.</div>;
 
     return (
-        <div className="mt-8 section-container">
+        <div className="mt-28 section-container">
             {/* Search and Category Filter */}
             <div className="flex flex-col md:flex-row items-center justify-end mb-6 gap-4">
                 <input
@@ -79,7 +79,7 @@ const Product = () => {
             {
                 isLoading ? <LoadingComponent /> : <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
 
-                    {products.length > 0 ? (
+                    {products && products.length > 0 ? (
                         products.map(({ _id, image, name, price, category }) => (
                             <div
                                 key={_id}
@@ -92,7 +92,7 @@ const Product = () => {
                                         src={image}
                                         alt={name}
                                     />
-                                    <span className="absolute top-4 right-4 bg-gray-800 text-white text-sm font-medium px-3 py-1 rounded-full shadow-sm">
+                                    <span className="absolute top-4 right-4 bg-gradient-to-r from-indigo-600 to-purple-500 text-white text-xs font-medium px-3 py-1 rounded-full shadow-md">
                                         {category}
                                     </span>
                                 </div>
@@ -113,9 +113,9 @@ const Product = () => {
                                     <div className="mt-4 flex justify-between items-center">
                                         <Link
                                             to={`/product/${_id}`}
-                                            className="text-indigo-600 border w-full text-center border-indigo-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-600 hover:text-white transition-all duration-200"
+                                            className="mt-2 text-sm font-semibold px-6 py-2 m-2 text-white uppercase transition-all duration-500 bg-gradient-to-r from-[#00d2ff] via-[#3a7bd5] to-[#00d2ff] bg-[length:200%_auto] rounded-lg shadow-lg hover:bg-right"
                                         >
-                                            View Details
+                                            Show Details
                                         </Link>
                                         {/* <button
                                             className="text-indigo-600 border border-indigo-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-600 hover:text-white transition-all duration-200"
