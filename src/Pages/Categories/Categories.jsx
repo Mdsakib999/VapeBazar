@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Categories = () => {
@@ -10,6 +11,9 @@ const Categories = () => {
             return res.data;
         },
     });
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
 
     if (isLoading) {
         return (

@@ -31,9 +31,9 @@ const CategoryProducts = () => {
     }
 
     return (
-        <div className="container mx-auto px-6 py-12">
+        <div className="container mx-auto px-6 mt-20 py-12">
             {/* Category Name */}
-            <h1 className="text-3xl font-bold text-gray-800 mb-12 capitalize text-center">
+            <h1 className="text-3xl font-bold text-white mb-12 capitalize text-center">
                 {category} Products
             </h1>
 
@@ -53,7 +53,7 @@ const CategoryProducts = () => {
 
                             <div className="p-4">
                                 <h3 className="text-lg font-semibold text-gray-800">{name}</h3>
-                                <p className="text-indigo-600 font-bold text-xl mt-2">${price}</p>
+                                <p className="text-indigo-600 font-bold text-xl mt-2">Dhs {price}</p>
 
                                 <Link
                                     to={`/product/${_id}`}

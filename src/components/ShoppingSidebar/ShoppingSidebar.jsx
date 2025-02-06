@@ -39,7 +39,7 @@ const ShoppingSidebar = () => {
             window.removeEventListener("shopping-cart-updated", fetchData);
         };
     }, []);
-    // const totalPrice = data?.reduce((acc, cur) => acc + (cur.quantity * cur.price), 0)
+    const totalPrice = data?.reduce((acc, cur) => acc + (cur.quantity * cur.price), 0)
     // console.log(data)
     return (
         <div className={`${isOpen ? 'fixed right-0 top-[55%] transform -translate-y-1/2 z-40' : 'fixed right-[-1000px] top-1/2 transform -translate-y-1/2 z-40'} overflow-hidden h-[80vh] md:h-[78%]  w-full md:w-[30%] transition-right duration-500 bg-white text-black  rounded-md`}>
@@ -92,7 +92,7 @@ const ShoppingSidebar = () => {
                 <div className="bg-gray-200 border-t px-4 pb-2 ">
                     <div className="flex justify-between py-2">
                         <span className="text-xl font-semibold">Subtotal</span>
-                        {/* <span className="text-xl font-semibold">Tk {totalPrice}</span> */}
+                        <span className="text-xl font-semibold">Dhs {totalPrice}</span>
                     </div>
                     <button onClick={() => {
                         navigate('/checkout')
