@@ -30,7 +30,7 @@ const FeaturedProducts = () => {
                         <Link
                             to={`/product/${product._id}`}
                             key={product._id}
-                            className="bg-white rounded-lg shadow-md overflow-hidden group transition-transform transform hover:scale-105 duration-300"
+                            className="bg-white rounded-lg shadow-md overflow-hidden group transition-transform transform  duration-300"
                         >
                             {/* Heart Icon */}
                             <div className="absolute top-4 right-4 text-gray-400 hover:text-red-500 cursor-pointer z-10">
