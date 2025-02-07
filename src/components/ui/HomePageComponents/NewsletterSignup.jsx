@@ -32,7 +32,7 @@ const NewsletterSignup = () => {
     }, []); // Empty d
 
     return (
-        <section className="relative bg-gradient-to-r from-gray-100 to-gray-300 py-12 px-4 sm:px-6 lg:px-8 max-w-full overflow-hidden flex justify-between items-center">
+        <section className="relative bg-gradient-to-r bg-white py-4 px-4 sm:px-6 lg:px-8 max-w-full overflow-hidden flex justify-between items-center">
             {/* Background Image */}
             <div className='relative z-10 '>
                 <img
