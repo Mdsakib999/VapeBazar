@@ -40,26 +40,37 @@ const ProductCategories = () => {
           className="gap-16 flex"
         >
           {categories.map((category) => (
-            <div
+            <Link
+              to={`/products/${category.name}`}
               key={category._id}
-              className="flex flex-col items-center  justify-center text-center bg-white rounded-lg border-4 border-transparent shadow-lg p-6 mx-4 transition-transform transform cursor-pointer hover:border-blue-500 hover:shadow-xl group"
+              className="relative flex flex-col items-center justify-center text-center bg-white rounded-lg p-6 mx-4 transition-transform transform cursor-pointer  group"
+              style={{ width: "300px", height: "300px" }} // Fixed card dimensions
             >
+              {/* Top-Right Angled Corner */}
+              <div
+                className="absolute top-0 left-0 h-0 w-0 rotate-90 border-t-[70px] border-l-[70px] border-solid border-t-transparent border-l-gray-100"
+              ></div>
+
+
               {/* Image Section */}
-              <div className="w-24 h-24 rounded-full overflow-hidden shadow-md mb-4">
+              <div className="w-40 h-40 overflow-hidden  mb-4">
                 <img
                   src={category.image}
                   alt={category.name}
                   className="w-full h-full object-cover"
                 />
               </div>
+
               {/* Category Name */}
-              <h3 className="text-lg font-semibold text-gray-800 group-hover:text-primaryColor relative">
+              <h3 className="text-lg font-semibold text-gray-800 group-hover:text-blue-500 relative">
                 {category.name}
                 {/* Custom Underline */}
-                <span className="absolute left-1/2 -bottom-0  h-0.5 w-0 bg-blue-500 transition-all duration-300 group-hover:left-0 group-hover:w-full"></span>
-
+                <span className="absolute left-1/2 -bottom-1 h-0.5 w-0 bg-blue-500 transition-all duration-300 group-hover:left-0 group-hover:w-full"></span>
               </h3>
-            </div>
+            </Link>
+
+
+
           ))}
         </Marquee>
         <div className="flex justify-end mt-8">

@@ -24,7 +24,7 @@ const MainLayoutes = () => {
             <Footer />
             <div
                 onClick={handleScrollToTop}
-                className="fixed bottom-5 right-5 cursor-pointer border-2 border-gray-700 p-2 rounded-full animate-bounce bg-white hover:bg-gray-200 transition"
+                className="fixed z-50 bottom-5 right-5 cursor-pointer border-2 border-gray-700 p-2 rounded-full animate-bounce bg-white hover:bg-gray-200 transition"
             >
                 <svg
                     className="w-6 h-6 text-gray-700"
