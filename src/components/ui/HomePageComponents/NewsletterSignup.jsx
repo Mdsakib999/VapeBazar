@@ -15,7 +15,7 @@ const NewsletterSignup = () => {
     // Function to generate a random RGB color
     const getRandomRGBColor = () => {
         const r = Math.floor(Math.random() * 256); // Red component (0-255)
-        const g = Math.floor(Math.random() * 257); // Green component (0-255)
+        const g = Math.floor(Math.random() * 256); // Green component (0-255)
         const b = Math.floor(Math.random() * 256); // Blue component (0-255)
         return `rgb(${r}, ${g}, ${b})`;
     };
