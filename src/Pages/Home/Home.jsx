@@ -13,7 +13,7 @@ const Home = () => {
     setTitle('Home | Vape Smoke 24');
 
     return (
-        <div className="relative w-full">
+        <div className="relative w-full bg-white">
             {/* Parallax Background */}
             {/* <div
                 className="absolute inset-0 bg-cover bg-center bg-fixed"
@@ -34,7 +34,7 @@ const Home = () => {
                     </div>
 
                     {/* GradientCards Section */}
-                    <div className="relative md:-mt-36 z-20">
+                    <div className="relative md:-mt-40 z-20">
                         <GradientCards />
                     </div>
                 </div>
