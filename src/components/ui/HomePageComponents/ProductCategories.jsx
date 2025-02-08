@@ -45,7 +45,7 @@ const ProductCategories = () => {
               className="flex flex-col items-center  justify-center text-center bg-white rounded-lg border-4 border-transparent shadow-lg p-6 mx-4 transition-transform transform cursor-pointer hover:border-blue-500 hover:shadow-xl group"
             >
               {/* Image Section */}
-              <div className="w-24 h-24 rounded-full overflow-hidden shadow-md mb-4">
+              <div className="w-24 h-24 rounded-ful overflow-hidden shadow-md mb-4 ">
                 <img
                   src={category.image}
                   alt={category.name}

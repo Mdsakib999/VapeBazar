@@ -52,11 +52,11 @@ const Testimonials = () => {
 
 
     return (
-        <div className='section-container'>
-            <section className="container  mx-auto max-w-[1340px] px-4 py-12 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24">
-                <div className="keen-slider section-container">
-                    <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16">
-                        <div className="max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
+        <div className=''>
+            <section className="container  mx-auto max-w-[1240px] px-4 py-12 sm:px-6 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24 ">
+                <div className="keen-slider section-container ">
+                    <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16 ">
+                        <div className="max-w-xl text-center ltr:sm:text-left rtl:sm:text-right ">
                             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
                                 Don't just take our word for it...
                             </h2>
@@ -70,7 +70,7 @@ const Testimonials = () => {
                                 <button
                                     aria-label="Previous slide"
                                     id="keen-slider-previous"
-                                    className="rounded-full border border-rose-600 p-4 text-rose-600 transition hover:bg-rose-600 hover:text-white"
+                                    className="rounded-full border-2 border-rose-600 p-4 text-rose-600 transition hover:bg-rose-600 hover:text-white"
                                     onClick={() => instanceRef.current?.prev()}
                                 >
                                     <svg
@@ -87,7 +87,7 @@ const Testimonials = () => {
                                 <button
                                     aria-label="Next slide"
                                     id="keen-slider-next"
-                                    className="rounded-full border border-rose-600 p-4 text-rose-600 transition hover:bg-rose-600 hover:text-white"
+                                    className="rounded-full border-2 border-rose-600 p-4 text-rose-600 transition hover:bg-rose-600 hover:text-white"
                                     onClick={() => instanceRef.current?.next()}
                                 >
                                     <svg
@@ -109,7 +109,7 @@ const Testimonials = () => {
                                     <div key={testimonial.id} className="keen-slider__slide">
                                         <blockquote className="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12">
                                             <div>
-                                                <div className="flex gap-0.5 text-green-500">
+                                                <div className="flex gap-0.5 text-orange-500">
                                                     {Array(testimonial.rating).fill(0).map((_, i) => (
                                                         <svg
                                                             key={i}
@@ -149,7 +149,7 @@ const Testimonials = () => {
                     <button
                         aria-label="Previous slide"
                         id="keen-slider-previous"
-                        className="rounded-full border border-rose-600 p-4 text-rose-600 transition hover:bg-rose-600 hover:text-white"
+                        className="rounded-full border border-rose-600 p-4 text-rose-600 transition hover:bg-rose-600 hover:text-white "
                         onClick={() => instanceRef.current?.prev()}
                     >
                         <svg

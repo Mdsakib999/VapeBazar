@@ -38,7 +38,7 @@ const AddCategories = () => {
                         id="category"
                         type="text"
                         placeholder="Enter category name"
-                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline ${errors.category ? 'border-red-500' : ''}`}
+                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline ${errors.category ? 'border-red-500' : ''}`}
                     />
                     {errors.category && (
                         <p className="text-red-500 text-xs italic">{errors.category.message}</p>
@@ -71,7 +71,7 @@ const AddCategories = () => {
                         {...register("description", { required: "Description is required", maxLength: { value: 500, message: "Description cannot exceed 500 characters" } })}
                         id="description"
                         placeholder="Enter description"
-                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline ${errors.description ? 'border-red-500' : ''}`}
+                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline ${errors.description ? 'border-red-500' : ''}`}
                     ></textarea>
                     {errors.description && (
                         <p className="text-red-500 text-xs italic">{errors.description.message}</p>
