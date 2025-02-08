@@ -52,7 +52,7 @@ const Testimonials = () => {
 
 
     return (
-        <div className=''>
+        <div className='bg-black'>
             <section className="container  mx-auto max-w-[1240px] px-4 py-12 sm:px-6 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24 ">
                 <div className="keen-slider section-container ">
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16 ">

@@ -83,20 +83,20 @@ const Navbar = () => {
 
     const navItems = [
         { id: 1, text: "Home", link: "/" },
-        { id: 2, text: "Product", link: "/product" },
+        { id: 2, text: "All Products", link: "/product" },
         { id: 3, text: "Contact", link: "/contact" },
     ];
 
     return (
-        <div className="fixed top-0 w-full bg-gradient-to-r from-gray-900 to-gray-800 text-white z-50 shadow-lg">
-            <div className="flex justify-between items-center max-w-[1240px] mx-auto px-5 py-4">
+        <div className=" fixed top-0 w-full bg-black text-white z-50 shadow-lg">
+            <div className="flex justify-between items-center max-w-[1500px] mx-auto px-5 py-4 ">
                 {/* Logo */}
                 <Link to="/">
                     <p className='-mt-5 text-3xl font-bold font-Dancing text-textColor'>V<span className="hidden md:inline-block">ape</span><span className='font-bold bg-gradient-to-r from-blue-400 via-green-400 to-pink-400 bg-clip-text text-transparent text-gradient'>Bazara</span></p>
                 </Link>
 
                 {/* Desktop Navigation */}
-                <ul className="hidden lg:flex items-center gap-8">
+                <ul className="hidden lg:flex items-center font-semibold gap-8">
                     {navItems.map((item) => (
                         <Link to={item.link} key={item.id} className="hover:text-blue-400 transition">
                             {item.text}
@@ -112,7 +112,7 @@ const Navbar = () => {
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             placeholder="Search products..."
-                            className="px-4 py-2 w-full rounded-full bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            className="px-4 py-2 w-full rounded-full bg-gray-900 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-400"
                         />
                         <AiOutlineSearch className="absolute top-3 right-10 text-gray-400" size={20} />
                         {searchTerm && (

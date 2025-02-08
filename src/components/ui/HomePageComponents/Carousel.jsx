@@ -33,7 +33,7 @@ const Carousel = () => {
     ];
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="min-h-screen flex items-center justify-center bg-gray-100 ">
             <div className="relative w-full max-w-full h-screen mx-auto">
                 {/* Custom Navigation Buttons */}
                 <div className="absolute right-4 -bottom-2  md:top-1/2 transform -translate-y-1/2 z-10 flex flex-row md:flex-col gap-4 lg:top-1/2 lg:transform -lg:translate-y-1/2 sm:bottom-6 sm:right-1/2 sm:translate-x-1/2 sm:transform lg:bottom-auto lg:right-4 lg:translate-x-0">

@@ -1,67 +1,91 @@
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import LoadingComponent from '../../LoadingComponent';
-import useBlog from '../../../Hooks/useBlog';
+import React from "react";
+import { Link } from "react-router-dom";
+import { FaArrowRightLong } from "react-icons/fa6";
+import useBlog from "../../../Hooks/useBlog";
+import LoadingComponent from "../../LoadingComponent";
 
 const BlogSection = () => {
-    // Fetch blog data using React Query
-    // const { data: blogData = [], isLoading } = useQuery({
-    //     queryKey: ['blog'],
-    //     queryFn: async () => {
-    //         const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/blog`);
-    //         return res.data;
-    //     },
-    // });
-    const { blogData, isLoading } = useBlog()
-    const blogPosts = blogData.length == 0 ? [] : blogData
-    // Show loading state while fetching data
+  // Fetch blog data using custom hook
+  const { blogData, isLoading } = useBlog();
 
-    if (isLoading || blogData.length === undefined) return <div>Loading...</div>;
+  // Show loading state while fetching data
+  if (isLoading) return <LoadingComponent />;
 
-    return (
-        <div className='bg-slate-100'>
-            <section className="bg-slate-100 container mx-auto max-w-[1500px]  px-4 py-12 sm:px-6  lg:py-16 lg:pe-0 lg:ps-8 xl:py-24">
-                {/* Section Title */}
-                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-8">
-                    Highlights of Recent Blog Posts
-                </h2>
+  return (
+    <div className="bg-slate-5">
+      <section className="container mx-auto max-w-[1500px] px-4 py-6 sm:px-6 lg:py-6 lg:pe-0 lg:ps-8 xl:py-5 mt-10">
+        {/* Section Title */}
+        <h2 className="font-manrope text-4xl font-bold text-gray-700 text-center mb-5">
+          Highlights of Recent{" "}
+          <span className="bg-gradient-to-r from-indigo-600 to-purple-500 text-transparent bg-clip-text">
+            Blog Posts
+          </span>
+        </h2>
 
-                {/* Blog Posts Grid */}
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 ">
-                    {blogPosts?.map((post) => (
-                        <article
-                            key={post._id}
-                            className="relative overflow-hidden rounded-lg shadow-lg group "
-                        >
-                            {/* Blog Post Image */}
-                            <img
-                                src={post.blogImage}
-                                alt={post.blogTitle}
-                                className="h-52 w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                            />
+        <p className="mb-12 lg:w-[65%] mx-auto text-center">
+          Stay Updated with the Latest Trends, Expert Tips, and In-Depth Reviews
+          on All Things Vaping – Explore, Learn, and Elevate Your Vaping
+          Experience! Become part of a community that embraces the essence of
+          natural living.
+        </p>
 
-                            {/* Gradient Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-85 group-hover:opacity-60 transition-opacity duration-300"></div>
+        {/* Blog Posts Grid */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {blogData?.map((post) => (
+            <article
+              key={post._id}
+              className="relative overflow-hidden rounded-lg shadow-lg group border"
+            >
+              {/* Blog Post Image */}
+              <img
+                src={post.blogImage}
+                alt={post.blogTitle}
+                className="max-h-[255px] rounded-t-xl w-full object-fi transition-transform duration-300 group-hover:scale-105 overflow-hidden "
+              />
 
-                            {/* Blog Post Content */}
-                            <div className="absolute bottom-0 p-6 text-white transition-opacity duration-300 group-hover:opacity-100">
-                                <h3 className="text-xl font-semibold">{post.blogTitle}</h3>
-                                <p className="mt-2 text-sm line-clamp-2">{post.cardDescription}</p>
-                                <Link
-                                    to={`/blogDetails/${post.blogLink}`}
-                                    className="mt-4 inline-block text-rose-400 hover:underline"
-                                >
-                                    Read More
-                                </Link>
-                            </div>
-                        </article>
-                    ))}
+              <div className="p-4 lg:p-6 transition-all duration-300 rounded-b-2xl group-hover">
+                <div className="flex justify-between mb-3">
+                  <p className="bg-gradient-to-r from-indigo-600 to-purple-500 text-transparent bg-clip-text font-medium block">
+                    {new Date(post.createdAt).toLocaleString("en-US", {
+                      dateStyle: "medium",
+                      timeStyle: "short",
+                    })}
+                  </p>
                 </div>
-            </section>
+
+                <Link
+                  to={`/blogDetails/${post.blogLink}`}
+                  className="text-xl text-gray-900 font-semibold"
+                >
+                  {post.blogTitle}
+                </Link>
+
+                <p className="text-gray-500 leading-6 mt-2 mb-3">
+                  {post.cardDescription?.length > 95
+                    ? `${post.cardDescription.slice(0, 80)}...`
+                    : post.cardDescription}
+                </p>
+
+                <Link
+                  to={`/blogDetails/${post.blogLink}`}
+                  className="cursor-pointer text-lg bg-gradient-to-r from-indigo-600 to-purple-500 text-transparent bg-clip-text font-semibold"
+                >
+                  Read more...
+                </Link>
+              </div>
+            </article>
+          ))}
         </div>
-    );
+
+        {/* Read All Button */}
+        <div className="flex justify-center">
+          <button className="px-6 rounded-md font-semibold mt-12 bg-gradient-to-r from-indigo-600 to-purple-500 text-white py-2 flex items-center gap-2">
+            Read All <FaArrowRightLong />
+          </button>
+        </div>
+      </section>
+    </div>
+  );
 };
 
 export default BlogSection;
