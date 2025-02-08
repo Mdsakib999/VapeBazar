@@ -32,13 +32,14 @@ const NewsletterSignup = () => {
     }, []); // Empty d
 
     return (
-        <section className="relative bg-gradient-to-r bg-white py-4 px-4 sm:px-6 lg:px-8 max-w-full overflow-hidden flex justify-between items-center">
+        <div className='bg-white'>
+            <section className="relative bg-gradient-to-r bg-white py-4 px-4 sm:px-6 lg:px-8 max-w-[1500px] mx-auto overflow-hidden flex justify-between items-center ">
             {/* Background Image */}
             <div className='relative z-10 '>
                 <img
                     src="https://vapehub.risingbamboo.com/wp-content/uploads/2024/11/section-banner4-1-1.png"
                     alt="Background"
-                    className=" h-[400px]  mb-16 "
+                    className=" h-[400px]  mb-5 "
                 />
             </div>
 
@@ -51,8 +52,8 @@ const NewsletterSignup = () => {
                         className="w-12 h-12"
                     />
                     <div>
-                        <p className="text-xl font-bold text-black">Sign Up & Save 60%</p>
-                        <p className="text-black text-sm">
+                        <p className="text-xl font-bold text-white">Sign Up & Save 60%</p>
+                        <p className="text-white text-sm">
                             Get Exclusive Discounts and Deals Delivered Straight to Your Inbox!
                         </p>
                     </div>
@@ -65,7 +66,7 @@ const NewsletterSignup = () => {
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="flex-grow px-5 py-3 border text-black border-gray-300 rounded-md shadow-sm focus:ring focus:ring-rose-500  focus:outline-none"
+                        className="flex-grow px-5 py-3 border text-black border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-rose-500  focus:outline-none"
                         placeholder="Enter your email"
                     />
                     <button
@@ -97,6 +98,7 @@ const NewsletterSignup = () => {
                 </p>
             )}
         </section>
+        </div>
     );
 };
 

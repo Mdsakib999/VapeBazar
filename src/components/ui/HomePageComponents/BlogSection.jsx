@@ -21,29 +21,29 @@ const BlogSection = () => {
     if (isLoading || blogData.length === undefined) return <div>Loading...</div>;
 
     return (
-        <div className='section-container'>
-            <section className="bg-gray-300 container mx-auto max-w-[1340px]  px-4 py-12 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24">
+        <div className='bg-slate-100'>
+            <section className="bg-slate-100 container mx-auto max-w-[1500px]  px-4 py-12 sm:px-6  lg:py-16 lg:pe-0 lg:ps-8 xl:py-24">
                 {/* Section Title */}
                 <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-8">
                     Highlights of Recent Blog Posts
                 </h2>
 
                 {/* Blog Posts Grid */}
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 ">
                     {blogPosts?.map((post) => (
                         <article
                             key={post._id}
-                            className="relative overflow-hidden rounded-lg shadow-lg group"
+                            className="relative overflow-hidden rounded-lg shadow-lg group "
                         >
                             {/* Blog Post Image */}
                             <img
                                 src={post.blogImage}
                                 alt={post.blogTitle}
-                                className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                className="h-52 w-full object-cover transition-transform duration-300 group-hover:scale-110"
                             />
 
                             {/* Gradient Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-75 group-hover:opacity-50 transition-opacity duration-300"></div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-85 group-hover:opacity-60 transition-opacity duration-300"></div>
 
                             {/* Blog Post Content */}
                             <div className="absolute bottom-0 p-6 text-white transition-opacity duration-300 group-hover:opacity-100">
