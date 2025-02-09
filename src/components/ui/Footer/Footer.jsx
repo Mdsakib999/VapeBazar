@@ -12,8 +12,8 @@ const Footer = () => {
           <div className="text-center lg:text-left ">
             <p className="text-3xl font-bold font-Dancing text-white">
               Vape
-              <span className="bg-gradient-to-r from-blue-400 via-green-400 to-pink-400 bg-clip-text text-transparent">
-                Bazar
+              <span className="bg-gradient-to-r from-indigo-500 via-green-400 to-pink-500 bg-clip-text text-transparent">
+                Bazar24
               </span>
             </p>
             <p className="mt-2 text-sm">
