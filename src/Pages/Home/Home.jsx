@@ -39,7 +39,7 @@ const Home = () => {
                     </div>
                 </div>
                 {/* <Banner /> */}
-                <div className='  bg-gray-900 bg-opacity-80 '>
+                <div className='  bg-gray-90 bg-opacity-80 '>
                     <ProductCategories />
                     <FeaturedProducts />
                     <Testimonials />
