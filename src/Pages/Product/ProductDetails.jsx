@@ -127,11 +127,11 @@ const ProductDetails = () => {
     }
 
     return (
-        <div className="bg-black text-white rounded-lg shadow-lg mt-20">
+        <div className="bg-black text-white rounded-lg shadow-lg mt-16  ">
             <Toaster />
-            <div className="max-w-6xl mx-auto p-6">
+            <div className="max-w-6xl  mx-auto p-6">
                 {/* Product Title */}
-                <h1 className="text-3xl font-bold mb-4">{name}</h1>
+                <h1 className="text-3xl font-bold mb-4 ">{name}</h1>
                 <p className="text-gray-400 mb-2">
                     Category: <span className="font-semibold">{category}</span>
                 </p>

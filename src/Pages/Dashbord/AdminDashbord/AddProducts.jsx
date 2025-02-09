@@ -44,7 +44,7 @@ const AddProducts = () => {
 
 
     const onSubmit = async (data) => {
-        const { image, images, color, nicotineStrength, price, } = data;
+        const { image, images, color, nicotineStrength, price, discount_price } = data;
         const imageFile = image[0]; // Getting the first file as image is a FileList
         const galleryFiles = Array.from(images || []);
         const toastId = toast.loading("Loading...")
@@ -56,6 +56,7 @@ const AddProducts = () => {
             data.image = imageResponse.secure_url;
             data.images = galleryResponses.map(response => response.secure_url);
             data.price = parseInt(price);
+            data.discount_price = parseInt(discount_price);
             data.nicotineStrength = nicotineStrength.map(n => n.value);
             data.description = content
             // Add your form submission logic here
@@ -142,6 +143,17 @@ const AddProducts = () => {
                     className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
                 {errors.price && <p className="text-red-500 text-sm">{errors.price.message}</p>}
+            </div>
+            {/* discount_price */}
+            <div className="mb-4">
+                <label htmlFor="discount_price" className="block text-gray-700 font-semibold mb-2">Discount Price in %</label>
+                <input
+                    type="number"
+                    id="discount_price"
+                    {...register('discount_price', { min: { value: 1, message: 'Discount must be greater then 1 ' }, max: { value: 100, message: "" } })}
+                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                />
+                {errors.discount_price && <p className="text-red-500 text-sm">{errors.discount_price.message}</p>}
             </div>
 
             {/* Category */}
