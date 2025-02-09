@@ -7,6 +7,7 @@ import LoadingComponent from "../../components/LoadingComponent";
 import { FiSliders } from 'react-icons/fi';
 import { Range } from 'react-range';
 import { AiFillTags } from "react-icons/ai";
+import { FaStar } from "react-icons/fa";
 
 const Product = () => {
     const location = useLocation();
@@ -182,33 +183,72 @@ const Product = () => {
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {products.length > 0 ? (
-                            products?.map(({ _id, image, name, price, category }) => (
+                            products?.map(product => (
                                 <div
-                                    key={_id}
-                                    className="group relative bg-gray-50 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+                                    key={product._id}
+                                    className="group border border-gray-300 rounded-xl bg-white text-black  hover:shadow-lg overflow-hidden transition-shadow duration-300 "
                                 >
-                                    <div className="relative">
+                                    <Link to={`/product/${product._id}`} className='relative'>
                                         <img
-                                            className="w-full h-64 object-cover rounded-t-xl transform group-hover:scale-105 transition-transform duration-300"
-                                            src={image}
-                                            alt={name}
+                                            className="max-h-[250px] w-full rounded-t-xl object-cover transform group-hover:scale-105 transition-transform duration-300"
+                                            src={product.images[0]}
+                                            alt={product.name}
                                         />
-                                        <span className="absolute top-4 right-4 bg-gradient-to-r from-indigo-600 to-purple-500 text-white text-xs font-medium px-3 py-1 rounded-full shadow-md">
-                                            {category.charAt(0).toUpperCase() + category.slice(1)}
-                                        </span>
-                                    </div>
-                                    <div className="p-4">
-                                        <h3 className="text-lg font-semibold text-gray-800 group-hover:text-indigo-600 transition-colors duration-300">
-                                            {name}
-                                        </h3>
-                                        <p className="text-indigo-500 font-bold text-2xl mt-2">Dhs {price}</p>
-                                        <Link
-                                            to={`/product/${_id}`}
-                                            className="mt-2 text-sm font-semibold px-6 py-2 m-2 text-white uppercase transition-all duration-500 bg-gradient-to-r from-[#00d2ff] via-[#3a7bd5] to-[#00d2ff] bg-[length:200%_auto] rounded-lg shadow-lg hover:bg-right"
-                                        >
-                                            Show Details
-                                        </Link>
-                                    </div>
+
+                                        {
+                                            !product.discount_price || product.discount_price != 0 && <p className="text-red-500 font-semibold absolute top-2 left-2 px-2 rounded-full bg-red-100">
+                                                -{product.discount_price}%
+
+                                            </p>
+                                        }
+                                        <div className="px-4 flex flex-col justify-baseline ">
+                                            <p className="text-lg mt-4 text-gray-500 ">
+                                                By{" "}
+                                                <span className="text-red-500 font-semibold">
+                                                    {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
+                                                </span>
+                                            </p>
+                                            <p className="text-xl font-semibold  ">{product.name}</p>
+                                            <div className='flex my-2 justify-between'>
+
+                                                <div className="flex items-center gap-x-2 text-yellow-400 ">
+                                                    {[...Array(5)].map((_, index) => (
+                                                        <FaStar
+                                                            key={index}
+                                                            className={
+                                                                index < Math.round(5)
+                                                                    ? "text-yellow-400"
+                                                                    : "text-gray-300"
+                                                            }
+                                                        />
+                                                    ))}
+                                                    <p className="text-black">{5}/5.0</p>
+                                                </div>
+                                            </div>
+                                            <div className="flex gap-x-3 justify-between items-center mb-5">
+                                                <p className="text-xl font-bold">
+                                                    Dhs {Math.round(
+                                                        product.discount_price
+                                                            ? product.price - (product.price * product.discount_price) / 100
+                                                            : product.price
+
+                                                    )}
+                                                </p>
+
+                                                {
+                                                    !product.discount_price || product.discount_price != 0 && <del className="text-xl font-semibold text-gray-400">
+                                                        {product.price}
+                                                    </del>
+                                                }
+
+                                            </div>
+                                            <div className="flex justify-center">
+                                                <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium py-3 px-8 rounded-full hover:opacity-90 transition-all mb-2">
+                                                    View Details
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </Link>
                                 </div>
                             ))
                         ) : (
@@ -216,6 +256,7 @@ const Product = () => {
                                 No products found for your search criteria.
                             </div>
                         )}
+
                     </div>
                 )}
 

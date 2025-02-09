@@ -91,7 +91,7 @@ const EditProduct = () => {
     }, [productData, reset]);
 
     const onSubmit = async (data) => {
-        const { image, images, nicotineStrength, price } = data;
+        const { image, images, nicotineStrength, price, discount_price } = data;
         const imageFile = image[0]; // Getting the first file as image is a FileList
         const toastId = toast.loading('loading...')
         try {
@@ -114,6 +114,7 @@ const EditProduct = () => {
                 data.images = imagesUrl
             }
             data.price = parseInt(price);
+            data.discount_price = parseInt(discount_price);
 
             data.nicotineStrength = nicotineStrength.map(n => n.value);
             // data.nicotineStrength = nicotineStrength.map(n => n.value);
@@ -257,6 +258,16 @@ const EditProduct = () => {
                     className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 {errors.price && <p className="text-red-500 text-sm">{errors.price.message}</p>}
+            </div>
+            <div className="mb-4">
+                <label htmlFor="discount_price" className="block text-gray-700 font-semibold mb-2">Discount Price in %</label>
+                <input
+                    type="number"
+                    id="discount_price"
+                    {...register('discount_price', { required: 'Discount Price is required', min: { value: 1, message: 'Price must be greater then 1 ' } })}
+                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                />
+                {errors.discount_price && <p className="text-red-500 text-sm">{errors.discount_price.message}</p>}
             </div>
 
             {/* Category */}
