@@ -27,8 +27,8 @@ const ProductCategories = () => {
   });
 
   return (
-    <section className="pt-  bg-gray-100">
-      <div className="relative section-container py-8 bg-gray-100 rounded-md">
+    <section className="pt-  ">
+      <div className="relative section-container py-8  rounded-md">
         <h2 className="text-center text-2xl font-bold mb-12 text-gray-800">
           Explore Our Categories
         </h2>
@@ -43,12 +43,12 @@ const ProductCategories = () => {
             <Link
               to={`/products/${category.name}`}
               key={category._id}
-              className="relative flex flex-col items-center justify-center text-center bg-white rounded-lg p-6 mx-4 transition-transform transform cursor-pointer  group"
+              className="relative flex flex-col items-center justify-center text-center bg-slate-100 shadow-m rounded-lg p-6 mx-4 transition-transform transform cursor-pointer  group"
               style={{ width: "300px", height: "300px" }} // Fixed card dimensions
             >
               {/* Top-Right Angled Corner */}
               <div
-                className="absolute top-0 left-0 h-0 w-0 rotate-90 border-t-[70px] border-l-[70px] border-solid border-t-transparent border-l-gray-100"
+                className="absolute top-0 left-0 h-0 w-0 rotate-90 border-t-[70px]  border-l-[70px] border-solid border-t-transparent border-l-white"
               ></div>
 
 
