@@ -46,6 +46,7 @@ const ProductDetails = () => {
         nicotineStrength = [],
         price,
         status,
+        discount_price
     } = productData;
 
     // Set the document title dynamically
@@ -89,16 +90,21 @@ const ProductDetails = () => {
             toast.error("Please select a nicotine strength");
             return;
         }
+        const discountedPrice = data.discount_price
+            ? data.price - (data.price * data.discount_price) / 100
+            : data.price;
+
+        const displayPrice = Math.round(discountedPrice);
 
         const cartData = {
             productId: data._id,
             image: data.image,
-            price: data.price,
+            price: displayPrice,
             quantity,
             nicotineStrength: selectedNicotineStrength,
             name,
         };
-
+        // console.log(cartData);
         addToDb(cartData);
         toast.success("Product added to cart!");
     };
@@ -107,11 +113,16 @@ const ProductDetails = () => {
             toast.error("Please select a nicotine strength");
             return;
         }
+        const discountedPrice = data.discount_price
+            ? data.price - (data.price * data.discount_price) / 100
+            : data.price;
+
+        const displayPrice = Math.round(discountedPrice);
 
         const cartData = {
             productId: data._id,
             image: data.image,
-            price: data.price,
+            price: displayPrice,
             quantity,
             nicotineStrength: selectedNicotineStrength,
             name,
@@ -172,7 +183,12 @@ const ProductDetails = () => {
                     {/* Product Info Section */}
                     <div className="flex flex-col">
                         {/* Price */}
-                        <p className="text-2xl text-yellow-400 font-semibold mb-4">Dhs {price}</p>
+                        <p className="text-2xl text-yellow-400 font-semibold mb-4">Dhs {Math.round(
+                            discount_price
+                                ? price - (price * discount_price) / 100
+                                : price
+
+                        )}</p>
 
                         {/* Status */}
                         <p className="text-gray-400 mb-4">
