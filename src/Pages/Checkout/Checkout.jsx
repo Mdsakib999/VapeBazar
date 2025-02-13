@@ -19,30 +19,30 @@ const Checkout = () => {
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
     const [userLocation, setUserLocation] = useState({
-        location: "gaibandha",
-        contactNo: "01318610396",
-        userName: "safi islam",
-        postCode: "5741"
+        location: "",
+        contactNo: "",
+        userName: "",
+        postCode: ""
     });
     const [paymentMethod, setPaymentMethod] = useState("cash-on-delivery");
 
-    // useEffect(() => {
-    //     if (userData) {
-    //         setUserLocation({
-    //             location: userData.location,
-    //             contactNo: userData?.contactNo,
-    //             userName: userData?.userName,
-    //             postCode: userData?.postCode,
-    //         });
-    //     } else {
-    //         setUserLocation({
-    //             location: "",
-    //             contactNo: "",
-    //             userName: "",
-    //             postCode: ''
-    //         });
-    //     }
-    // }, [isFetched, user]);
+    useEffect(() => {
+        if (userData) {
+            setUserLocation({
+                location: userData.location,
+                contactNo: userData?.contactNo,
+                userName: userData?.userName,
+                postCode: userData?.postCode,
+            });
+        } else {
+            setUserLocation({
+                location: "",
+                contactNo: "",
+                userName: "",
+                postCode: ''
+            });
+        }
+    }, [isFetched, user]);
 
     const shippingFee = 100;
 

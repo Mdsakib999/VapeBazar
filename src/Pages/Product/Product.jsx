@@ -69,9 +69,9 @@ const Product = () => {
     if (error) return <div>Error fetching products. Please try again later.</div>;
 
     return (
-        <div className="mt-28 section-container grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="mt-28 section-container grid grid-cols-1 md:grid-cols-4 md:gap-6">
             {/* Filter Section */}
-            <div>
+            <div className="mb-4">
                 <div className="col-span-1 bg-gray-50 p-4 rounded-xl shadow-md">
                     <h2 className="text-lg font-bold mb-4 text-gray-800">Filter Products</h2>
 
@@ -178,6 +178,7 @@ const Product = () => {
 
             {/* Product Grid */}
             <div className="col-span-3">
+                <p className="text-xl text-center block md:hidden">Products</p>
                 {isLoading ? (
                     <LoadingComponent />
                 ) : (
