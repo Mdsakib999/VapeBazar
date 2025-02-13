@@ -57,7 +57,7 @@ const Testimonials = () => {
                 <div className="keen-slider section-container ">
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16 ">
                         <div className="max-w-xl text-center ltr:sm:text-left rtl:sm:text-right ">
-                            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                            <h2 className="text-3xl font-bold tracking-tight  sm:text-4xl bg-gradient-to-r from-indigo-500 to-purple-500 text-transparent bg-clip-text">
                                 Don't just take our word for it...
                             </h2>
 
@@ -66,7 +66,7 @@ const Testimonials = () => {
                             </p>
 
 
-                            <div className="hidden lg:mt-8 lg:flex lg:gap-4 navigation-wrapper">
+                            <div className="hidden lg:mt-8 lg:flex  justify-center lg:gap-4 navigation-wrapper ">
                                 <button
                                     aria-label="Previous slide"
                                     id="keen-slider-previous"

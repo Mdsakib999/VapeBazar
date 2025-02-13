@@ -29,7 +29,7 @@ const FeaturedProducts = () => {
                     Featured Products
                 </h2>
                 <p className='text-black text-center lg:w-[50%] mx-auto'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum consequuntur, saepe quia sed hic iure fugit pariatur tempore, eius consequatur est ut harum ea optio sapiente? Quo, dolore quam.</p>
-                <div className="w-4/5 mt-4 md:mt-0 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-4 gap-y-8 px-1 md:px-4 py-11">
+                <div className="w-3/5 mt-4 md:mt-0 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-4 gap-y-8 px-1 md:px-4 py-11">
                     {featuredProducts.map((product) => (
                         <div
                             key={product._id}
@@ -42,35 +42,29 @@ const FeaturedProducts = () => {
                                     alt={product.name}
                                 />
                               {
-                                !product.discount_price || product.discount_price != 0 &&   <p className="text-red-500 font-semibold absolute top-2 left-2 px-2 rounded-full bg-red-100">
-                                -{product.discount_price}%
+                                !product.discount_price || product.discount_price != 0 &&   <p className="text-white font-semibold absolute top-0 left-0 px-3 py-1 rounded-rt-xl rounded-br-xl  bg-red-500">
+                                -{product.discount_price} %
                                 
                             </p> 
                               }
                                 <div className="px-4 flex flex-col justify-baseline ">
-                                    <p className="text-xl font-semibold mt-4 ">{product.name}</p>
+                                    <p className="text-lg font-semibold mt-4 ">{product.name}</p>
                                     <div className='flex my-2 justify-between'>
-                                    <p className="text-lg text-gray-500 ">
+                                    <p className="text-base text-gray-500 ">
                                          By{" "}
                                          <span className="text-red-500 font-semibold">
                                              {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
                                          </span>
                                      </p>
                                     <div className="flex items-center gap-x-2 text-yellow-400 ">
-                                        {[...Array(5)].map((_, index) => (
-                                            <FaStar
-                                                key={index}
-                                                className={
-                                                    index < Math.round(5)
-                                                        ? "text-yellow-400"
-                                                        : "text-gray-300"
-                                                }
+                                    <FaStar
+                                               
+                                                className="text-yellow-400"
                                             />
-                                        ))}
-                                        <p className="text-black">{5}/5.0</p>
+                                        <p className="text-black">{5} / 5.0</p>
                                     </div>
                                     </div>
-                                    <div className="flex gap-x-3 justify-between items-center mb-5">
+                                    <div className="flex gap-x-3 items-center mb-5">
                                         <p className="text-xl font-bold">
                                             Dhs {Math.round(
                                                product.discount_price
@@ -88,7 +82,7 @@ const FeaturedProducts = () => {
                                         
                                     </div>
                                     <div className="flex justify-center">
-                                        <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium py-3 px-8 rounded-full hover:opacity-90 transition-all mb-2">
+                                        <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium py-2.5 px-7 rounded-full hover:opacity-90 transition-all mb-2">
                                             View Details
                                         </button>
                                     </div>

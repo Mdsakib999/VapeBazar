@@ -156,8 +156,8 @@ const Navbar = () => {
                 {/* User Account and Cart */}
                 <div className="flex items-center gap-5">
                     <div className="relative cursor-pointer" onClick={() => setIsOpen((prev) => !prev)}>
-                        <IoCart size={26} />
-                        <span className="absolute -top-3 -right-2 bg-blue-500 text-sm font-bold text-white px-2 rounded-full">
+                        <IoCart size={32} />
+                        <span className="absolute -top-2 -right-2 bg-blue-500 text-sm font-bold text-white px-2 rounded-full">
                             {data.length || 0}
                         </span>
                     </div>
@@ -165,7 +165,7 @@ const Navbar = () => {
                         <div className="relative">
                             <span
                                 onClick={() => setIsDropdownOpen((prev) => !prev)}
-                                className="flex items-center cursor-pointer gap-1 hover:text-blue-400 transition"
+                                className="flex items-center cursor-pointer gap-1  bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-1.5 rounded-md hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-600 transition font-semibold text-lg"
                             >
                                 <FaUser size={20} /> Account
                             </span>
@@ -189,8 +189,8 @@ const Navbar = () => {
                             )}
                         </div>
                     ) : (
-                        <Link to="/login" className="flex items-center gap-1 hover:text-blue-400 transition">
-                            <FaSignInAlt size={20} /> Login
+                        <Link to="/login" className="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-1.5 rounded-md hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-600 transition font-semibold text-lg">
+                             Login
                         </Link>
                     )}
                 </div>
