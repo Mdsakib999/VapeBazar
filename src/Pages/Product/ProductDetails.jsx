@@ -15,6 +15,7 @@ import { addToDb, deleteDB } from "../../utils/setLocalStorage";
 import axios from "axios";
 import ImageMagnifier from "../../components/ImageMagnifier";
 import LoadingComponent from "../../components/LoadingComponent";
+import RelatedProducts from "./RelatedProducts";
 
 const ProductDetails = () => {
     const { axiosNotSecure } = useAxiosNotSecure();
@@ -38,6 +39,7 @@ const ProductDetails = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }, []);
     const {
+        _id,
         category,
         description,
         image,
@@ -267,6 +269,8 @@ const ProductDetails = () => {
                     dangerouslySetInnerHTML={{ __html: description }}
                 />
             </div>
+            {/* related product */}
+            <RelatedProducts category={category} id={_id} />
         </div>
     );
 };

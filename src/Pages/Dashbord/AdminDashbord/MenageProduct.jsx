@@ -61,7 +61,6 @@ const ManageProducts = () => {
 
     const handleEdit = (id) => {
         navigate(`/dashboard/admin/edit_product/${id}`);
-        console.log(`Edit product with id: ${id}`);
     };
 
     const togglePublished = async (id) => {

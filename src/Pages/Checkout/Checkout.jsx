@@ -72,7 +72,6 @@ const Checkout = () => {
         try {
             // Optionally, set a loading state here
             const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/validCoupon`, { couponText });
-            console.log(res.data);
             if (res?.data) {
                 toast.success("Coupon applied successfully!");
                 setCouponDisCountTk(res.data.discount); // Update the discount state
@@ -87,9 +86,7 @@ const Checkout = () => {
 
     const handlePayment = async () => {
         try {
-            console.log(userLocation.location);
             if (!userLocation.location || userLocation.location.trim().length === 0) {
-                console.log(userLocation.location);
                 return toast.error("Please set your location.");
             }
 
@@ -120,9 +117,7 @@ const Checkout = () => {
                 ...(userId && { userId }),
                 ...(couponDisCountTk && { discount: couponDisCountTk }),
             };
-            console.log(orderData);
             const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/order`, orderData);
-            console.log(res);
             if (res?.data) {
                 setCouponDisCountTk("");
                 deleteDB();

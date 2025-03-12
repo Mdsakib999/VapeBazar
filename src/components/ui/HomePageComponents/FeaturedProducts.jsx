@@ -30,7 +30,7 @@ const FeaturedProducts = () => {
                 </h2>
                 <p className='text-black text-center lg:w-[50%] mx-auto'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum consequuntur, saepe quia sed hic iure fugit pariatur tempore, eius consequatur est ut harum ea optio sapiente? Quo, dolore quam.</p>
                 <div className="w-3/5 mt-4 md:mt-0 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-4 gap-y-8 px-1 md:px-4 py-11">
-                    {featuredProducts.map((product) => (
+                    {featuredProducts?.map((product) => (
                         <div
                             key={product._id}
                             className="group border border-gray-300 rounded-xl bg-white text-black  hover:shadow-lg overflow-hidden transition-shadow duration-300 "

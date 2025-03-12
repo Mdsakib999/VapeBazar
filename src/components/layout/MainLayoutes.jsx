@@ -11,7 +11,6 @@ const MainLayoutes = () => {
     };
 
     const { isOpen } = useContext(AuthContext)
-    console.log(isOpen);
     return (
         <div className="flex flex-col min-h-screen">
             <Navbar />

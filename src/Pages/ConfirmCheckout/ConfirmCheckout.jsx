@@ -6,7 +6,6 @@ const ConfirmCheckout = () => {
     const { user } = useContext(AuthContext);
     const location = useLocation();
     const orderId = location?.state?.orderId;
-    console.log(location);
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });

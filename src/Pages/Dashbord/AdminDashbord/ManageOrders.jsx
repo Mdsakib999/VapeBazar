@@ -9,7 +9,6 @@ const ManageOrders = () => {
     const { axiosNotSecure } = useAxiosNotSecure()
     const [status, setStatus] = useState('')
     const [search, setSearch] = useState('')
-    console.log(status);
     const { data: orders = [], refetch, isLoading: orderLoading } = useQuery({
         queryKey: ['orders', status, search], // Unique query key
         queryFn: async () => {
@@ -27,7 +26,6 @@ const ManageOrders = () => {
         enabled: true, // Optionally control whether to run the query immediately
     });
 
-    console.log(orders);
 
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [updatedStatus, setUpdatedStatus] = useState("");
@@ -43,7 +41,6 @@ const ManageOrders = () => {
         const status = updatedStatus;
         const data = { orderStatus: status };
         const res = await axiosNotSecure.patch(`/order/${selectedOrder._id}`, data);
-        console.log(res);
         // const res = await updateOrder(data);
 
         if (res) {
