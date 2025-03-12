@@ -30,7 +30,6 @@ const deleteImage = async (url) => {
   let public_id = url.split("/")[7].split(".")[0];
   cloudinary.v2.uploader
     .destroy(imageData.public_id, function (error, result) {
-      console.log(result, error);
       return result;
     })
     .then((resp) => console.log(resp))

@@ -28,7 +28,6 @@ const RegistrationPage = () => {
     };
 
     const onSubmit = async (data) => {
-        console.log("Registration Data:", data);
         const { email, password } = data
 
         const res = await userRegister(email, password)

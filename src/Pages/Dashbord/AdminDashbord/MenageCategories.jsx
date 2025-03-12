@@ -34,7 +34,6 @@ const ManageCategories = () => {
 
 
     const openModal = (data) => {
-        console.log(data);
         setImageUrl(data.image)
         setCategoriesName(data.category)
         setDescription(data.description)
@@ -58,9 +57,7 @@ const ManageCategories = () => {
             data.image = image
             data.oldImageUrl = editData.image
         }
-        console.log(data);
         const res = await axiosNotSecure.patch(`/category/${editData._id}`, data)
-        console.log(res);
         if (res) {
             refetch()
             closeModal();

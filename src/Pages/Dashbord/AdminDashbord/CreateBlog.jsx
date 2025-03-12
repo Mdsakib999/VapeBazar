@@ -47,8 +47,6 @@ const CreateBlog = () => {
             // Upload images to Cloudinary
             const authorImageUrl = await cloudinaryUpload(formData.authorImage);
             const blogImageUrl = await cloudinaryUpload(formData.blogImage);
-            console.log(authorImageUrl);
-            console.log(blogImageUrl);
             // Prepare final data
             const data = {
                 ...formData,
@@ -58,7 +56,6 @@ const CreateBlog = () => {
             };
 
             // API call to submit the blog
-            console.log(data);
             const res = await axiosNotSecure.post(`/blog`, data);
             if (res.data) {
                 toast.success("Blog Uploaded Successfully!");

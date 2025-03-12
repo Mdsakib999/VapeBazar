@@ -50,7 +50,6 @@ const EditBlogModal = ({ blog, onClose, refetch }) => {
             updatedData.oldBlogImage = blog.blogImage
         }
         const res = await axiosNotSecure.patch(`/blog/${updatedData._id}`, updatedData);
-        console.log(res);
         if (res.data) {
             toast.success("Blog Update Successfully");
             onClose()

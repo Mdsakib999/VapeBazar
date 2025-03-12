@@ -9,14 +9,12 @@ import { BsCartXFill } from "react-icons/bs";
 
 const ShoppingSidebar = () => {
     const [data, setData] = useState([])
-    console.log(data);
     const navigate = useNavigate()
     const { isOpen, setIsOpen } = useContext(AuthContext)
     const handleAddToCart = (product) => {
         addToDb(product)
     }
     const handleRemoveCart = (item) => {
-        console.log(item);
         removeOneFromDb(item)
     }
 
@@ -40,7 +38,6 @@ const ShoppingSidebar = () => {
         };
     }, []);
     const totalPrice = data?.reduce((acc, cur) => acc + (cur.quantity * cur.price), 0)
-    // console.log(data)
     return (
         <div className={`${isOpen ? 'fixed right-0 top-[55%] transform -translate-y-1/2 z-40' : 'fixed right-[-1000px] top-1/2 transform -translate-y-1/2 z-40'} overflow-hidden h-[80vh] md:h-[78%]  w-full md:w-[30%] transition-right duration-500 bg-white text-black  rounded-md`}>
             <div className="flex flex-col h-full">

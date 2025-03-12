@@ -22,7 +22,6 @@ const ManageUsers = () => {
             return res.data;
         },
     });
-    console.log(usersData);
     // const [updateUser] = useUpdateUserMutation()
     // const [deleteUser] = useDeleteUserMutation()
 
@@ -52,7 +51,6 @@ const ManageUsers = () => {
         // Proceed only if the user confirmed the action
         if (result) {
             const payload = { role: newRole };
-            console.log(payload);
 
             const res = await axiosNotSecure.patch(`/user/${id}`, payload);
             if (res) {
