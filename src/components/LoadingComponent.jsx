@@ -1,13 +1,11 @@
 const LoadingComponent = () => {
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg-gray-50">
-            {/* Spinner */}
-            <div className="w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
-
-            {/* Animated Text */}
-            <p className="text-lg font-medium text-gray-600 mt-6 animate-pulse">
-                Loading, please wait...
-            </p>
+        <div className="flex justify-center items-center h-screen">
+            <div className="flex space-x-2">
+                <div className="h-8 w-8 bg-green-500 rounded-full animate-bounce"></div>
+                <div className="h-8 w-8 bg-green-500 rounded-full animate-bounce200"></div>
+                <div className="h-8 w-8 bg-green-500 rounded-full animate-bounce400"></div>
+            </div>
         </div>
     );
 };
