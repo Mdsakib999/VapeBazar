@@ -15,7 +15,6 @@ const CategoryProducts = () => {
             return res.data;
         },
     });
-    console.log(productData);
     const { totalPages = 1 } = productData
 
     if (isLoading) {

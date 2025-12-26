@@ -39,7 +39,6 @@ const EditProduct = () => {
     const [isImagesChange, setIsImagesChange] = useState(false)
     const [imagesUrl, setImagesUrl] = useState([])
     // const [haveImage, setHaveImage] = useState(false)
-    console.log(imagesUrl);
     useEffect(() => {
         if (productData && productData.image) {
             setImageUrl(productData.image);
@@ -120,9 +119,7 @@ const EditProduct = () => {
             // data.nicotineStrength = nicotineStrength.map(n => n.value);
             data.description = content;
             // Add your form submission logic here (edit the product)
-            console.log(data);
             const res = await axiosNotSecure.patch(`/product/${id}`, data);
-            console.log(res);
             if (res) {
                 setIsLoading(false);
                 setIsImageChange(false)

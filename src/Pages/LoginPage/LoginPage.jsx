@@ -20,10 +20,8 @@ const LoginPage = () => {
     };
     const navigate = useNavigate()
     const onSubmit = async (data) => {
-        console.log("Login Data:", data);
         const { email, password } = data
         const res = await login(email, password)
-        console.log(res);
         if (res) {
             navigate("/")
         }
@@ -33,7 +31,6 @@ const LoginPage = () => {
         if (res) {
             navigate('/')
             const res2 = await axios.post(`${import.meta.env.VITE_SERVER_URL}/user`, { email: res.user.email })
-            console.log(res2);
 
         }
     }

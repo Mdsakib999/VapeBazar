@@ -34,7 +34,6 @@ const Settings = () => {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        console.log("Updated User Data:", formData);
         const res = await axiosNotSecure.patch(`/user`, formData);
         if (res) {
             refetch()

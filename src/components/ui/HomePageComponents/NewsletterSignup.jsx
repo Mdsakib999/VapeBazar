@@ -6,7 +6,6 @@ const NewsletterSignup = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Email submitted:', email);
         setSubmitted(true);
         setEmail('');
     };
@@ -33,71 +32,71 @@ const NewsletterSignup = () => {
 
     return (
         <div className='bg-white'>
-            <section className="relative bg-gradient-to-r bg-white py-4 px-4 sm:px-6 lg:px-8 max-w-[1500px] mx-auto overflow-hidden flex justify-between items-center ">
-            {/* Background Image */}
-            <div className='relative z-10 '>
-                <img
-                    src="https://vapehub.risingbamboo.com/wp-content/uploads/2024/11/section-banner4-1-1.png"
-                    alt="Background"
-                    className=" h-[400px]  mb-5 "
-                />
-            </div>
-
-            <div className="relative z-10 w-[70%] flex flex-col lg:flex-row justify-between items-center">
-                {/* Icon and Text */}
-                <div className="flex items-center gap-5 mb-8 lg:mb-0">
+            <section className="relative bg-gradient-to-r bg-white py-4 px-4 sm:px-6 lg:px-8 max-w-[1500px] mx-auto overflow-hidden flex justify-center   md:justify-between items-center ">
+                {/* Background Image */}
+                <div className='relative z-10 md:inline-block hidden '>
                     <img
-                        src="https://vapehub.risingbamboo.com/wp-content/uploads/2024/10/icon-newsletter.svg"
-                        alt="Newsletter Icon"
-                        className="w-12 h-12"
+                        src="https://vapehub.risingbamboo.com/wp-content/uploads/2024/11/section-banner4-1-1.png"
+                        alt="Background"
+                        className=" h-[400px]  mb-5 "
                     />
-                    <div>
-                        <p className="text-xl font-bold text-white">Sign Up & Save 60%</p>
-                        <p className="text-white text-sm">
-                            Get Exclusive Discounts and Deals Delivered Straight to Your Inbox!
-                        </p>
-                    </div>
                 </div>
 
-                {/* Subscription Form */}
-                <form onSubmit={handleSubmit} className="flex w-full relative max-w-md">
-                    <input
-                        type="email"
-                        required
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="flex-grow px-5 py-3 border text-black border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-rose-500  focus:outline-none"
-                        placeholder="Enter your email"
-                    />
-                    <button
-                        type="submit"
-                        className="px-5 py-[13px] bg-rose-600 text-white font-medium absolute end-0 rounded-r-md shadow-sm hover:bg-rose-700 focus:ring focus:ring-rose-500 focus:outline-none"
-                    >
-                        Subscribe
-                    </button>
-                </form>
-            </div>
-            {/* <div className='bg-orange-400 w-full absolute left-0 block h-[200px]'></div> */}
-            <div
-                style={{
-                    backgroundColor: bgColor,
-                    transition: 'background-color 5s ease', // Smooth transition effect
-                    width: '100%',
-                    height: '200px',
-                    position: 'absolute',
-                    left: 0,
-                }}
-                className="w-full h-[200px] transition-all duration-200 absolute left-0"
-            >
-                {/* Content of the div */}
-            </div>
+                <div className="relative z-10 w-[70%] flex flex-col lg:flex-row justify-between items-center">
+                    {/* Icon and Text */}
+                    <div className="flex items-center gap-5 mb-8 lg:mb-0">
+                        <img
+                            src="https://vapehub.risingbamboo.com/wp-content/uploads/2024/10/icon-newsletter.svg"
+                            alt="Newsletter Icon"
+                            className="w-12 h-12"
+                        />
+                        <div>
+                            <p className="text-xl font-bold text-white">Sign Up & Save 60%</p>
+                            <p className="text-white text-sm">
+                                Get Exclusive Discounts and Deals Delivered Straight to Your Inbox!
+                            </p>
+                        </div>
+                    </div>
 
-            {submitted && (
-                <p className="mt-4 text-center text-green-600">
-                    Thank you for subscribing!
-                </p>
-            )}
-        </section>
+                    {/* Subscription Form */}
+                    <form onSubmit={handleSubmit} className="flex w-full relative max-w-md">
+                        <input
+                            type="email"
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="flex-grow px-5 py-3 border text-black border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-rose-500  focus:outline-none"
+                            placeholder="Enter your email"
+                        />
+                        <button
+                            type="submit"
+                            className="px-2 md:px-5 py-[13px] bg-rose-600 text-white font-medium absolute end-0 rounded-r-md shadow-sm hover:bg-rose-700 focus:ring focus:ring-rose-500 focus:outline-none"
+                        >
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+                {/* <div className='bg-orange-400 w-full absolute left-0 block h-[200px]'></div> */}
+                <div
+                    style={{
+                        backgroundColor: bgColor,
+                        transition: 'background-color 5s ease', // Smooth transition effect
+                        width: '100%',
+                        height: '200px',
+                        position: 'absolute',
+                        left: 0,
+                    }}
+                    className="w-full  md:h-[200px] transition-all duration-200 absolute left-0"
+                >
+                    {/* Content of the div */}
+                </div>
+
+                {submitted && (
+                    <p className="mt-4 text-center text-green-600">
+                        Thank you for subscribing!
+                    </p>
+                )}
+            </section>
         </div>
     );
 };

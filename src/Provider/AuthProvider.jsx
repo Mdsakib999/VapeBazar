@@ -17,7 +17,6 @@ const AuthProvider = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
-    console.log(token);
     useState(() => {
         const auth = localStorage.getItem('auth')
         if (auth) {

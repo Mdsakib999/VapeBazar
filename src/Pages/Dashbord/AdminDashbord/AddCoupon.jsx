@@ -33,7 +33,6 @@ const AddCoupon = () => {
         setLoading(true);
         try {
             const res = await axiosNotSecure.post('/coupon', couponData);
-            console.log(res.data);
             if (res?.data) {
                 toast.success("Coupon created successfully!");
                 setCouponData({ couponText: "", expireDate: "", discountTk: "" });

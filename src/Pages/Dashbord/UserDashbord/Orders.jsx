@@ -20,7 +20,6 @@ const Orders = () => {
     // cons
     // Sample order data
     // const orders = data?.data
-    console.log(orders);
     // const totalItems = data?.meta?.total
     const handlePageChange = (page) => {
         setCurrentPage(page);
