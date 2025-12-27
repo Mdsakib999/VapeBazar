@@ -21,7 +21,7 @@ const MainLayoutes = () => {
                 <Outlet />
             </div>
             <Footer />
-            <div
+            {/* <div
                 onClick={handleScrollToTop}
                 className="fixed z-50 bottom-5 right-5 cursor-pointer border-2 border-gray-700 p-2 rounded-full animate-bounce bg-white hover:bg-gray-200 transition"
             >
@@ -40,7 +40,7 @@ const MainLayoutes = () => {
                         d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18"
                     />
                 </svg>
-            </div>
+            </div> */}
         </div>
     );
 };
