@@ -4,12 +4,15 @@ import Select from 'react-select';
 import { cloudinaryUpload, cloudinaryUploadMultiple } from '../../../utils/cloudinary';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosNotSecure from '../../../Hooks/useAxiosNotSecure';
-import { FaSpinner } from 'react-icons/fa';
+import { FaPlus, FaSpinner } from 'react-icons/fa';
 import JoditEditor from "jodit-pro-react";
 import { toast } from 'sonner';
+import { Trash2 } from 'lucide-react';
 
 const AddProducts = () => {
     const [isLoading, setIsLoading] = useState(false)
+    const [flavour, setFlavour] = useState([''])
+    const [nicotine, setNicotine] = useState([''])
     const editor = useRef(null)
     const [content, setContent] = useState('')
     const { axiosNotSecure } = useAxiosNotSecure()
@@ -28,19 +31,7 @@ const AddProducts = () => {
             .join(' ');
         return { option: str, value: item?.category }
     })
-    const nicotineStrengthOptions = [
-        { value: '3mg', label: '3 mg' },
-        { value: '6mg', label: '6 mg' },
-        { value: '12mg', label: '12 mg' },
-        { value: '18mg', label: '18 mg' },
-        { value: '24mg', label: '24 mg' },
-        { value: '36mg', label: '36 mg' },
-        { value: '48mg', label: '48 mg' },
-        { value: '50mg', label: '50 mg' },
-        { value: 'Nicotine Salt 20mg', label: 'Nicotine Salt 20 mg' },
-        { value: 'Nicotine Salt 35mg', label: 'Nicotine Salt 35 mg' },
-        { value: 'Nicotine Salt 50mg', label: 'Nicotine Salt 50 mg' },
-    ];
+
 
 
     const onSubmit = async (data) => {
@@ -57,7 +48,8 @@ const AddProducts = () => {
             data.images = galleryResponses.map(response => response.secure_url);
             data.price = parseInt(price);
             data.discount_price = parseInt(discount_price);
-            data.nicotineStrength = nicotineStrength.map(n => n.value);
+            data.nicotineStrength = nicotine;
+            data.flavour = flavour;
             data.description = content
             // Add your form submission logic here
             const res = await axiosNotSecure.post('/product', data)
@@ -73,6 +65,12 @@ const AddProducts = () => {
             toast.error(error.message, { id: toastId })
             console.error('Error uploading files:', error);
         }
+    };
+    const handleAddFlavour = () => {
+        setFlavour((prev) => [...prev, ""]);
+    };
+    const handleAddNicotine = () => {
+        setNicotine((prev) => [...prev, ""]);
     };
 
     return (
@@ -171,24 +169,91 @@ const AddProducts = () => {
                 </select>
                 {errors.category && <p className="text-red-500 text-sm">{errors.category.message}</p>}
             </div>
-
             {/* Nicotine Strength */}
             <div className="mb-4">
+                <label htmlFor="nicotineStrength" className="block text-gray-700 font-semibold mb-2">Flavour</label>
+                <div>
+                    <div>
+                        <button
+                            type="button"
+                            onClick={handleAddFlavour}
+                            className="flex items-center gap-2 border px-3 py-1 rounded cursor-pointer"
+                        >
+                            Add <FaPlus />
+                        </button>
+                    </div>
+                    <div className="space-y-2">
+                        {flavour.map((item, idx) => (
+                            <div key={idx} className="flex items-center gap-2">
+                                <input
+                                    type="text"
+                                    value={item}
+                                    onChange={(e) => {
+                                        const updated = [...flavour];
+                                        updated[idx] = e.target.value;
+                                        setFlavour(updated);
+                                    }}
+                                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                    placeholder={`Flavour ${idx + 1}`}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        const updated = flavour.filter((_, i) => i !== idx);
+                                        setFlavour(updated.length ? updated : [""]);
+                                    }}
+                                    className="text-red-500"
+                                >
+                                    <Trash2 size={18} />
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                {errors.nicotineStrength && (
+                    <p className="text-red-500 text-sm">{errors.nicotineStrength.message}</p>
+                )}
+            </div>
+            <div className="mb-4">
                 <label htmlFor="nicotineStrength" className="block text-gray-700 font-semibold mb-2">Nicotine Strength</label>
-                <Controller
-                    name="nicotineStrength"
-                    control={control}
-                    rules={{ required: 'Nicotine Strength is required' }}
-                    render={({ field }) => (
-                        <Select
-                            {...field}
-                            options={nicotineStrengthOptions}
-                            isMulti
-                            classNamePrefix="react-select"
-                            className="w-full border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                        />
-                    )}
-                />
+                <div>
+                    <div>
+                        <button
+                            type="button"
+                            onClick={handleAddNicotine}
+                            className="flex items-center gap-2 border px-3 py-1 rounded cursor-pointer"
+                        >
+                            Add <FaPlus />
+                        </button>
+                    </div>
+                    <div className="space-y-2">
+                        {nicotine.map((item, idx) => (
+                            <div key={idx} className="flex items-center gap-2">
+                                <input
+                                    type="text"
+                                    value={item}
+                                    onChange={(e) => {
+                                        const updated = [...flavour];
+                                        updated[idx] = e.target.value;
+                                        setNicotine(updated);
+                                    }}
+                                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                    placeholder={`Nicotine ${idx + 1}`}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        const updated = nicotine.filter((_, i) => i !== idx);
+                                        setNicotine(updated.length ? updated : [""]);
+                                    }}
+                                    className="text-red-500"
+                                >
+                                    <Trash2 size={18} />
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
                 {errors.nicotineStrength && (
                     <p className="text-red-500 text-sm">{errors.nicotineStrength.message}</p>
                 )}
