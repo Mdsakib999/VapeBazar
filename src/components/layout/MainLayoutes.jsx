@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, ScrollRestoration } from 'react-router-dom';
 import Navbar from '../ui/Navbar/Navbar';
 import Footer from '../ui/Footer/Footer';
 import { AuthContext } from '../../Provider/AuthProvider';
@@ -14,9 +14,11 @@ const MainLayoutes = () => {
     return (
         <div className="flex flex-col min-h-screen">
             <Navbar />
+
             <div>
                 <ShoppingSidebar />
             </div>
+            <ScrollRestoration />
             <div className="flex-grow  min-h-[calc(100vh-80px)]   relative overflow-hidden">
                 <Outlet />
             </div>

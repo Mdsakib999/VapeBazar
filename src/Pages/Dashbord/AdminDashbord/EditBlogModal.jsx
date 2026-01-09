@@ -227,7 +227,7 @@ const EditBlogModal = ({ blog, onClose, refetch }) => {
                     <button
                         type="button"
                         onClick={onClose}
-                        className="px-6 py-3 text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-lg"
+                        className="px-6 py-3 text-gray-700 bg-gray-200 hover:bg-red-500 hover:text-white rounded-lg"
                     >
                         Cancel
                     </button>

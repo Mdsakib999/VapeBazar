@@ -103,7 +103,7 @@ const AddCoupon = () => {
                     className="text-center mb-10"
                 >
                     <div className="inline-flex items-center gap-3 mb-4">
-                        <div className="p-4 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-600 shadow-xl">
+                        <div className="p-4 rounded-2xl bg-gradient-to-br from-pink-500 to-purple-600 shadow-xl">
                             <Ticket className="w-8 h-8 text-white" />
                         </div>
                         <div>
@@ -148,8 +148,8 @@ const AddCoupon = () => {
                                         transition={{ delay: 0.2 }}
                                     >
                                         <label className="flex items-center gap-2 text-sm font-bold text-gray-800 mb-3">
-                                            <div className="p-1.5 rounded-lg bg-orange-100">
-                                                <Tag className="w-4 h-4 text-orange-600" />
+                                            <div className="p-1.5 rounded-lg bg-purple-100">
+                                                <Tag className="w-4 h-4 text-pink-600" />
                                             </div>
                                             Coupon Code
                                             <span className="text-red-500">*</span>
@@ -160,7 +160,7 @@ const AddCoupon = () => {
                                             value={couponData.couponText}
                                             onChange={handleChange}
                                             placeholder="e.g., SUMMER2024, SAVE20"
-                                            className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 bg-gray-50/50 focus:bg-white focus:border-orange-500 focus:ring-4 focus:ring-orange-100 outline-none transition-all duration-200 text-gray-800 font-semibold uppercase"
+                                            className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 bg-gray-50/50 focus:bg-white focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none transition-all duration-200 text-gray-800 font-semibold uppercase"
                                             required
                                         />
                                         <p className="text-xs text-gray-500 mt-2 flex items-center gap-1">
@@ -176,8 +176,8 @@ const AddCoupon = () => {
                                         transition={{ delay: 0.3 }}
                                     >
                                         <label className="flex items-center gap-2 text-sm font-bold text-gray-800 mb-3">
-                                            <div className="p-1.5 rounded-lg bg-orange-100">
-                                                <Percent className="w-4 h-4 text-orange-600" />
+                                            <div className="p-1.5 rounded-lg bg-purple-100">
+                                                <Percent className="w-4 h-4 text-pink-600" />
                                             </div>
                                             Discount Amount
                                             <span className="text-red-500">*</span>
@@ -190,7 +190,7 @@ const AddCoupon = () => {
                                                 value={couponData.discountTk}
                                                 onChange={handleChange}
                                                 placeholder="Enter discount amount"
-                                                className="w-full pl-12 pr-5 py-4 rounded-xl border-2 border-gray-200 bg-gray-50/50 focus:bg-white focus:border-orange-500 focus:ring-4 focus:ring-orange-100 outline-none transition-all duration-200 text-gray-800 font-semibold"
+                                                className="w-full pl-12 pr-5 py-4 rounded-xl border-2 border-gray-200 bg-gray-50/50 focus:bg-white focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none transition-all duration-200 text-gray-800 font-semibold"
                                                 required
                                             />
                                         </div>
@@ -209,8 +209,8 @@ const AddCoupon = () => {
                                         transition={{ delay: 0.4 }}
                                     >
                                         <label className="flex items-center gap-2 text-sm font-bold text-gray-800 mb-3">
-                                            <div className="p-1.5 rounded-lg bg-orange-100">
-                                                <Calendar className="w-4 h-4 text-orange-600" />
+                                            <div className="p-1.5 rounded-lg bg-purple-100">
+                                                <Calendar className="w-4 h-4 text-pink-600" />
                                             </div>
                                             Expiration Date & Time
                                             <span className="text-red-500">*</span>
@@ -226,7 +226,7 @@ const AddCoupon = () => {
                                                     minDate: "today"
                                                 }}
                                                 placeholder="Select date and time"
-                                                className="w-full pl-12 pr-5 py-4 rounded-xl border-2 border-gray-200 bg-gray-50/50 focus:bg-white focus:border-orange-500 focus:ring-4 focus:ring-orange-100 outline-none transition-all duration-200 text-gray-800 font-semibold"
+                                                className="w-full pl-12 pr-5 py-4 rounded-xl border-2 border-gray-200 bg-gray-50/50 focus:bg-white focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none transition-all duration-200 text-gray-800 font-semibold"
                                             />
                                         </div>
                                         <p className="text-xs text-gray-500 mt-2">
@@ -239,16 +239,16 @@ const AddCoupon = () => {
                                         initial={{ opacity: 0, scale: 0.9 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: 0.5 }}
-                                        className="bg-gradient-to-br from-orange-500 to-amber-600 rounded-2xl p-6 text-white shadow-xl"
+                                        className="bg-gradient-to-br from-pink-50 to-pink-50 rounded-2xl p-6  shadow-xl"
                                     >
                                         <div className="flex items-center gap-2 mb-4">
                                             <Sparkles className="w-5 h-5" />
                                             <h3 className="font-bold text-lg">Preview</h3>
                                         </div>
-                                        <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border-2 border-white/30 border-dashed">
+                                        <div className="bg-gray-50/50 backdrop-blur-sm rounded-xl p-4 border-2 border-gray-400 border-dashed">
                                             <div className="text-center">
-                                                <p className="text-xs text-white/80 mb-1">Coupon Code</p>
-                                                <p className="text-2xl font-black tracking-wider mb-3">
+                                                <p className="text-xs text-gray-600 mb-1">Coupon Code</p>
+                                                <p className="text-2xl font-black tracking-wider text-gray-600 mb-3">
                                                     {couponData.couponText || "YOURCODE"}
                                                 </p>
                                                 <div className="flex items-center justify-center gap-2 text-sm">
@@ -281,7 +281,7 @@ const AddCoupon = () => {
                                     disabled={isLoading}
                                     whileHover={{ scale: isLoading ? 1 : 1.02 }}
                                     whileTap={{ scale: isLoading ? 1 : 0.98 }}
-                                    className="flex-1 flex items-center justify-center gap-3 px-8 py-5 bg-gradient-to-r from-orange-600 via-amber-600 to-orange-600 bg-size-200 bg-pos-0 hover:bg-pos-100 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed text-lg"
+                                    className="flex-1 flex items-center justify-center gap-3 px-8 py-5 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-size-200 bg-pos-0 hover:bg-pos-100 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed text-lg"
                                 >
                                     {isLoading ? (
                                         <>
@@ -313,50 +313,7 @@ const AddCoupon = () => {
                     </form>
                 </motion.div>
 
-                {/* Info Cards */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.7 }}
-                    className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6"
-                >
-                    {[
-                        {
-                            icon: <Tag className="w-6 h-6" />,
-                            title: "Clear Codes",
-                            desc: "Use short, memorable codes that are easy to type",
-                            color: "orange"
-                        },
-                        {
-                            icon: <Calendar className="w-6 h-6" />,
-                            title: "Valid Period",
-                            desc: "Set appropriate expiration dates for your campaigns",
-                            color: "amber"
-                        },
-                        {
-                            icon: <Percent className="w-6 h-6" />,
-                            title: "Fair Discounts",
-                            desc: "Balance attractive discounts with profitability",
-                            color: "yellow"
-                        }
-                    ].map((item, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.8 + index * 0.1 }}
-                            className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                        >
-                            <div className={`inline-flex p-3 rounded-xl bg-${item.color}-100 mb-4`}>
-                                <div className={`text-${item.color}-600`}>
-                                    {item.icon}
-                                </div>
-                            </div>
-                            <h3 className="font-bold text-gray-800 mb-2 text-lg">{item.title}</h3>
-                            <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
-                        </motion.div>
-                    ))}
-                </motion.div>
+                
             </div>
         </div>
     );
