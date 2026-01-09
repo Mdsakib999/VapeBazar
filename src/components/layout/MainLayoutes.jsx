@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, ScrollRestoration } from 'react-router-dom';
 import Navbar from '../ui/Navbar/Navbar';
 import Footer from '../ui/Footer/Footer';
 import { AuthContext } from '../../Provider/AuthProvider';
@@ -14,14 +14,16 @@ const MainLayoutes = () => {
     return (
         <div className="flex flex-col min-h-screen">
             <Navbar />
+
             <div>
                 <ShoppingSidebar />
             </div>
+            <ScrollRestoration />
             <div className="flex-grow  min-h-[calc(100vh-80px)]   relative overflow-hidden">
                 <Outlet />
             </div>
             <Footer />
-            <div
+            {/* <div
                 onClick={handleScrollToTop}
                 className="fixed z-50 bottom-5 right-5 cursor-pointer border-2 border-gray-700 p-2 rounded-full animate-bounce bg-white hover:bg-gray-200 transition"
             >
@@ -40,7 +42,7 @@ const MainLayoutes = () => {
                         d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18"
                     />
                 </svg>
-            </div>
+            </div> */}
         </div>
     );
 };

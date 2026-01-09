@@ -79,9 +79,9 @@ const BlogSection = () => {
 
         {/* Read All Button */}
         <div className="flex justify-center">
-          <button className="px-6 rounded-md font-semibold mt-12 bg-gradient-to-r from-indigo-600 to-purple-500 text-white py-2 flex items-center gap-2">
+          <Link to="/blog" className="px-6 rounded-md font-semibold mt-12 bg-gradient-to-r from-indigo-600 to-purple-500 text-white py-2 flex items-center gap-2">
             Read All <FaArrowRightLong />
-          </button>
+          </Link>
         </div>
       </section>
     </div>
