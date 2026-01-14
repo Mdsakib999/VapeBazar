@@ -200,7 +200,7 @@ const AddProducts = () => {
                                     type="button"
                                     onClick={() => {
                                         const updated = flavour.filter((_, i) => i !== idx);
-                                        setFlavour(updated.length ? updated : [""]);
+                                        setFlavour(updated.length ? updated : []);
                                     }}
                                     className="text-red-500"
                                 >
@@ -244,7 +244,7 @@ const AddProducts = () => {
                                     type="button"
                                     onClick={() => {
                                         const updated = nicotine.filter((_, i) => i !== idx);
-                                        setNicotine(updated.length ? updated : [""]);
+                                        setNicotine(updated.length ? updated : []);
                                     }}
                                     className="text-red-500"
                                 >

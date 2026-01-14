@@ -48,6 +48,7 @@ const ManageOrders = () => {
             refetch()
         }
     };
+    console.log(orders)
 
     const handleDeleteOrder = async (id) => {
         const isDelete = confirm('Do You Want to Delete Order')
@@ -279,7 +280,10 @@ const ManageOrders = () => {
                                         className="w-16 h-16 object-cover rounded"
                                     />
                                     <div>
-                                        <p className="flex justify-center">{item?.productId?.name} <p className="text-red-500"> {`${item.nicotineStrength}`}</p> </p>
+                                        <p className="flex flex-col justify-center">{item?.productId?.name}
+                                            <p className="text-red-500"> NicotineStrength: {`${item.nicotineStrength || "None"}`}</p>
+                                            <p className="text-red-500">Flavour: {`${item.flavour || "None"}`}</p>
+                                        </p>
                                         <p>
                                             {Number(item.quantity)} x Dhs{" "}
                                             {Number(item?.productId?.price)} ={" "}

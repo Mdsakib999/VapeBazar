@@ -25,6 +25,7 @@ const ProductDetails = () => {
     const [title, setTitle] = useState("");
     const [mainImage, setMainImage] = useState("");
     const [selectedNicotineStrength, setSelectedNicotineStrength] = useState("");
+    const [selectedFlavour, setSelectedFlavour] = useState("");
     const [quantity, setQuantity] = useState(1);
     const [intervalId, setIntervalId] = useState(null);
     const [icon, setIcon] = useState('')
@@ -49,6 +50,7 @@ const ProductDetails = () => {
         description,
         image,
         images = [],
+        flavour,
         name,
         nicotineStrength = [],
         price,
@@ -79,7 +81,7 @@ const ProductDetails = () => {
         }
     }, [title]);
 
-    // Set main image on initial load
+
     useEffect(() => {
         if (image) {
             setMainImage(image);
@@ -93,8 +95,12 @@ const ProductDetails = () => {
 
     // Handle adding product to cart
     const handleAddToCart = (data) => {
-        if (!selectedNicotineStrength) {
+        if (!selectedNicotineStrength && nicotineStrength.length > 0) {
             toast.error("Please select a nicotine strength");
+            return;
+        }
+        if (!selectedFlavour && flavour.length > 0) {
+            toast.error("Please select a Flavours");
             return;
         }
         const discountedPrice = data.discount_price
@@ -108,8 +114,9 @@ const ProductDetails = () => {
             image: data.image,
             price: displayPrice,
             quantity,
-            nicotineStrength: selectedNicotineStrength,
+            nicotineStrength: selectedNicotineStrength || '',
             name,
+            flavour: selectedFlavour || ''
         };
         addToDb(cartData);
         toast.success("Product added to cart!");
@@ -151,7 +158,7 @@ const ProductDetails = () => {
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-20">
             <Toaster position="top-center" />
-            
+
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Breadcrumb */}
                 <div className="flex items-center gap-2 text-sm text-gray-600 mb-6">
@@ -187,7 +194,7 @@ const ProductDetails = () => {
                                     className="w-full h-full object-contain p-8"
                                     alt={name}
                                 />
-                                
+
                                 {/* Quick Actions */}
                                 <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     <button className="bg-white p-3 rounded-full shadow-lg hover:bg-indigo-50 transition-colors">
@@ -205,11 +212,10 @@ const ProductDetails = () => {
                                     <div
                                         key={index}
                                         onClick={() => setMainImage(img)}
-                                        className={`flex-shrink-0 w-20 h-20 rounded-xl cursor-pointer transition-all duration-300 ${
-                                            mainImage === img
-                                                ? "ring-4 ring-indigo-500 scale-105 shadow-lg"
-                                                : "ring-2 ring-gray-200 hover:ring-gray-300"
-                                        }`}
+                                        className={`flex-shrink-0 w-20 h-20 rounded-xl cursor-pointer transition-all duration-300 ${mainImage === img
+                                            ? "ring-4 ring-indigo-500 scale-105 shadow-lg"
+                                            : "ring-2 ring-gray-200 hover:ring-gray-300"
+                                            }`}
                                     >
                                         <img
                                             src={img}
@@ -256,11 +262,10 @@ const ProductDetails = () => {
                             <div className="flex items-center gap-3">
                                 <span className="text-gray-600 font-medium">Availability:</span>
                                 <span
-                                    className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold ${
-                                        status === "active"
-                                            ? "bg-green-100 text-green-700"
-                                            : "bg-red-100 text-red-700"
-                                    }`}
+                                    className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold ${status === "active"
+                                        ? "bg-green-100 text-green-700"
+                                        : "bg-red-100 text-red-700"
+                                        }`}
                                 >
                                     {status === "active" ? <FiCheck /> : <FiPackage />}
                                     {status === "active" ? "In Stock" : "Out of Stock"}
@@ -271,29 +276,54 @@ const ProductDetails = () => {
                             <div className="border-t border-gray-200"></div>
 
                             {/* Nicotine Strength Selector */}
-                            <div className="space-y-3">
-                                <label className="text-gray-900 font-bold text-lg">
-                                    Select Nicotine Strength
-                                </label>
-                                <div className="flex flex-wrap gap-3">
-                                    {nicotineStrength.map((strength, index) => (
-                                        <button
-                                            key={index}
-                                            onClick={() => setSelectedNicotineStrength(strength)}
-                                            className={`px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 ${
-                                                selectedNicotineStrength === strength
+                            {
+                                nicotineStrength.length > 0 && <div className="space-y-3">
+                                    <label className="text-gray-900 font-bold text-lg">
+                                        Select Nicotine Strength
+                                    </label>
+                                    <div className="flex flex-wrap gap-3">
+                                        {nicotineStrength.map((strength, index) => (
+                                            <button
+                                                key={index}
+                                                onClick={() => setSelectedNicotineStrength(strength)}
+                                                className={`px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 ${selectedNicotineStrength === strength
                                                     ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg transform scale-105"
                                                     : "bg-gray-100 text-gray-700 hover:bg-gray-200 border-2 border-gray-200"
-                                            }`}
-                                        >
-                                            {strength}
-                                        </button>
-                                    ))}
+                                                    }`}
+                                            >
+                                                {strength}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    {selectedNicotineStrength && (
+                                        <p className="text-sm text-gray-500 italic">Please select a strength to continue</p>
+                                    )}
                                 </div>
-                                {!selectedNicotineStrength && (
-                                    <p className="text-sm text-gray-500 italic">Please select a strength to continue</p>
-                                )}
-                            </div>
+                            }
+                            {
+                                flavour.length > 0 && <div className="space-y-3">
+                                    <label className="text-gray-900 font-bold text-lg">
+                                        Select Flavour
+                                    </label>
+                                    <div className="flex flex-wrap gap-3">
+                                        {flavour.map((strength, index) => (
+                                            <button
+                                                key={index}
+                                                onClick={() => setSelectedFlavour(strength)}
+                                                className={`px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 ${selectedFlavour === strength
+                                                    ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg transform scale-105"
+                                                    : "bg-gray-100 text-gray-700 hover:bg-gray-200 border-2 border-gray-200"
+                                                    }`}
+                                            >
+                                                {strength}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    {!selectedFlavour && (
+                                        <p className="text-sm text-gray-500 italic">Please select a strength to continue</p>
+                                    )}
+                                </div>
+                            }
 
                             {/* Quantity Selector */}
                             <div className="space-y-3">

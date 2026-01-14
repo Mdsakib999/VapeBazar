@@ -16,20 +16,16 @@ export const deleteDB = () => {
 
 export const addToDb = (data) => {
   let shoppingCart = getShoppingCart();
-  // Check if the product already exists in the cart
   const isExist = shoppingCart.find(
     (item) => item.productId === data.productId
   );
 
   if (isExist) {
-    // Update the quantity of the existing product
     isExist.quantity += 1;
     isExist.totalPrice = isExist.quantity * isExist.price;
   } else {
-    // Add a new product to the cart
     shoppingCart.push({ ...data, totalPrice: isExist?.price });
   }
-  // Save the updated cart back to localStorage
   localStorage.setItem("shopping-cart", JSON.stringify(shoppingCart));
   window.dispatchEvent(new Event("shopping-cart-updated"));
 };

@@ -100,7 +100,8 @@ const Checkout = () => {
 
             const product = products.map((item) => ({
                 productId: item.productId,
-                nicotineStrength: item.nicotineStrength,
+                nicotineStrength: item?.nicotineStrength || '',
+                flavour: item?.flavour || '',
                 quantity: item.quantity.toString(),
             }));
 
