@@ -144,6 +144,9 @@ const ManageOrders = () => {
                                         <td className="p-2 border">
                                             {order?.userData?.email ? order.userData.email : "Guest"}
                                         </td>
+                                        {
+                                            console.log(order)
+                                        }
                                         <td className="p-2 border">
                                             {order?.userId?.contactNo ? order.userId.contactNo : order?.contactNo}
                                         </td>
