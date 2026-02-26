@@ -3,7 +3,13 @@ import { Link } from "react-router-dom";
 import useAxiosNotSecure from "../../Hooks/useAxiosNotSecure";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { BookOpen, Calendar, ArrowRight, Loader2, Newspaper } from "lucide-react";
+import {
+  BookOpen,
+  Calendar,
+  ArrowRight,
+  Loader2,
+  Newspaper,
+} from "lucide-react";
 
 const Blog = () => {
   const { axiosNotSecure } = useAxiosNotSecure();
@@ -62,8 +68,12 @@ const Blog = () => {
             className="flex flex-col items-center justify-center py-20 bg-white rounded-3xl shadow-sm border border-gray-100"
           >
             <Newspaper className="w-20 h-20 text-gray-300 mb-4" />
-            <h3 className="text-2xl font-bold text-gray-700 mb-2">No Blogs Yet</h3>
-            <p className="text-gray-500">Check back later for exciting content!</p>
+            <h3 className="text-2xl font-bold text-gray-700 mb-2">
+              No Blogs Yet
+            </h3>
+            <p className="text-gray-500">
+              Check back later for exciting content!
+            </p>
           </motion.div>
         )}
 
@@ -89,7 +99,6 @@ const Blog = () => {
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
                 </Link>
 
                 {/* Content */}
@@ -110,11 +119,14 @@ const Blog = () => {
                       <div className="flex items-center gap-1.5 text-xs text-gray-500">
                         <Calendar className="w-3 h-3" />
                         <span>
-                          {new Date(blog?.createdAt).toLocaleDateString("en-US", {
-                            month: "short",
-                            day: "numeric",
-                            year: "numeric",
-                          })}
+                          {new Date(blog?.createdAt).toLocaleDateString(
+                            "en-US",
+                            {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            },
+                          )}
                         </span>
                       </div>
                     </div>
@@ -129,14 +141,13 @@ const Blog = () => {
                       {blog?.blogTitle}
                     </h3>
                   </Link>
-                  
+
                   {/* Description */}
                   <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
-                      {blog?.cardDescription?.length > 95
-                        ? `${blog.cardDescription.slice(0, 32)}.....`
-                        : blog?.cardDescription}
-                    </p>
-                
+                    {blog?.cardDescription?.length > 95
+                      ? `${blog.cardDescription.slice(0, 32)}.....`
+                      : blog?.cardDescription}
+                  </p>
 
                   {/* Read More Link */}
                   <Link

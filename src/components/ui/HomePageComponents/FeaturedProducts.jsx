@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FaStar } from "react-icons/fa";
 import axios from 'axios';
 import React from 'react';
+import { motion } from "framer-motion";
+import { Calendar, ArrowRight } from "lucide-react";
 import { Link } from 'react-router-dom';
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 
@@ -22,14 +24,15 @@ const FeaturedProducts = () => {
         return <div>Loading....</div>
     }
     return (
-        <section className="py-12 bg-white ">
-             <section className="py-12 bg-white">
-            <div className="container mx-auto px-4">
+        <section className="py-16 bg-white ">
+             <section className=" bg-white">
+            <div className="container mx-auto px-4 ">
                 <h2 className="text-center text-black text-4xl font-extrabold mb-6">
                     Featured Products
                 </h2>
-                <p className='text-black text-center lg:w-[50%] mx-auto'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum consequuntur, saepe quia sed hic iure fugit pariatur tempore, eius consequatur est ut harum ea optio sapiente? Quo, dolore quam.</p>
-                <div className="w-3/5 mt-4 md:mt-0 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-4 gap-y-8 px-1 md:px-4 py-11">
+                <p className='text-black text-center lg:w-[50%] mx-auto'>Explore our carefully curated collection of top-tier vape devices and flavors, crafted to deliver exceptional performance, bold taste, and an unforgettable experience with every single puff.</p>
+
+                <div className="md:w-3/5 mt-4 md:mt-0 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-4 gap-y-8 px-1 md:px-4 py-11">
                     {featuredProducts?.map((product) => (
                         <div
                             key={product._id}
@@ -91,6 +94,53 @@ const FeaturedProducts = () => {
                         </div>
                     ))}
                 </div>
+
+                {/*  Read All Button */}
+                          
+                              <div className=' flex justify-center items-center'>
+                                <Link to="/product">
+                                  <motion.button 
+                                      // whileHover={{ scale: 1.05, y: -2 }}
+                                      // whileTap={{ scale: 0.95 }}
+                                      className="group relative px-10 mt-5 py-4 bg-gradient-to-r from-purple-500 via-indigo-600 to-purple-600 bg-[length:200%_100%] text-white font-bold text-lg rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500"
+                                  >
+                                      {/* Animated Background */}
+                                      <motion.div
+                                          className="absolute inset-0 bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-500 bg-[length:200%_100%]"
+                                          animate={{
+                                              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                                          }}
+                                          transition={{
+                                              duration: 3,
+                                              repeat: Infinity,
+                                              ease: "linear",
+                                          }}
+                                      />
+          
+                                      {/* Button Content */}
+                                      <span className="relative z-10 flex items-center gap-3">
+                                          <span> View All Product</span>
+                                          <motion.div
+                                              animate={{
+                                                  x: [0, 5, 0],
+                                              }}
+                                              transition={{
+                                                  duration: 1.5,
+                                                  repeat: Infinity,
+                                                  ease: "easeInOut",
+                                              }}
+                                          >
+                                              <ArrowRight className="w-5 h-5" />
+                                          </motion.div>
+                                      </span>
+          
+                                      {/* Glow Effect */}
+                                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                          <div className="absolute inset-0 bg-white/20 blur-xl" />
+                                      </div>
+                                  </motion.button>
+                              </Link>
+                              </div>
             </div>
         </section>
         </section>

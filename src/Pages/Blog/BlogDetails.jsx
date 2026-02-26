@@ -40,7 +40,7 @@ const BlogDetails = () => {
                     </p>
                     <div className=" sm:flex justify-between items-center  mt-6 ">
                         <div className="flex items-center gap-x-3 ">
-                            <div className="w-16 h-16 rounded-full border-2 border-orange-500">
+                            <div className="w-16 h-16 rounded-full border-2 border-purple-500">
                                 <img
                                     className="w-full h-full rounded-full object-cover object-center"
                                     // src="https://blog-pixomatic.s3.appcnt.com/image/22/01/26/61f166e07f452/_orig/pixomatic_1572877263963.png"
@@ -52,7 +52,7 @@ const BlogDetails = () => {
                             <div>
                                 <p className="font-semibold">{blogData?.authorName}</p>
                                 <p>
-                                    <span className="text-orange-600 font-medium mb-1 block">
+                                    <span className="text-purple-600 font-medium mb-1 block">
                                         {/* {formatDate(blogData?.createdAt)} */}
                                         {
                                             new Date(blogData?.createdAt).toLocaleString("en-US", {

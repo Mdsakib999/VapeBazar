@@ -14,16 +14,8 @@ const Home = () => {
 
     return (
         <div className="relative w-full bg-white">
-            {/* Parallax Background */}
-            {/* <div
-                className="absolute inset-0 bg-cover bg-center bg-fixed"
-                style={{
-                    backgroundImage: "url('https://img.freepik.com/free-photo/man-vaping-electronic-cigarette_158595-3038.jpg?t=st=1738128784~exp=1738132384~hmac=9d38b5702f37203b3a8024a5e3169e616e095ac00b297140c0cd2437702309b7&w=1380')",
-                }}
-            >
-
-                <div className="absolute inset-0 bg-black bg-opacity-60"></div>
-            </div> */}
+            
+            
 
             {/* Content */}
             <div className=" ">
@@ -33,15 +25,14 @@ const Home = () => {
                         <Carousel />
                     </div>
 
-                    {/* GradientCards Section */}
-                    <div className="relative md:-mt-40 z-20">
-                        <GradientCards />
-                    </div>
+                    
                 </div>
                 {/* <Banner /> */}
                 <div className='  bg-gray-90 bg-opacity-80 '>
                     <ProductCategories />
                     <FeaturedProducts />
+                    {/* GradientCards Section */}
+                     <GradientCards />
                     <Testimonials />
                     <BlogSection />
                     <NewsletterSignup />
