@@ -4,11 +4,72 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosNotSecure from "../../../Hooks/useAxiosNotSecure";
 import { Toaster, toast } from 'sonner'
 import axios from "axios";
+import { AlertTriangle, X } from 'lucide-react';
 
+// Confirmation Modal Component
+const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, blogTitle }) => {
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 p-4">
+            <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-fadeIn">
+                {/* Header */}
+                <div className="bg-gradient-to-r from-red-500 to-red-600 px-6 py-5 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                        <div className="bg-white/20 backdrop-blur-sm rounded-full p-2">
+                            <AlertTriangle className="w-6 h-6 text-white" />
+                        </div>
+                        <h3 className="text-xl font-bold text-white">Confirm Deletion</h3>
+                    </div>
+                    <button
+                        onClick={onClose}
+                        className="text-white hover:bg-white/20 rounded-full p-1.5 transition-all duration-200"
+                    >
+                        <X className="w-5 h-5" />
+                    </button>
+                </div>
+
+                {/* Content */}
+                <div className="p-6">
+                    <p className="text-gray-700 text-base mb-2">
+                        Are you sure you want to delete this blog?
+                    </p>
+                    {/* {blogTitle && (
+                        <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg mt-4">
+                            <p className="text-sm text-gray-600 mb-1">Blog Title:</p>
+                            <p className="font-semibold text-gray-800">{blogTitle}</p>
+                        </div>
+                    )} */}
+                    <p className="text-sm text-gray-500 mt-4">
+                        This action cannot be undone. The blog will be permanently removed from the database.
+                    </p>
+                </div>
+
+                {/* Actions */}
+                <div className="px-6 pb-6 flex gap-3">
+                    <button
+                        onClick={onClose}
+                        className="flex-1 px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all duration-200"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        onClick={onConfirm}
+                        className="flex-1 px-4 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
+                    >
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const ManageBlog = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedBlog, setSelectedBlog] = useState(null);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [blogToDelete, setBlogToDelete] = useState(null);
     const { axiosNotSecure } = useAxiosNotSecure()
     const { data: blogData = [], refetch } = useQuery({
         queryKey: ['blog'],
@@ -17,29 +78,43 @@ const ManageBlog = () => {
             return res.data;
         },
     });
-    const handelDelete = async (id) => {
-        // Confirm with the user before deleting the blog
-        const isConfirmed = confirm("Do you want to delete this blog?");
-        if (isConfirmed) {
-            try {
-                // Send DELETE request to the server
-                const response = await axiosNotSecure.delete(`/blog/${id}`);
 
-                // Check if the response indicates a successful deletion
-                if (response.data) {
-                    refetch(); // Refresh the blog data
-                    toast.success("Blog deleted successfully!");
-                } else {
-                    toast.error("An error occurred while deleting the blog.");
-                }
-            } catch (error) {
-                // Handle any unexpected errors
-                toast.error("Failed to delete the blog. Please try again later.");
-                console.error("Error deleting blog:", error);
+    const handelDelete = async (id) => {
+        try {
+            // Send DELETE request to the server
+            const response = await axiosNotSecure.delete(`/blog/${id}`);
+
+            // Check if the response indicates a successful deletion
+            if (response.data) {
+                refetch(); // Refresh the blog data
+                toast.success("Blog Deleted Successfully!");
+                setIsDeleteModalOpen(false);
+                setBlogToDelete(null);
+            } else {
+                toast.error("An error occurred while deleting the blog.");
             }
+        } catch (error) {
+            // Handle any unexpected errors
+            toast.error("Failed to delete the blog. Please try again later.");
+            console.error("Error deleting blog:", error);
         }
     };
 
+    const openDeleteModal = (blog) => {
+        setBlogToDelete(blog);
+        setIsDeleteModalOpen(true);
+    };
+
+    const closeDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+        setBlogToDelete(null);
+    };
+
+    const confirmDelete = () => {
+        if (blogToDelete) {
+            handelDelete(blogToDelete._id);
+        }
+    };
 
     const handleEdit = (blog) => {
         setSelectedBlog(blog);
@@ -105,7 +180,7 @@ const ManageBlog = () => {
                             </p>
                             <div className="mt-4 flex justify-evenly">
                                 <button
-                                    onClick={() => handelDelete(blog._id)}
+                                    onClick={() => openDeleteModal(blog)}
                                     className="bg-red-500 text-white px-3 py-1 font-bold rounded hover:bg-red-600"
                                 >
                                     Delete
@@ -121,6 +196,15 @@ const ManageBlog = () => {
                     </div>
                 ))}
             </div>
+
+            {/* Delete Confirmation Modal */}
+            <DeleteConfirmationModal
+                isOpen={isDeleteModalOpen}
+                onClose={closeDeleteModal}
+                onConfirm={confirmDelete}
+                blogTitle={blogToDelete?.blogTitle}
+            />
+
             {/* Edit Blog Modal */}
             {isModalOpen && (
                 <EditBlogModal

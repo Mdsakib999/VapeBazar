@@ -9,6 +9,9 @@ import { Range } from 'react-range';
 import { AiFillTags } from "react-icons/ai";
 import { FaStar, FaFilter } from "react-icons/fa";
 import { HiViewGrid } from "react-icons/hi";
+import { ShoppingCart } from "lucide-react";
+import { addToDb } from "../../utils/setLocalStorage";
+import { toast, Toaster } from "sonner";
 
 const Product = () => {
     const location = useLocation();
@@ -35,13 +38,35 @@ const Product = () => {
         setPriceRange([1, 10000]);
     };
 
+    // Add to cart handler (no nicotine/flavour selection needed from listing page)
+    const handleAddToCart = (e, product) => {
+        e.preventDefault(); // prevent Link navigation
+        e.stopPropagation();
+
+        const discountedPrice = product.discount_price
+            ? product.price - (product.price * product.discount_price) / 100
+            : product.price;
+
+        const cartData = {
+            productId: product._id,
+            image: product.images[0],
+            price: Math.round(discountedPrice),
+            quantity: 1,
+            nicotineStrength: '',
+            name: product.name,
+            flavour: ''
+        };
+
+        addToDb(cartData);
+        toast.success(`${product.name} added to cart!`);
+    };
+
     setTitle("Products | Vape Smoke 24");
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }, []);
 
-    // Fetch categories for the dropdown
     const { data: categoriesData = [] } = useQuery({
         queryKey: ["category"],
         queryFn: async () => {
@@ -50,7 +75,6 @@ const Product = () => {
         },
     });
 
-    // Fetch products with query parameters
     const { data: productData = {}, isLoading, error } = useQuery({
         queryKey: ["products", selectedCategory, searchTerm, priceRange, currentPage],
         queryFn: async () => {
@@ -218,6 +242,8 @@ const Product = () => {
 
     return (
         <div className="mt-28 section-container min-h-screen pb-12">
+            <Toaster position="top-center" />
+
             {/* Header Section */}
             <div className="mb-8">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -228,7 +254,7 @@ const Product = () => {
                         </h1>
                         <p className="text-gray-600">Discover premium vape products</p>
                     </div>
-                    
+
                     {/* Mobile Filter Button */}
                     <button
                         onClick={() => setShowMobileFilters(true)}
@@ -311,17 +337,14 @@ const Product = () => {
                                             </div>
 
                                             <div className="p-5">
-                                                <div className="mb-2">
+                                                <div className="flex justify-between items-center ">
+                                                    <div className="mb-2">
                                                     <span className="text-xs font-semibold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">
                                                         {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
                                                     </span>
                                                 </div>
 
-                                                <h3 className="text-lg font-bold text-gray-800 mb-3 line-clamp-2 group-hover:text-indigo-600 transition-colors">
-                                                    {product.name}
-                                                </h3>
-
-                                                <div className="flex items-center gap-1 mb-4">
+                                                <div className="flex items-center gap-1 mb-2">
                                                     {[...Array(5)].map((_, index) => (
                                                         <FaStar
                                                             key={index}
@@ -331,8 +354,15 @@ const Product = () => {
                                                     ))}
                                                     <span className="text-sm text-gray-600 ml-2">5.0</span>
                                                 </div>
+                                                </div>
 
-                                                <div className="flex items-center justify-between mb-4">
+                                                <h3 className="text-lg font-bold text-gray-800 mb-2 line-clamp-2 group-hover:text-indigo-600 transition-colors">
+                                                    {product.name}
+                                                </h3>
+
+                                                
+
+                                                <div className="flex items-center justify-between mb-3">
                                                     <div className="flex items-baseline gap-2">
                                                         <span className="text-2xl font-bold text-gray-900">
                                                             Dhs {Math.round(
@@ -349,9 +379,20 @@ const Product = () => {
                                                     </div>
                                                 </div>
 
-                                                <button className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-3 rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200">
-                                                    View Details
-                                                </button>
+                                                {/* ---- Updated Button Row ---- */}
+                                                <div className="flex items-center gap-3">
+                                                    <button className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-3 rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200">
+                                                        View Details
+                                                    </button>
+                                                    <button
+                                                        onClick={(e) => handleAddToCart(e, product)}
+                                                        className="bg-indigo-50 border-2 border-indigo-200 text-indigo-600 p-3 rounded-xl hover:bg-indigo-600 hover:text-white hover:border-indigo-600 hover:scale-105 transition-all duration-200"
+                                                        title="Add to Cart"
+                                                    >
+                                                        <ShoppingCart size={20} />
+                                                    </button>
+                                                </div>
+
                                             </div>
                                         </Link>
                                     ))
@@ -387,7 +428,6 @@ const Product = () => {
                                     <div className="flex gap-2">
                                         {Array.from({ length: totalPages }, (_, index) => {
                                             const pageNumber = index + 1;
-                                            // Show first page, last page, current page, and pages around current
                                             if (
                                                 pageNumber === 1 ||
                                                 pageNumber === totalPages ||

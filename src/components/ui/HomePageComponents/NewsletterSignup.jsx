@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Sparkles, Gift, TrendingUp, Check } from 'lucide-react';
 
 const NewsletterSignup = () => {
     const [email, setEmail] = useState('');
     const [submitted, setSubmitted] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -15,116 +14,63 @@ const NewsletterSignup = () => {
     };
 
     return (
-        <section className="relative py-20 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-50">
-            {/* Animated Background Elements */}
+        <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-50">
+            {/* Static background orbs — no animate-pulse, no infinite motion */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {/* Floating Particles */}
-                {[...Array(12)].map((_, i) => (
-                    <motion.div
-                        key={`particle-${i}`}
-                        className="absolute rounded-full bg-gradient-to-br from-cyan-400/20 via-blue-400/20 to-purple-400/20 blur-2xl"
-                        initial={{
-                            x: `${Math.random() * 100}%`,
-                            y: `${100 + Math.random() * 20}%`,
-                        }}
-                        animate={{
-                            y: `${-20 - Math.random() * 20}%`,
-                            x: [
-                                `${Math.random() * 100}%`,
-                                `${Math.random() * 100}%`,
-                            ],
-                            scale: [1, 1.3, 1],
-                        }}
-                        transition={{
-                            duration: 20 + Math.random() * 10,
-                            repeat: Infinity,
-                            ease: "linear",
-                            delay: i * 0.5,
-                        }}
-                        style={{
-                            width: `${80 + Math.random() * 120}px`,
-                            height: `${80 + Math.random() * 120}px`,
-                        }}
-                    />
-                ))}
-
-                {/* Glowing Orbs */}
-                <div className="absolute top-1/4 left-10 w-96 h-96 bg-gradient-to-br from-cyan-400/30 to-blue-500/30 rounded-full blur-3xl animate-pulse" />
-                <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-gradient-to-br from-purple-400/30 to-pink-500/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+                <div className="absolute top-1/4 left-6 w-72 h-72 bg-gradient-to-br from-cyan-400/25 to-blue-500/25 rounded-full blur-3xl" />
+                <div className="absolute bottom-1/4 right-6 w-72 h-72 bg-gradient-to-br from-purple-400/25 to-pink-500/25 rounded-full blur-3xl" />
             </div>
 
-            <div className="relative container mx-auto px-6">
+            <div className="relative container mx-auto px-4 sm:px-6">
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                    className="relative"
+                    transition={{ duration: 0.6 }}
                 >
-                    {/* Main Container with Glassmorphism */}
                     <div className="relative max-w-7xl mx-auto">
+                        {/* Decorative corner blobs — static, no animation */}
+                        <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full blur-2xl opacity-40 pointer-events-none" />
+                        <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full blur-2xl opacity-40 pointer-events-none" />
+
                         <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                            {/* Animated Gradient Background */}
-                            <motion.div
-                                animate={{
-                                    background: [
-                                        'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                                        'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-                                        'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-                                        'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-                                        'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                                    ],
-                                }}
-                                transition={{
-                                    duration: 15,
-                                    repeat: Infinity,
-                                    ease: "linear",
-                                }}
-                                className="absolute inset-0"
+                            {/* Static gradient background — replaces the heavy cycling animation */}
+                            <div className="absolute inset-0 bg-gradient-to-135 from-[#667eea] to-[#764ba2]"
+                                style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #4facfe 100%)' }}
                             />
 
-                            {/* Overlay Pattern */}
-                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)]" />
+                            {/* Subtle radial overlay */}
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.08),transparent_60%)]" />
 
-                            {/* Content Container */}
-                            <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12 items-center p-8 md:p-12 lg:p-16">
-                                {/* Left Section - Image & Features */}
-                                <div className="space-y-8">
-                                    {/* Decorative Image */}
+                            {/* Content */}
+                            <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12 items-center p-6 sm:p-10 lg:p-16">
+
+                                {/* Left — Image & Features */}
+                                <div className="space-y-6">
+                                    {/* Image — desktop only */}
                                     <motion.div
-                                        initial={{ opacity: 0, scale: 0.8 }}
+                                        initial={{ opacity: 0, scale: 0.9 }}
                                         whileInView={{ opacity: 1, scale: 1 }}
                                         viewport={{ once: true }}
-                                        transition={{ duration: 0.8, delay: 0.2 }}
+                                        transition={{ duration: 0.6, delay: 0.2 }}
                                         className="relative hidden lg:block"
                                     >
-                                        <div className="relative w-full h-64 rounded-2xl overflow-hidden">
+                                        <div className="relative w-full h-56 rounded-2xl overflow-hidden">
                                             <img
                                                 src="https://vapehub.risingbamboo.com/wp-content/uploads/2024/11/section-banner4-1-1.png"
                                                 alt="Newsletter"
                                                 className="w-full h-full object-contain drop-shadow-2xl"
+                                                loading="lazy"
                                             />
-                                            
-                                            {/* Floating Elements */}
-                                            <motion.div
-                                                animate={{
-                                                    y: [0, -20, 0],
-                                                    rotate: [0, 5, 0],
-                                                }}
-                                                transition={{
-                                                    duration: 3,
-                                                    repeat: Infinity,
-                                                    ease: "easeInOut",
-                                                }}
-                                                className="absolute top-4 right-4 p-3 rounded-full bg-white/20 backdrop-blur-md"
-                                            >
-                                                <Sparkles className="w-6 h-6 text-yellow-300" />
-                                            </motion.div>
+                                            {/* Simple static badge — removed infinite floating */}
+                                            <div className="absolute top-4 right-4 p-3 rounded-full bg-white/20 backdrop-blur-md">
+                                                <Sparkles className="w-5 h-5 text-yellow-300" />
+                                            </div>
                                         </div>
                                     </motion.div>
 
-                                    {/* Features Grid */}
-                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                    {/* Feature Cards — CSS hover only, no whileHover framer */}
+                                    <div className="grid grid-cols-3 sm:grid-cols-3 gap-3">
                                         {[
                                             { icon: Gift, text: "60% OFF", color: "from-pink-500 to-rose-500" },
                                             { icon: TrendingUp, text: "Exclusive Deals", color: "from-cyan-500 to-blue-500" },
@@ -132,105 +78,90 @@ const NewsletterSignup = () => {
                                         ].map((feature, index) => (
                                             <motion.div
                                                 key={feature.text}
-                                                initial={{ opacity: 0, y: 20 }}
+                                                initial={{ opacity: 0, y: 16 }}
                                                 whileInView={{ opacity: 1, y: 0 }}
                                                 viewport={{ once: true }}
-                                                transition={{ delay: 0.4 + index * 0.1 }}
-                                                whileHover={{ scale: 1.05, y: -5 }}
+                                                transition={{ delay: 0.3 + index * 0.1 }}
                                                 className="group relative"
                                             >
-                                                <div className="relative p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300">
+                                                <div className="relative p-3 sm:p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-colors duration-300 cursor-default">
                                                     <div className={`p-2 rounded-lg bg-gradient-to-r ${feature.color} w-fit mb-2`}>
-                                                        <feature.icon className="w-5 h-5 text-white" />
+                                                        <feature.icon className="w-4 h-4 text-white" />
                                                     </div>
-                                                    <p className="text-white font-bold text-sm">{feature.text}</p>
+                                                    <p className="text-white font-bold text-xs sm:text-sm leading-tight">{feature.text}</p>
                                                 </div>
-                                                
-                                                {/* Glow Effect */}
-                                                <div className={`absolute inset-0 bg-gradient-to-r ${feature.color} blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300 rounded-2xl -z-10`} />
                                             </motion.div>
                                         ))}
                                     </div>
                                 </div>
 
-                                {/* Right Section - CTA & Form */}
-                                <div className="space-y-6">
-                                    {/* Heading */}
+                                {/* Right — CTA & Form */}
+                                <div className="space-y-5">
                                     <motion.div
-                                        initial={{ opacity: 0, x: 20 }}
+                                        initial={{ opacity: 0, x: 16 }}
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
-                                        transition={{ duration: 0.8, delay: 0.3 }}
+                                        transition={{ duration: 0.6, delay: 0.2 }}
                                         className="space-y-4"
                                     >
                                         {/* Badge */}
                                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30">
                                             <Mail className="w-4 h-4 text-white" />
-                                            <span className="text-sm font-semibold text-white uppercase tracking-wider">
+                                            <span className="text-xs sm:text-sm font-semibold text-white uppercase tracking-wider">
                                                 Newsletter Signup
                                             </span>
                                         </div>
 
-                                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
+                                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
                                             Save Up To
-                                            <span className="block bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 bg-clip-text text-transparent drop-shadow-lg">
+                                            <span className="block bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 bg-clip-text text-transparent">
                                                 60% OFF
                                             </span>
                                         </h2>
 
-                                        <p className="text-lg text-white/90 leading-relaxed max-w-xl">
+                                        <p className="text-sm sm:text-base lg:text-lg text-white/90 leading-relaxed max-w-xl">
                                             Join our VIP community and get exclusive discounts, early access to new products, and special deals delivered straight to your inbox!
                                         </p>
                                     </motion.div>
 
                                     {/* Form */}
                                     <motion.form
-                                        initial={{ opacity: 0, x: 20 }}
+                                        initial={{ opacity: 0, x: 16 }}
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
-                                        transition={{ duration: 0.8, delay: 0.5 }}
+                                        transition={{ duration: 0.6, delay: 0.35 }}
                                         onSubmit={handleSubmit}
                                         className="space-y-4"
                                     >
                                         <div className="relative">
                                             <div className="relative flex items-center">
-                                                <Mail className="absolute left-4 w-5 h-5 text-gray-400 pointer-events-none" />
+                                                <Mail className="absolute left-4 w-5 h-5 text-gray-400 pointer-events-none z-10" />
                                                 <input
                                                     type="email"
                                                     required
                                                     value={email}
                                                     onChange={(e) => setEmail(e.target.value)}
-                                                    className="w-full pl-12 pr-32 py-4 rounded-full bg-white text-gray-800 placeholder-gray-400 shadow-xl focus:outline-none focus:ring-4 focus:ring-white/30 transition-all duration-300"
+                                                    className="w-full pl-12 pr-36 py-4 rounded-full bg-white text-gray-800 placeholder-gray-400 shadow-xl focus:outline-none focus:ring-4 focus:ring-white/30 transition-shadow duration-300 text-sm sm:text-base"
                                                     placeholder="Enter your email address"
                                                 />
-                                                <motion.button
+                                                <button
                                                     type="submit"
-                                                    whileHover={{ scale: 1.05 }}
-                                                    whileTap={{ scale: 0.95 }}
-                                                    onHoverStart={() => setIsHovered(true)}
-                                                    onHoverEnd={() => setIsHovered(false)}
-                                                    className="absolute right-1 px-6 py-3 bg-gradient-to-r from-pink-500 via-rose-500 to-orange-500 text-white font-bold rounded-full shadow-lg hover:shadow-pink-500/50 transition-all duration-300"
+                                                    className="absolute right-1 px-4 sm:px-6 py-3 bg-gradient-to-r from-pink-500 via-rose-500 to-orange-500 text-white font-bold rounded-full shadow-lg hover:shadow-pink-500/40 hover:scale-105 active:scale-95 transition-all duration-200 text-sm flex items-center gap-1.5"
                                                 >
-                                                    <span className="flex items-center gap-2">
-                                                        Subscribe
-                                                        <motion.div
-                                                            animate={isHovered ? { x: [0, 5, 0] } : {}}
-                                                            transition={{ duration: 0.5, repeat: isHovered ? Infinity : 0 }}
-                                                        >
-                                                            →
-                                                        </motion.div>
-                                                    </span>
-                                                </motion.button>
+                                                    Subscribe
+                                                    <span className="hidden sm:inline">→</span>
+                                                </button>
                                             </div>
 
                                             {/* Success Message */}
                                             <AnimatePresence>
                                                 {submitted && (
                                                     <motion.div
-                                                        initial={{ opacity: 0, y: -10 }}
+                                                        initial={{ opacity: 0, y: -8 }}
                                                         animate={{ opacity: 1, y: 0 }}
-                                                        exit={{ opacity: 0, y: -10 }}
-                                                        className="absolute top-full mt-3 left-0 right-0"
+                                                        exit={{ opacity: 0, y: -8 }}
+                                                        transition={{ duration: 0.3 }}
+                                                        className="absolute top-full mt-3 left-0 right-0 z-20"
                                                     >
                                                         <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-green-500 text-white shadow-lg">
                                                             <div className="p-1 rounded-full bg-white/20">
@@ -246,35 +177,29 @@ const NewsletterSignup = () => {
                                         </div>
 
                                         {/* Trust Indicators */}
-                                        <div className="flex flex-wrap items-center gap-4 pt-2">
-                                            <div className="flex items-center gap-2 text-white/80 text-sm">
-                                                <Check className="w-4 h-4 text-green-300" />
-                                                <span>No spam, ever</span>
-                                            </div>
-                                            <div className="flex items-center gap-2 text-white/80 text-sm">
-                                                <Check className="w-4 h-4 text-green-300" />
-                                                <span>Unsubscribe anytime</span>
-                                            </div>
-                                            <div className="flex items-center gap-2 text-white/80 text-sm">
-                                                <Check className="w-4 h-4 text-green-300" />
-                                                <span>100% secure</span>
-                                            </div>
+                                        <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-1">
+                                            {["No spam, ever", "Unsubscribe anytime", "100% secure"].map((text) => (
+                                                <div key={text} className="flex items-center gap-1.5 text-white/80 text-xs sm:text-sm">
+                                                    <Check className="w-3.5 h-3.5 text-green-300 flex-shrink-0" />
+                                                    <span>{text}</span>
+                                                </div>
+                                            ))}
                                         </div>
                                     </motion.form>
 
-                                    {/* Stats */}
+                                    {/* Social Proof */}
                                     <motion.div
                                         initial={{ opacity: 0 }}
                                         whileInView={{ opacity: 1 }}
                                         viewport={{ once: true }}
-                                        transition={{ delay: 0.7 }}
-                                        className="flex items-center gap-6 pt-4"
+                                        transition={{ delay: 0.5 }}
+                                        className="flex items-center gap-4 pt-2"
                                     >
-                                        <div className="flex -space-x-3">
+                                        <div className="flex -space-x-2.5">
                                             {[1, 2, 3, 4].map((i) => (
                                                 <div
                                                     key={i}
-                                                    className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white flex items-center justify-center text-white font-bold text-xs"
+                                                    className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white flex items-center justify-center text-white text-xs"
                                                 >
                                                     👤
                                                 </div>
@@ -288,10 +213,6 @@ const NewsletterSignup = () => {
                                 </div>
                             </div>
                         </div>
-
-                        {/* Decorative Elements */}
-                        <div className="absolute -top-4 -right-4 w-32 h-32 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full blur-3xl opacity-50 animate-pulse" />
-                        <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full blur-3xl opacity-50 animate-pulse" style={{ animationDelay: '1s' }} />
                     </div>
                 </motion.div>
             </div>
