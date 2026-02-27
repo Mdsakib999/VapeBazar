@@ -27,7 +27,7 @@ const AddProducts = () => {
             return res.data;
         },
     });
-    
+
     const categoryOptions = categoriesData.map(item => {
         const str = item?.category.split(' ')
             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -87,7 +87,7 @@ const AddProducts = () => {
             data.nicotineStrength = nicotine;
             data.flavour = flavour;
             data.description = content
-            
+
             const res = await axiosNotSecure.post('/product', data)
             if (res) {
                 reset();
@@ -120,7 +120,7 @@ const AddProducts = () => {
             <div className="max-w-5xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-10">
-                    
+
                     <h1 className="text-4xl font-bold mb-2">
                         Add New Product
                     </h1>
@@ -169,7 +169,7 @@ const AddProducts = () => {
                                 </div>
 
 
-                                 {/* Price and Discount */}
+                                {/* Price and Discount */}
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <label htmlFor="price" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -192,7 +192,7 @@ const AddProducts = () => {
 
                                     <div>
                                         <label htmlFor="discount_price" className="block text-sm font-semibold text-gray-700 mb-2">
-                                            Discount %
+                                            Discount
                                         </label>
                                         <div className="relative">
                                             <input
@@ -202,7 +202,7 @@ const AddProducts = () => {
                                                 className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-purple-500 focus:bg-white transition-all duration-200"
                                                 placeholder="0"
                                             />
-                                            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 font-semibold">%</span>
+                                            {/* <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 font-semibold">%</span> */}
                                         </div>
                                         {errors.discount_price && <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
                                             <span className="text-xs">●</span> {errors.discount_price.message}
@@ -210,7 +210,7 @@ const AddProducts = () => {
                                     </div>
                                 </div>
 
-                                
+
                                 {/* Main Image Upload */}
                                 <div className="group">
                                     <label htmlFor="image" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -227,8 +227,8 @@ const AddProducts = () => {
                                             }}
                                             className="hidden"
                                         />
-                                        <label 
-                                            htmlFor="image" 
+                                        <label
+                                            htmlFor="image"
                                             className="flex flex-col items-center justify-center w-full h-48 bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-dashed border-purple-300 rounded-xl cursor-pointer hover:border-purple-500 transition-all duration-200 group-hover:shadow-lg relative"
                                         >
                                             {imagePreview ? (
@@ -276,8 +276,8 @@ const AddProducts = () => {
                                             }}
                                             className="hidden"
                                         />
-                                        <label 
-                                            htmlFor="images" 
+                                        <label
+                                            htmlFor="images"
                                             className="flex flex-col items-center justify-center w-full h-32 bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-dashed border-blue-300 rounded-xl cursor-pointer hover:border-blue-500 transition-all duration-200 group-hover:shadow-lg relative"
                                         >
                                             {galleryPreviews.length > 0 ? (

@@ -14,8 +14,8 @@ const Home = () => {
 
     return (
         <div className="relative w-full bg-white">
-            
-            
+
+
 
             {/* Content */}
             <div className=" ">
@@ -25,14 +25,14 @@ const Home = () => {
                         <Carousel />
                     </div>
 
-                    
+
                 </div>
                 {/* <Banner /> */}
                 <div className='  bg-gray-90 bg-opacity-80 '>
                     <ProductCategories />
                     <FeaturedProducts />
                     {/* GradientCards Section */}
-                     <GradientCards />
+                    <GradientCards />
                     <Testimonials />
                     <BlogSection />
                     <NewsletterSignup />

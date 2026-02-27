@@ -50,9 +50,9 @@ const ProductCategories = () => {
   const loopCategories =
     categories.length > 0
       ? Array.from(
-          { length: Math.ceil(10 / categories.length) },
-          () => categories,
-        ).flat()
+        { length: Math.ceil(10 / categories.length) },
+        () => categories,
+      ).flat()
       : [];
 
   return (
