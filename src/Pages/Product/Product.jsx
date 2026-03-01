@@ -326,7 +326,8 @@ const Product = () => {
                                             <div className="relative overflow-hidden bg-gray-50">
                                                 <img
                                                     className="h-64 w-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                                                    src={product.images[0]}
+                                                    src={product.image}
+                                                    // src={product.images[0]}
                                                     alt={product.name}
                                                 />
                                                 {product.discount_price && product.discount_price !== 0 && (
