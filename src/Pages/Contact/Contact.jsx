@@ -4,7 +4,7 @@ import { FiMail, FiPhone, FiMapPin, FiClock, FiSend, FiUser, FiMessageCircle } f
 import { BsWhatsapp, BsInstagram, BsFacebook, BsTwitter } from 'react-icons/bs';
 
 const Contact = () => {
-    setTitle('Contact | vape smoke 24');
+    setTitle('Contact | vapes 24');
     const [formData, setFormData] = useState({
         name: '',
         email: '',

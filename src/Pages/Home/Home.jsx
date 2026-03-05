@@ -10,7 +10,7 @@ import Carousel from '../../components/ui/HomePageComponents/Carousel';
 import GradientCards from '../../components/ui/HomePageComponents/GradientCards';
 
 const Home = () => {
-    setTitle('Home | Vape Smoke 24');
+    setTitle('Home | Vapes 24');
 
     return (
         <div className="relative w-full bg-white">

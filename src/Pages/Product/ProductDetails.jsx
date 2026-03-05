@@ -61,7 +61,7 @@ const ProductDetails = () => {
     // Set the document title dynamically
     useEffect(() => {
         if (name) {
-            setTitle(`${name} | Vape Smoke 24`);
+            setTitle(`${name} | Vapes 24`);
             setIcon(image)
         }
     }, [name]);
@@ -95,14 +95,15 @@ const ProductDetails = () => {
 
     // Handle adding product to cart
     const handleAddToCart = (data) => {
-        if (!selectedNicotineStrength && nicotineStrength.length > 0) {
-            toast.error("Please select a nicotine strength");
-            return;
-        }
-        if (!selectedFlavour && flavour.length > 0) {
-            toast.error("Please select a Flavours");
-            return;
-        }
+        if (nicotineStrength?.length > 0 && !selectedNicotineStrength) {
+    toast.error("Please select a nicotine strength");
+    return;
+}
+
+if (flavour?.length > 0 && !selectedFlavour) {
+    toast.error("Please select a flavour");
+    return;
+}
         // const discountedPrice = data.discount_price
         //     ? data.price - (data.price * data.discount_price) / 100
         //     : data.price;
@@ -123,11 +124,11 @@ const ProductDetails = () => {
     };
 
     const handleBuyNow = (data) => {
-        if (!selectedNicotineStrength && nicotineStrength.length > 0) {
+        if (nicotineStrength?.length > 0 && !selectedNicotineStrength) {
             toast.error("Please select a nicotine strength");
             return;
         }
-        if (!selectedFlavour && flavour.length > 0) {
+        if (flavour?.length > 0 && !selectedFlavour) {
             toast.error("Please select a Flavours");
             return;
         }
@@ -281,12 +282,17 @@ const ProductDetails = () => {
 
                             {/* Nicotine Strength Selector */}
                             {
-                                nicotineStrength.length > 0 && <div className="space-y-3">
+                                nicotineStrength?.length > 0 && (
+                                    <div className="space-y-3">
+                                        {
+                                            console.log(nicotineStrength.length)
+                                        }
                                     <label className="text-gray-900 font-bold text-lg">
                                         Select Nicotine Strength
                                     </label>
                                     <div className="flex flex-wrap gap-3">
                                         {nicotineStrength.map((strength, index) => (
+                                            console.log(strength),
                                             <button
                                                 key={index}
                                                 onClick={() => setSelectedNicotineStrength(strength)}
@@ -303,11 +309,13 @@ const ProductDetails = () => {
                                         <p className="text-sm text-gray-500 italic">Please select a strength to continue</p>
                                     )}
                                 </div>
+                                )
+                                
                             }
                             {
-                                flavour.length > 0 && <div className="space-y-3">
+                                flavour?.length > 0 && <div className="space-y-3">
                                     <label className="text-gray-900 font-bold text-lg">
-                                        Select Flavour
+                                        Select Flavor
                                     </label>
                                     <div className="flex flex-wrap gap-3">
                                         {flavour.map((strength, index) => (

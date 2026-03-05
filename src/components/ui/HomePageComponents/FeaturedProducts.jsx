@@ -19,7 +19,7 @@ const FeaturedProducts = () => {
         // enabled: !!selectedCategory || !!searchTerm, 
         // Fetch only when there's search or category selected
     });
-    const featuredProducts = productData?.products?.slice(0, 4)
+    const featuredProducts = productData?.products?.slice(0, 6)
     if(isLoading){
         return <div>Loading....</div>
     }

@@ -5,6 +5,7 @@ import { FiPhoneCall } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { ArrowUp, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
+import img2 from "../../../assets/vape-logo-blkbg.png";
 
 const Footer = () => {
     const [showScrollTop, setShowScrollTop] = useState(false);
@@ -115,18 +116,20 @@ const Footer = () => {
             >
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
                     {/* Branding and About */}
-                    <motion.div variants={itemVariants} className="text-center lg:text-left">
+                    <motion.div variants={itemVariants} className="text-center lg:text-left  flex flex-col items-center">
                         {/* Logo with Glow Effect */}
+                        <Link to="/">
+                        <img className="w-[120px]" src={img2} alt="" />
                         <motion.div
                             whileHover={{ scale: 1.05 }}
-                            className="inline-block"
+                            className="inline-block "
                         >
                             <h3 className="text-4xl font-bold font-Dancing relative">
                                 <span className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]">
-                                    Vape
+                                    Vap
                                 </span>
                                 <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">
-                                    Bazar24
+                                    es24
                                 </span>
                                 <motion.div
                                     className="absolute -top-1 -right-8"
@@ -144,6 +147,7 @@ const Footer = () => {
                                 </motion.div>
                             </h3>
                         </motion.div>
+                        </Link>
 
                         <p className="mt-4 text-sm text-gray-400 leading-relaxed max-w-xs mx-auto lg:mx-0">
                             Your one-stop shop for all vaping needs. Quality products and customer satisfaction guaranteed.
@@ -314,8 +318,7 @@ const Footer = () => {
                     <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                         {/* Copyright */}
                         <p className="text-sm text-gray-500 text-center md:text-left">
-                            &copy; {new Date().getFullYear()} VapeBazar. All rights reserved. Crafted with{" "}
-                            <span className="text-red-500">❤️</span> for vaping enthusiasts.
+                            &copy; {new Date().getFullYear()} Vapes24. All rights reserved. Crafted for vaping enthusiasts.
                         </p>
 
                         {/* Payment Methods */}

@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { capitalizeFirstWords } from "../../../utils/capitalizeFirstWords";
-import Marquee from "react-fast-marquee";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Package } from "lucide-react";
 
 const ProductCategories = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
+  const trackRef = useRef(null);
 
   const { data: categoriesData = [] } = useQuery({
     queryKey: ["category"],
@@ -45,6 +45,15 @@ const ProductCategories = () => {
     };
   }, []);
 
+  // Duplicate the list so the scroll loop is seamless.
+  // We render [original + duplicate] side by side; the CSS animation
+  // translates by exactly 50% (the width of the original set), then resets.
+  // const loopCategories = categories.length > 0 ? [...categories, ...categories] : [];
+  console.log(categories)
+
+  // Total width of ONE set = count * (card 220px + mx-3*2 = 24px gap) = 244px each
+  const cardWidth = 244; // 220 card + 24 margin (mx-3 on each side)
+  const singleSetWidth = categories.length * cardWidth;
   // Duplicate until we have at least 10 items so the marquee
   // always has enough content to fill the screen and loop smoothly.
   const loopCategories =
@@ -63,6 +72,23 @@ const ProductCategories = () => {
       {/* Static background orbs */}
       <div className="absolute top-16 left-8 w-56 h-56 bg-cyan-400/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-16 right-8 w-56 h-56 bg-purple-400/20 rounded-full blur-3xl pointer-events-none" />
+
+      {/* Keyframe styles injected inline so no external CSS file is needed */}
+      <style>{`
+        @keyframes marquee-scroll {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-${singleSetWidth}px); }
+        }
+        .marquee-track {
+          display: flex;
+          width: max-content;
+          animation: marquee-scroll ${Math.max(singleSetWidth / 40, 8)}s linear infinite;
+          will-change: transform;
+        }
+        .marquee-track:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
 
       <div className="relative section-container">
         {/* Section Header */}
@@ -101,7 +127,7 @@ const ProductCategories = () => {
           </p>
         </motion.div>
 
-        {/* Marquee */}
+        {/* Scrolling Track */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isVisible ? { opacity: 1 } : {}}
@@ -112,85 +138,86 @@ const ProductCategories = () => {
           <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
 
-          <Marquee
-            gradient={false}
-            speed={40}
-            pauseOnHover
-            loop={0}
-            className="py-6"
-          >
-            {loopCategories.map((category, i) => (
-              <Link
-                to={`/products/${category.name}`}
-                key={`${category.id}-${i}`}
-                className="mx-3"
-                onMouseEnter={() => setHoveredCard(`${category.id}-${i}`)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                <div
-                  className="b mx-3 relative group bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-                  style={{ width: "220px", height: "270px" }}
+          {/* Outer clip */}
+          <div className="overflow-hidden py-6">
+            {/* Track: original set + duplicate for seamless loop */}
+            <div ref={trackRef} className="marquee-track">
+              {loopCategories.map((category, i) => (
+                <Link
+                  to={`/products/${category.name}`}
+                  key={`${category.id}-${i}`}
+                  className="mx-3 flex-shrink-0"
+                  onMouseEnter={() => setHoveredCard(`${category.id}-${i}`)}
+                  onMouseLeave={() => setHoveredCard(null)}
                 >
-                  {/* Hover bg tint */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-blue-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  {
+                    console.log(category)
+                  }
+                  <div
+                    className="relative group bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                    style={{ width: "220px", height: "270px" }}
+                  >
+                    {/* Hover bg tint */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-blue-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                  {/* Corner accents */}
-                  <div className="absolute top-0 right-0 w-14 h-14 border-t-2 border-r-2 border-cyan-300/40 rounded-tr-2xl group-hover:border-cyan-500 transition-colors duration-300" />
-                  <div className="absolute bottom-0 left-0 w-14 h-14 border-b-2 border-l-2 border-purple-300/40 rounded-bl-2xl group-hover:border-purple-500 transition-colors duration-300" />
+                    {/* Corner accents */}
+                    <div className="absolute top-0 right-0 w-14 h-14 border-t-2 border-r-2 border-cyan-300/40 rounded-tr-2xl group-hover:border-cyan-500 transition-colors duration-300" />
+                    <div className="absolute bottom-0 left-0 w-14 h-14 border-b-2 border-l-2 border-purple-300/40 rounded-bl-2xl group-hover:border-purple-500 transition-colors duration-300" />
 
-                  {/* Icon badge */}
-                  <div className="absolute top-4 right-4 z-10">
-                    <div className="p-2 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
-                      <Package className="w-4 h-4 text-white" />
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="relative z-10 h-full flex flex-col items-center justify-center p-5">
-                    {/* Image */}
-                    <div className="relative mb-4 w-32 h-32 rounded-xl overflow-hidden shadow-lg">
-                      <img
-                        src={category.image}
-                        alt={category.name}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-cyan-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </div>
-
-                    {/* Name */}
-                    <div className="text-center">
-                      <h3 className="text-base font-bold text-gray-800 mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-600 group-hover:to-purple-600 transition-all duration-300">
-                        {category.name}
-                      </h3>
-
-                      {/* Underline */}
-                      <div className="h-0.5 w-0 mx-auto bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full group-hover:w-full transition-all duration-300" />
-
-                      {/* Explore link */}
-                      <div
-                        className="flex items-center justify-center gap-1 mt-3 text-xs font-semibold text-cyan-600 transition-all duration-300"
-                        style={{
-                          opacity:
-                            hoveredCard === `${category.id}-${i}` ? 1 : 0,
-                          transform:
-                            hoveredCard === `${category.id}-${i}`
-                              ? "translateY(0)"
-                              : "translateY(6px)",
-                        }}
-                      >
-                        <span>Explore Collection</span>
-                        <ArrowRight className="w-3 h-3" />
+                    {/* Icon badge */}
+                    <div className="absolute top-4 right-4 z-10">
+                      <div className="p-2 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
+                        <Package className="w-4 h-4 text-white" />
                       </div>
                     </div>
-                  </div>
 
-                  {/* Floating shadow */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 scale-95" />
-                </div>
-              </Link>
-            ))}
-          </Marquee>
+                    {/* Content */}
+                    <div className="relative z-10 h-full flex flex-col items-center justify-center p-5">
+                      {/* Image */}
+                      <div className="relative mb-4 w-32 h-32 rounded-xl overflow-hidden shadow-lg">
+                        <img
+                          src={category.image}
+                          alt={category.name}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-cyan-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      </div>
+
+                      {/* Name */}
+                      <div className="text-center">
+                        <h3 className="text-base font-bold text-gray-800 mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-600 group-hover:to-purple-600 transition-all duration-300">
+                          {category.name}
+                        </h3>
+
+                        {/* Underline */}
+                        <div className="h-0.5 w-0 mx-auto bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full group-hover:w-full transition-all duration-300" />
+
+                        {/* Explore link */}
+                        <div
+                          className="flex items-center justify-center gap-1 mt-3 text-xs font-semibold text-cyan-600 transition-all duration-300"
+                          style={{
+                            opacity:
+                              hoveredCard === `${category.id}-${i}` ? 1 : 0,
+                            transform:
+                              hoveredCard === `${category.id}-${i}`
+                                ? "translateY(0)"
+                                : "translateY(6px)",
+                          }}
+                        >
+                          <span>Explore Collection</span>
+                          <ArrowRight className="w-3 h-3" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Floating shadow */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 scale-95" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
         </motion.div>
 
         {/* View All Button */}

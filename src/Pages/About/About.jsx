@@ -4,7 +4,7 @@ import { FiAward, FiShield, FiTrendingUp, FiUsers, FiHeart, FiTarget, FiZap, FiC
 import { BsLightningChargeFill, BsStarFill } from 'react-icons/bs';
 
 const About = () => {
-    setTitle('About Us | Vape Smoke 24');
+    setTitle('About Us | Vapes 24');
 
     const stats = [
         { number: '10K+', label: 'Happy Customers', icon: <FiUsers /> },
@@ -50,7 +50,7 @@ const About = () => {
     ];
 
     const milestones = [
-        { year: '2019', title: 'Founded', description: 'Vape Smoke 24 was established in Dubai' },
+        { year: '2019', title: 'Founded', description: 'Vapes 24 was established in Dubai' },
         { year: '2020', title: 'Expansion', description: 'Opened our first physical store in Business Bay' },
         { year: '2022', title: 'Going Digital', description: 'Launched our online platform for wider reach' },
         { year: '2024', title: 'Leading Brand', description: 'Became one of UAE\'s trusted vape retailers' }
@@ -114,7 +114,7 @@ const About = () => {
                         </h2>
                         <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
                             <p>
-                                Founded in 2019, <span className="font-bold text-gray-900">Vape Smoke 24</span> emerged from a simple vision: to provide vapers in the UAE with access to premium, authentic products backed by exceptional service.
+                                Founded in 2019, <span className="font-bold text-gray-900">Vapes 24</span> emerged from a simple vision: to provide vapers in the UAE with access to premium, authentic products backed by exceptional service.
                             </p>
                             <p>
                                 What started as a small venture in Dubai has grown into one of the region's most trusted names in vaping. Our commitment to quality, authenticity, and customer satisfaction has been the cornerstone of our success.
@@ -138,7 +138,7 @@ const About = () => {
                             <div className="aspect-square bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center">
                                 <div className="text-center p-8">
                                     <BsLightningChargeFill className="text-8xl text-indigo-600 mb-6 mx-auto animate-pulse" />
-                                    <h3 className="text-3xl font-bold text-gray-900 mb-4">Vape Smoke 24</h3>
+                                    <h3 className="text-3xl font-bold text-gray-900 mb-4">Vape's 24</h3>
                                     <p className="text-gray-600 text-lg">Premium Vaping Experience</p>
                                 </div>
                             </div>
@@ -211,7 +211,7 @@ const About = () => {
                             </span>
                         </h2>
                         <p className="text-gray-700 text-lg leading-relaxed">
-                            At Vape Smoke 24, we don't just sell products—we create experiences. Every aspect of our service is designed with you in mind, from our carefully curated product selection to our knowledgeable support team.
+                            At Vape's' 24, we don't just sell products—we create experiences. Every aspect of our service is designed with you in mind, from our carefully curated product selection to our knowledgeable support team.
                         </p>
                         <p className="text-gray-700 text-lg leading-relaxed">
                             Join thousands of satisfied customers who trust us for their vaping needs. Whether you're new to vaping or a seasoned enthusiast, we're here to provide the best products, advice, and service in the UAE.

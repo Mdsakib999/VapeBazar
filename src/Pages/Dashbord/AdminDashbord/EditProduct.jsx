@@ -258,7 +258,7 @@ const EditProduct = () => {
                                         <div className="p-1.5 rounded-lg bg-blue-100">
                                             <DollarSign className="w-4 h-4 text-blue-600" />
                                         </div>
-                                        Price
+                                        Discount Price
                                         <span className="text-red-500">*</span>
                                     </label>
                                     <input
@@ -284,7 +284,7 @@ const EditProduct = () => {
                                         <div className="p-1.5 rounded-lg bg-blue-100">
                                             <Tag className="w-4 h-4 text-blue-600" />
                                         </div>
-                                        Discount
+                                         Regular Price
                                         <span className="text-red-500">*</span>
                                     </label>
                                     <input
