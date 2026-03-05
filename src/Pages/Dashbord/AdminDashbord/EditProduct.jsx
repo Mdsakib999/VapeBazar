@@ -99,11 +99,11 @@ const EditProduct = () => {
     const onSubmit = async (data) => {
         const { image, images, nicotineStrength, price, discount_price } = data;
         const imageFile = image[0];
-        const toastId = toast.loading('Updating product...');
-        
+        // const toastId = toast.loading('Updating product...');
+
         try {
             setIsLoading(true);
-            
+
             if (isImageChange) {
                 const imageResponse = await cloudinaryUpload(imageFile);
                 data.image = imageResponse.secure_url;
@@ -111,7 +111,7 @@ const EditProduct = () => {
             } else {
                 data.image = imageUrl;
             }
-            
+
             if (isImagesChange) {
                 const galleryFiles = Array.from(images || []);
                 const galleryResponses = await cloudinaryUploadMultiple(galleryFiles);
@@ -120,7 +120,7 @@ const EditProduct = () => {
             } else {
                 data.images = imagesUrl;
             }
-            
+
             data.price = parseInt(price);
             data.discount_price = parseInt(discount_price);
             data.nicotineStrength = nicotine;
@@ -128,15 +128,15 @@ const EditProduct = () => {
             data.description = content;
 
             const res = await axiosNotSecure.patch(`/product/${id}`, data);
-            
+
             if (res) {
                 setIsLoading(false);
                 setIsImageChange(false);
                 setIsImagesChange(false);
                 setUpdateSuccess(true);
-                toast.success("Product updated successfully!", { id: toastId });
+                // toast.success("Product updated successfully!", { id: toastId });
                 refetch();
-                
+
                 setTimeout(() => {
                     setUpdateSuccess(false);
                 }, 2000);
@@ -144,7 +144,7 @@ const EditProduct = () => {
         } catch (error) {
             setIsLoading(false);
             console.error('Error updating product:', error);
-            toast.error(error.message, { id: toastId });
+            toast.error(error.message);
         }
     };
 
@@ -199,15 +199,15 @@ const EditProduct = () => {
                             <Edit3 className="w-8 h-8 text-white" />
                         </div>
                         <div>
-                             <h1 className="text-3xl md:text-4xl font-black text-gray-900 mb-3">
-                        Edit Product
-                    </h1>
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Update product information and details
-                    </p>
+                            <h1 className="text-3xl md:text-4xl font-black text-gray-900 mb-3">
+                                Edit Product
+                            </h1>
+                            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                                Update product information and details
+                            </p>
                         </div>
                     </div>
-                   
+
                 </motion.div>
 
                 {/* Form */}
@@ -218,7 +218,7 @@ const EditProduct = () => {
                 >
                     <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
                         {/* Form Header */}
-                        
+
 
                         <div className="p-8 md:p-10 space-y-8">
                             {/* Product Name */}
@@ -258,7 +258,7 @@ const EditProduct = () => {
                                         <div className="p-1.5 rounded-lg bg-blue-100">
                                             <DollarSign className="w-4 h-4 text-blue-600" />
                                         </div>
-                                        Price
+                                        Discount Price
                                         <span className="text-red-500">*</span>
                                     </label>
                                     <input
@@ -284,12 +284,12 @@ const EditProduct = () => {
                                         <div className="p-1.5 rounded-lg bg-blue-100">
                                             <Tag className="w-4 h-4 text-blue-600" />
                                         </div>
-                                        Discount (%)
+                                         Regular Price
                                         <span className="text-red-500">*</span>
                                     </label>
                                     <input
                                         type="number"
-                                        {...register('discount_price', { required: 'Discount Price is required', min: { value: 0, message: 'Discount must be 0 or greater' } })}
+                                        {...register('discount_price',)}
                                         className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 bg-gray-50/50 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all duration-200 text-gray-800 font-medium"
                                         placeholder="0"
                                     />
@@ -593,7 +593,7 @@ const EditProduct = () => {
                                         value={content}
                                         tabIndex={6}
                                         onBlur={newContent => setContent(newContent)}
-                                        onChange={newContent => {}}
+                                        onChange={newContent => { }}
                                     />
                                 </div>
                             </motion.div>

@@ -15,6 +15,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { Package, Home, Phone, LogOut, LayoutDashboard } from "lucide-react";
+import logo from "../../../assets/vape-logo-blkbg.png";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -124,12 +125,13 @@ const Navbar = () => {
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2 group">
-              <motion.div whileHover={{ scale: 1.05 }} className="relative">
-                <p className="text-3xl md:text-4xl font-bold">
-                  <span className="text-white">Vape</span>
+            <Link to="/" className="flex items-center gap-2 group ">
+            <img className="w-[40px] md:w-[60px]" src={logo} alt="" />
+              <motion.div  className="relative">
+                <p className="text-2xl md:text-4xl font-bold font-Dancing">
+                  <span className="text-white">Vap</span>
                   <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
-                    Bazar
+                    es24
                   </span>
                 </p>
               </motion.div>

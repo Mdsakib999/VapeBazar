@@ -61,7 +61,7 @@ const ProductDetails = () => {
     // Set the document title dynamically
     useEffect(() => {
         if (name) {
-            setTitle(`${name} | Vape Smoke 24`);
+            setTitle(`${name} | Vapes 24`);
             setIcon(image)
         }
     }, [name]);
@@ -95,24 +95,25 @@ const ProductDetails = () => {
 
     // Handle adding product to cart
     const handleAddToCart = (data) => {
-        if (!selectedNicotineStrength && nicotineStrength.length > 0) {
-            toast.error("Please select a nicotine strength");
-            return;
-        }
-        if (!selectedFlavour && flavour.length > 0) {
-            toast.error("Please select a Flavours");
-            return;
-        }
-        const discountedPrice = data.discount_price
-            ? data.price - (data.price * data.discount_price) / 100
-            : data.price;
+        if (nicotineStrength?.length > 0 && !selectedNicotineStrength) {
+    toast.error("Please select a nicotine strength");
+    return;
+}
 
-        const displayPrice = Math.round(discountedPrice);
+if (flavour?.length > 0 && !selectedFlavour) {
+    toast.error("Please select a flavour");
+    return;
+}
+        // const discountedPrice = data.discount_price
+        //     ? data.price - (data.price * data.discount_price) / 100
+        //     : data.price;
+
+        // const displayPrice = Math.round(discountedPrice);
 
         const cartData = {
             productId: data._id,
             image: data.image,
-            price: displayPrice,
+            price: price,
             quantity,
             nicotineStrength: selectedNicotineStrength || '',
             name,
@@ -123,20 +124,24 @@ const ProductDetails = () => {
     };
 
     const handleBuyNow = (data) => {
-        if (!selectedNicotineStrength) {
+        if (nicotineStrength?.length > 0 && !selectedNicotineStrength) {
             toast.error("Please select a nicotine strength");
             return;
         }
-        const discountedPrice = data.discount_price
-            ? data.price - (data.price * data.discount_price) / 100
-            : data.price;
+        if (flavour?.length > 0 && !selectedFlavour) {
+            toast.error("Please select a Flavours");
+            return;
+        }
+        // const discountedPrice = data.discount_price
+        //     ? data.price - (data.price * data.discount_price) / 100
+        //     : data.price;
 
-        const displayPrice = Math.round(discountedPrice);
+        // const displayPrice = Math.round(discountedPrice);
 
         const cartData = {
             productId: data._id,
             image: data.image,
-            price: displayPrice,
+            price: price,
             quantity,
             nicotineStrength: selectedNicotineStrength,
             name,
@@ -244,15 +249,15 @@ const ProductDetails = () => {
                             {/* Price Section */}
                             <div className="flex items-baseline gap-4">
                                 <span className="text-4xl font-black text-gray-900">
-                                    Dhs {Math.round(discountedPrice)}
+                                    Dhs {price}
                                 </span>
                                 {discount_price && discount_price !== 0 && (
                                     <>
                                         <del className="text-2xl text-gray-400 font-semibold">
-                                            Dhs {price}
+                                            Dhs {discount_price}
                                         </del>
                                         <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-bold">
-                                            Save Dhs {Math.round(price - discountedPrice)}
+                                            Save Dhs {Math.round(discount_price - price)}
                                         </span>
                                     </>
                                 )}
@@ -277,12 +282,17 @@ const ProductDetails = () => {
 
                             {/* Nicotine Strength Selector */}
                             {
-                                nicotineStrength.length > 0 && <div className="space-y-3">
+                                nicotineStrength?.length > 0 && (
+                                    <div className="space-y-3">
+                                        {
+                                            console.log(nicotineStrength.length)
+                                        }
                                     <label className="text-gray-900 font-bold text-lg">
                                         Select Nicotine Strength
                                     </label>
                                     <div className="flex flex-wrap gap-3">
                                         {nicotineStrength.map((strength, index) => (
+                                            console.log(strength),
                                             <button
                                                 key={index}
                                                 onClick={() => setSelectedNicotineStrength(strength)}
@@ -299,11 +309,13 @@ const ProductDetails = () => {
                                         <p className="text-sm text-gray-500 italic">Please select a strength to continue</p>
                                     )}
                                 </div>
+                                )
+                                
                             }
                             {
-                                flavour.length > 0 && <div className="space-y-3">
+                                flavour?.length > 0 && <div className="space-y-3">
                                     <label className="text-gray-900 font-bold text-lg">
-                                        Select Flavour
+                                        Select Flavor
                                     </label>
                                     <div className="flex flex-wrap gap-3">
                                         {flavour.map((strength, index) => (

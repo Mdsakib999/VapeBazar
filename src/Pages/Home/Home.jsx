@@ -10,12 +10,12 @@ import Carousel from '../../components/ui/HomePageComponents/Carousel';
 import GradientCards from '../../components/ui/HomePageComponents/GradientCards';
 
 const Home = () => {
-    setTitle('Home | Vape Smoke 24');
+    setTitle('Home | Vapes 24');
 
     return (
         <div className="relative w-full bg-white">
-            
-            
+
+
 
             {/* Content */}
             <div className=" ">
@@ -25,14 +25,14 @@ const Home = () => {
                         <Carousel />
                     </div>
 
-                    
+
                 </div>
                 {/* <Banner /> */}
                 <div className='  bg-gray-90 bg-opacity-80 '>
                     <ProductCategories />
                     <FeaturedProducts />
                     {/* GradientCards Section */}
-                     <GradientCards />
+                    <GradientCards />
                     <Testimonials />
                     <BlogSection />
                     <NewsletterSignup />

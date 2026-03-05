@@ -50,7 +50,7 @@ const Product = () => {
         const cartData = {
             productId: product._id,
             image: product.images[0],
-            price: Math.round(discountedPrice),
+            price: product?.price,
             quantity: 1,
             nicotineStrength: '',
             name: product.name,
@@ -61,7 +61,7 @@ const Product = () => {
         toast.success(`${product.name} added to cart!`);
     };
 
-    setTitle("Products | Vape Smoke 24");
+    setTitle("Products | Vapes 24");
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -164,11 +164,10 @@ const Product = () => {
                             <button
                                 key={index}
                                 onClick={() => handleCategoryToggle(category.category)}
-                                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                                    selectedCategory.includes(category.category)
-                                        ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md transform scale-105'
-                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                }`}
+                                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${selectedCategory.includes(category.category)
+                                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md transform scale-105'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                    }`}
                             >
                                 {category.category.charAt(0).toUpperCase() + category.category.slice(1)}
                             </button>
@@ -330,51 +329,47 @@ const Product = () => {
                                                     // src={product.images[0]}
                                                     alt={product.name}
                                                 />
-                                                {product.discount_price && product.discount_price !== 0 && (
+                                                {/* {product.discount_price && product.discount_price !== 0 && (
                                                     <div className="absolute top-4 left-4 bg-gradient-to-r from-red-500 to-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
-                                                        -{product.discount_price}%
+                                                        -{product.discount_price} Dhs
                                                     </div>
-                                                )}
+                                                )} */}
                                             </div>
 
                                             <div className="p-5">
                                                 <div className="flex justify-between items-center ">
                                                     <div className="mb-2">
-                                                    <span className="text-xs font-semibold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">
-                                                        {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
-                                                    </span>
-                                                </div>
+                                                        <span className="text-xs font-semibold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">
+                                                            {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
+                                                        </span>
+                                                    </div>
 
-                                                <div className="flex items-center gap-1 mb-2">
-                                                    {[...Array(5)].map((_, index) => (
-                                                        <FaStar
-                                                            key={index}
-                                                            size={14}
-                                                            className="text-yellow-400"
-                                                        />
-                                                    ))}
-                                                    <span className="text-sm text-gray-600 ml-2">5.0</span>
-                                                </div>
+                                                    <div className="flex items-center gap-1 mb-2">
+                                                        {[...Array(5)].map((_, index) => (
+                                                            <FaStar
+                                                                key={index}
+                                                                size={14}
+                                                                className="text-yellow-400"
+                                                            />
+                                                        ))}
+                                                        <span className="text-sm text-gray-600 ml-2">5.0</span>
+                                                    </div>
                                                 </div>
 
                                                 <h3 className="text-lg font-bold text-gray-800 mb-2 line-clamp-2 group-hover:text-indigo-600 transition-colors">
                                                     {product.name}
                                                 </h3>
 
-                                                
+
 
                                                 <div className="flex items-center justify-between mb-3">
                                                     <div className="flex items-baseline gap-2">
                                                         <span className="text-2xl font-bold text-gray-900">
-                                                            Dhs {Math.round(
-                                                                product.discount_price
-                                                                    ? product.price - (product.price * product.discount_price) / 100
-                                                                    : product.price
-                                                            )}
+                                                            Dhs {product?.price}
                                                         </span>
-                                                        {product.discount_price && product.discount_price !== 0 && (
+                                                        {product?.discount_price && product?.discount_price !== 0 && (
                                                             <del className="text-sm text-gray-400">
-                                                                Dhs {product.price}
+                                                                Dhs {product?.discount_price}
                                                             </del>
                                                         )}
                                                     </div>
@@ -417,11 +412,10 @@ const Product = () => {
                                 <div className="flex justify-center items-center mt-12 gap-2">
                                     <Link
                                         to={`/product?page=${Math.max(currentPage - 1, 1)}`}
-                                        className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                                            currentPage === 1
-                                                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                                                : "bg-white text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 border border-gray-200"
-                                        }`}
+                                        className={`px-4 py-2 rounded-lg font-medium transition-all ${currentPage === 1
+                                            ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                                            : "bg-white text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 border border-gray-200"
+                                            }`}
                                     >
                                         Previous
                                     </Link>
@@ -438,11 +432,10 @@ const Product = () => {
                                                     <Link
                                                         key={index}
                                                         to={`/product?page=${pageNumber}`}
-                                                        className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                                                            currentPage === pageNumber
-                                                                ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
-                                                                : "bg-white text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 border border-gray-200"
-                                                        }`}
+                                                        className={`px-4 py-2 rounded-lg font-medium transition-all ${currentPage === pageNumber
+                                                            ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
+                                                            : "bg-white text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 border border-gray-200"
+                                                            }`}
                                                     >
                                                         {pageNumber}
                                                     </Link>
@@ -463,11 +456,10 @@ const Product = () => {
 
                                     <Link
                                         to={`/product?page=${Math.min(currentPage + 1, totalPages)}`}
-                                        className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                                            currentPage === totalPages
-                                                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                                                : "bg-white text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 border border-gray-200"
-                                        }`}
+                                        className={`px-4 py-2 rounded-lg font-medium transition-all ${currentPage === totalPages
+                                            ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                                            : "bg-white text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 border border-gray-200"
+                                            }`}
                                     >
                                         Next
                                     </Link>

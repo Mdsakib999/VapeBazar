@@ -19,7 +19,7 @@ const FeaturedProducts = () => {
         // enabled: !!selectedCategory || !!searchTerm, 
         // Fetch only when there's search or category selected
     });
-    const featuredProducts = productData?.products?.slice(0, 4)
+    const featuredProducts = productData?.products?.slice(0, 6)
     if(isLoading){
         return <div>Loading....</div>
     }
@@ -44,12 +44,12 @@ const FeaturedProducts = () => {
                                     src={product.images[0]}
                                     alt={product.name}
                                 />
-                              {
+                              {/* {
                                 !product.discount_price || product.discount_price != 0 &&   <p className="text-white font-semibold absolute top-0 left-0 px-3 py-1 rounded-rt-xl rounded-br-xl  bg-red-500">
                                 -{product.discount_price} %
                                 
                             </p> 
-                              }
+                              } */}
                                 <div className="px-4 flex flex-col justify-baseline ">
                                     <p className="text-lg font-semibold mt-4 ">{product.name}</p>
                                     <div className='flex my-2 justify-between'>
@@ -69,17 +69,12 @@ const FeaturedProducts = () => {
                                     </div>
                                     <div className="flex gap-x-3 items-center mb-5">
                                         <p className="text-xl font-bold">
-                                            Dhs {Math.round(
-                                               product.discount_price
-                                               ? product.price - (product.price * product.discount_price) / 100
-                                               : product.price
-                                               
-                                            )}
+                                            Dhs {product.price}
                                             </p>
                                         
                                         {
                                             !product.discount_price || product.discount_price != 0 && <del className="text-xl font-semibold text-gray-400">
-                                            {product.price}
+                                            {product.discount_price}
                                             </del> 
                                         }
                                         

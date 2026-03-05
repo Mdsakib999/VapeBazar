@@ -48,12 +48,21 @@ const ProductCategories = () => {
   // Duplicate the list so the scroll loop is seamless.
   // We render [original + duplicate] side by side; the CSS animation
   // translates by exactly 50% (the width of the original set), then resets.
-  const loopCategories = categories.length > 0 ? [...categories, ...categories] : [];
+  // const loopCategories = categories.length > 0 ? [...categories, ...categories] : [];
   console.log(categories)
 
   // Total width of ONE set = count * (card 220px + mx-3*2 = 24px gap) = 244px each
   const cardWidth = 244; // 220 card + 24 margin (mx-3 on each side)
   const singleSetWidth = categories.length * cardWidth;
+  // Duplicate until we have at least 10 items so the marquee
+  // always has enough content to fill the screen and loop smoothly.
+  const loopCategories =
+    categories.length > 0
+      ? Array.from(
+        { length: Math.ceil(10 / categories.length) },
+        () => categories,
+      ).flat()
+      : [];
 
   return (
     <section
