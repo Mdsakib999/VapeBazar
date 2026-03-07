@@ -320,7 +320,7 @@ const Product = () => {
                                         <Link
                                             key={product._id}
                                             to={`/product/${product._id}`}
-                                            className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-200"
+                                            className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-200 "
                                         >
                                             <div className="relative overflow-hidden bg-gray-50">
                                                 <img
@@ -336,7 +336,7 @@ const Product = () => {
                                                 )} */}
                                             </div>
 
-                                            <div className="p-5">
+                                            <div className="p-5 ">
                                                 <div className="flex justify-between items-center ">
                                                     <div className="mb-2">
                                                         <span className="text-xs font-semibold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">
