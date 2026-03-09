@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
+import LoadingComponent from "../../LoadingComponent";
 
 const ProductCard = ({ product }) => {
   const hasDiscount = product.discount_price && product.discount_price !== 0;
@@ -177,10 +178,15 @@ const FeaturedProducts = () => {
     },
   });
 
-  const featuredProducts = productData?.products?.slice(0, 6);
+  // const featuredProducts = productData?.products?.slice(0, 6);
+
+  // Random 6 product
+  const featuredProducts = productData?.products
+  ?.sort(() => 0.5 - Math.random())
+  ?.slice(0, 6);
 
   if (isLoading) {
-    return <div>Loading....</div>;
+    return <div><LoadingComponent></LoadingComponent> </div>;
   }
 
   return (
