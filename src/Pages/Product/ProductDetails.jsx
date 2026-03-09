@@ -361,7 +361,7 @@ if (flavour?.length > 0 && !selectedFlavour) {
                                         </button>
                                     </div>
                                     <span className="text-gray-600">
-                                        Total: <span className="font-bold text-gray-900">Dhs {Math.round(discountedPrice * quantity)}</span>
+                                        Total: <span className="font-bold text-gray-900">Dhs {Math.round(price * quantity)}</span>
                                     </span>
                                 </div>
                             </div>

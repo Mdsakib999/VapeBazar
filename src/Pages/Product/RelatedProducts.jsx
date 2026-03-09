@@ -121,7 +121,7 @@ const RelatedProducts = ({ category, id }) => {
                         >
                             <Link
                                 to={`/product/${product._id}`}
-                                className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-cyan-200 flex flex-col h-full block"
+                                className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-cyan-200 flex flex-col h-full"
                             >
                                 {/* Image */}
                                 <div className="relative overflow-hidden bg-gray-50">
@@ -132,8 +132,9 @@ const RelatedProducts = ({ category, id }) => {
                                         loading="lazy"
                                     />
                                     {product.discount_price && product.discount_price !== 0 && (
-                                        <div className="absolute top-3 left-3 bg-gradient-to-r from-red-500 to-pink-500 text-white px-2.5 py-0.5 rounded-full text-xs font-bold shadow-md">
-                                            -{product.discount_price}%
+                                        <div className="absolute top-3 left-3 bg-gradient-to-r from-red-500 to-pink-500 text-white px-2.5 py-0.5 rounded-full text-xs font-bold shadow-md ">
+                                            -{product.discount_price - product.price } Dhs
+                                            
                                         </div>
                                     )}
                                     <div className="absolute inset-0 bg-gradient-to-t from-cyan-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -165,16 +166,13 @@ const RelatedProducts = ({ category, id }) => {
 
                                     {/* Price */}
                                     <div className="flex items-baseline gap-2 mb-3">
-                                        <span className="text-lg font-black text-gray-900">
-                                            Dhs {Math.round(
-                                                product.discount_price && product.discount_price !== 0
-                                                    ? product.price - (product.price * product.discount_price) / 100
-                                                    : product.price
-                                            )}
+                                        <span className="text-lg  font-black text-gray-900">
+                                            Dhs {product.price}
                                         </span>
                                         {product.discount_price && product.discount_price !== 0 && (
-                                            <del className="text-xs text-gray-400">Dhs {product.price}</del>
+                                            <del className="text-xs text-gray-500">Dhs {product.discount_price}</del>
                                         )}
+
                                     </div>
 
                                     {/* CTA */}

@@ -14,8 +14,8 @@ import { Trash2, Upload, Image as ImageIcon, Package } from "lucide-react";
 
 const AddProducts = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [flavour, setFlavour] = useState([""]);
-  const [nicotine, setNicotine] = useState([""]);
+  const [flavour, setFlavour] = useState([]);
+  const [nicotine, setNicotine] = useState([]);
   const editor = useRef(null);
   const [content, setContent] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
@@ -106,8 +106,8 @@ const AddProducts = () => {
         setContent("");
         setImagePreview(null);
         setGalleryPreviews([]);
-        setFlavour([""]);
-        setNicotine([""]);
+        setFlavour([]);
+        setNicotine([]);
         setIsLoading(false);
         toast.success("Product Added Successfully", { id: toastId });
       }
@@ -335,7 +335,7 @@ const AddProducts = () => {
                 <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-2xl border-2 border-purple-100">
                   <div className="flex items-center justify-between mb-4">
                     <label className="block text-sm font-semibold text-gray-700">
-                      Flavours
+                      Flavors
                     </label>
                     <button
                       type="button"
@@ -345,33 +345,39 @@ const AddProducts = () => {
                       <FaPlus className="text-sm" /> Add
                     </button>
                   </div>
-                  <div className="space-y-3">
-                    {flavour.map((item, idx) => (
-                      <div key={idx} className="flex items-center gap-2">
-                        <input
-                          type="text"
-                          value={item}
-                          onChange={(e) => {
-                            const updated = [...flavour];
-                            updated[idx] = e.target.value;
-                            setFlavour(updated);
-                          }}
-                          className="flex-1 px-4 py-2.5 bg-white border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-500 transition-all duration-200"
-                          placeholder={`Flavour ${idx + 1}`}
-                        />
-                        <button
-                          type="button"
-                          onClick={() => {
-                            const updated = flavour.filter((_, i) => i !== idx);
-                            setFlavour(updated.length ? updated : [""]);
-                          }}
-                          className="p-2.5 text-red-500 hover:bg-red-50 rounded-lg transition-all duration-200"
-                        >
-                          <Trash2 size={18} />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
+                  {flavour.length === 0 ? (
+                    <p className="text-sm text-gray-400 text-center py-2">
+                      No flavors added. Click "Add" to include flavors.
+                    </p>
+                  ) : (
+                    <div className="space-y-3">
+                      {flavour.map((item, idx) => (
+                        <div key={idx} className="flex items-center gap-2">
+                          <input
+                            type="text"
+                            value={item}
+                            onChange={(e) => {
+                              const updated = [...flavour];
+                              updated[idx] = e.target.value;
+                              setFlavour(updated);
+                            }}
+                            className="flex-1 px-4 py-2.5 bg-white border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-500 transition-all duration-200"
+                            placeholder={`Flavour ${idx + 1}`}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const updated = flavour.filter((_, i) => i !== idx);
+                              setFlavour(updated);
+                            }}
+                            className="p-2.5 text-red-500 hover:bg-red-50 rounded-lg transition-all duration-200"
+                          >
+                            <Trash2 size={18} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Nicotine Strength */}
@@ -388,35 +394,41 @@ const AddProducts = () => {
                       <FaPlus className="text-sm" /> Add
                     </button>
                   </div>
-                  <div className="space-y-3">
-                    {nicotine.map((item, idx) => (
-                      <div key={idx} className="flex items-center gap-2">
-                        <input
-                          type="text"
-                          value={item}
-                          onChange={(e) => {
-                            const updated = [...nicotine];
-                            updated[idx] = e.target.value;
-                            setNicotine(updated);
-                          }}
-                          className="flex-1 px-4 py-2.5 bg-white border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-all duration-200"
-                          placeholder={`Nicotine ${idx + 1}`}
-                        />
-                        <button
-                          type="button"
-                          onClick={() => {
-                            const updated = nicotine.filter(
-                              (_, i) => i !== idx,
-                            );
-                            setNicotine(updated.length ? updated : [""]);
-                          }}
-                          className="p-2.5 text-red-500 hover:bg-red-50 rounded-lg transition-all duration-200"
-                        >
-                          <Trash2 size={18} />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
+                  {nicotine.length === 0 ? (
+                    <p className="text-sm text-gray-400 text-center py-2">
+                      No nicotine strengths added. Click "Add" to include strengths.
+                    </p>
+                  ) : (
+                    <div className="space-y-3">
+                      {nicotine.map((item, idx) => (
+                        <div key={idx} className="flex items-center gap-2">
+                          <input
+                            type="text"
+                            value={item}
+                            onChange={(e) => {
+                              const updated = [...nicotine];
+                              updated[idx] = e.target.value;
+                              setNicotine(updated);
+                            }}
+                            className="flex-1 px-4 py-2.5 bg-white border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-all duration-200"
+                            placeholder={`Nicotine ${idx + 1}`}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const updated = nicotine.filter(
+                                (_, i) => i !== idx,
+                              );
+                              setNicotine(updated);
+                            }}
+                            className="p-2.5 text-red-500 hover:bg-red-50 rounded-lg transition-all duration-200"
+                          >
+                            <Trash2 size={18} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Gallery Images */}
